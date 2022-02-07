@@ -14,15 +14,16 @@ class CreateEmpleadoTable extends Migration
     public function up()
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_empleado');
             $table->string('nombre', 40);
-            $table->string('password', 40);
+            $table->string('password', 200);
             $table->string('dni', 11);
             $table->string('correo', 60)->unique();
             $table->string('telefono', 11);
             $table->string('direccion', 40);
             $table->date('fecha_alta');
             $table->string('tipo', 10);
+            $table->timestamps();
         });
     }
 

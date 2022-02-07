@@ -22,19 +22,20 @@
                     @foreach ($cuotas as $c)
                         <tr>
                             <td>
-                                <a href="{{ route('cuotas.edit', [$c->id]) }}" class="edit"><i class="material-icons"
+                                <a href="{{ route('cuotas.edit', $c->id_cuota) }}" class="edit"><i class="material-icons"
                                         title="Editar Cuota">&#xE254;</i></a>
                                 <br>
                                 <br>
-                                {{-- <a href="{{ route('cuotas.delete', [$c->id]) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar Cuota">&#xE872;</i></a> --}}
+                                <a href="{{ route('cuotas.show', $c->id_cuota) }}" class="delete"><i class="material-icons"
+                                        title="Eliminar Cuota">&#xE872;</i></a>
                             </td>
                             <td>{{ $c->concepto }} </td>
                             <td>{{ $c->fecha_emision}} </td>
                             <td>{{ $c->importe}}</td>
                             <td>{{ $c->pagada}}</td>
-                            <td>{{ $c->fechapago}}</td>
+                            <td>{{ $c->fecha_pago}}</td>
                             <td><textarea cols="20" rows="5" readonly>{{ $c->notas}}</textarea></td>
+                            <td>{{ $c->id_cliente}}</td>
                         </tr>
                     @endforeach
                 </tbody>

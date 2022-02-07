@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TareaControl;
-use App\Http\Controllers\CuotaControl;
-use App\Http\Controllers\EmpleadoControl;
-use App\Http\Controllers\ClienteControl;
+use App\Http\Controllers\TareaController;
+use App\Http\Controllers\CuotaController;
+use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\ClienteController;
 
 
 
@@ -26,21 +26,21 @@ use App\Http\Controllers\ClienteControl;
 //     return view('welcome');
 // });
 
-Route::get('/', [TareaControl::class, 'index']);
-Route::get('/tareas', [TareaControl::class, 'index']);
-Route::get('/cuotas', [CuotasControl::class, 'index']);
-Route::get('/empleados', [EmpleadoControl::class, 'index']);
-Route::get('/clientes', [ClienteControl::class, 'index']);
+Route::get('/', [TareaController::class, 'index']);
+// Route::get('/tareas', [TareaControl::class, 'index']);
+// Route::get('/cuotas', [CuotasControl::class, 'index']);
+// Route::get('/empleados', [EmpleadoControl::class, 'index']);
+// Route::get('/clientes', [ClienteControl::class, 'index']);
 
 
-Route::resource("clientes", ClienteControl::class)
+Route::resource("clientes", ClienteController::class)
     ->parameters(["clientes" => "cliente"]);
 
-Route::resource("cuotas", CuotaControl::class)
+Route::resource("cuotas", CuotaController::class)
     ->parameters(["cuotas" => "cuota"]);
 
-Route::resource("empleados", EmpleadoControl::class)
+Route::resource("empleados", EmpleadoController::class)
     ->parameters(["empleados" => "empleado"]);
 
-Route::resource("tareas", TareaControl::class)
+Route::resource("tareas", TareaController::class)
     ->parameters(["tareas" => "tarea"]);

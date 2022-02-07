@@ -14,15 +14,17 @@ class CreateClienteTable extends Migration
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre', 40);
+            $table->increments('id_cliente');
             $table->string('cif', 40);
+            $table->string('nombre', 40);
             $table->string('telefono', 11);
             $table->string('correo', 60)->unique();
             $table->string('cuenta_corriente', 40);
-            $table->string('moneda', 40);
-            // $table->unsignedInteger('id');
-            // $table->foreign('id')->references('id')->on('pais');
+            $table->unsignedInteger('id_pais');
+            $table->foreign('id_pais')->references('id')->on('paises');
+            $table->string('moneda',3);
+            $table->string('cuota_mensual', 40);
+            $table->timestamps();
         });
     }
 

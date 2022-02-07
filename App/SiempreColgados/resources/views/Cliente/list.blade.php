@@ -14,27 +14,38 @@
                         <th scope="col">Telefono</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Cuenta Corriente</th>
+                        <th scope="col">Pais</th>
                         <th scope="col">Moneda</th>
+                        <th scope="col">Cuota Mensual</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($clientes as $c)
+                    <?php
+                    $pais = "";
+                    foreach ($paises as $p)
+                        if ($c->id_pais == $p->id)
+                                $pais = $p
+                    ?>
+
+
                         <tr>
                             <td>
-                                <a href="{{ route('clientes.edit', [$c->id]) }}" class="edit"><i class="material-icons"
-                                        title="Editar cliente">&#xE254;</i></a>
+                                <a href="{{ route('clientes.edit', $c->id_cliente) }}"  class="btn btn-warning"><i class="far fa-edit"></i></a>
                                 <br>
                                 <br>
-                                {{-- <a href="{{ route('clientes.delete', [$c->id]) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar cliente">&#xE872;</i></a> --}}
+                                <a href="{{ route('clientes.show', $c->id_cliente) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                             </td>
                             <td>{{ $c->nombre }} </td>
-                            <td>{{ $c->cif}} </td>
-                            <td>{{ $c->telefono}}</td>
-                            <td>{{ $c->correo}}</td>
-                            <td>{{ $c->cuenta_corriente}}</td>
-                            <td>{{ $c->moneda}}</td>
+                            <td>{{ $c->cif }} </td>
+                            <td>{{ $c->telefono }}</td>
+                            <td>{{ $c->correo }}</td>
+                            <td>{{ $c->cuenta_corriente }}</td>
+                            <td>{{ $pais->nombre }}</td>
+                            <td>{{ $pais->nombre_moneda }}</td>
+                            <td>{{ $c->cuota_mesual }}</td>
+
                         </tr>
                     @endforeach
                 </tbody>

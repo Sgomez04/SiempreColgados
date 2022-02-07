@@ -14,7 +14,7 @@ class CreateCuotaTable extends Migration
     public function up()
     {
         Schema::create('cuotas', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id_cuota');
             $table->string('concepto', 40);
             $table->date('fecha_emision');
             $table->double('importe');
@@ -22,7 +22,8 @@ class CreateCuotaTable extends Migration
             $table->date('fecha_pago')->nullable();
             $table->string('notas', 200);
             $table->unsignedInteger('id_cliente');
-            $table->foreign('id_cliente')->references('id')->on('clientes');
+            $table->foreign('id_cliente')->references('id_cliente')->on('clientes');
+            $table->timestamps();
         });
     }
 

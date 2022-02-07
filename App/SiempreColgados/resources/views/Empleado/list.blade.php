@@ -23,12 +23,12 @@
                     @foreach ($empleados as $e)
                         <tr>
                             <td>
-                                <a href="{{ route('empleados.edit', [$e->id]) }}" class="edit"><i class="material-icons"
+                                <a href="{{ route('empleados.edit', $e->id_empleado) }}" class="edit"><i class="material-icons"
                                         title="Editar empleado">&#xE254;</i></a>
                                 <br>
                                 <br>
-                                {{-- <a href="{{ route('empleados.delete', [$e->id]) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar empleado">&#xE872;</i></a> --}}
+                                <a href="{{ route('empleados.show', $e->id_empleado) }}" class="delete"><i class="material-icons"
+                                        title="Eliminar empleado">&#xE872;</i></a>
                             </td>
                             <td>{{ $e->nombre }} </td>
                             <td>{{ $e->password}} </td>

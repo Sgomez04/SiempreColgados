@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <td scope="col"><b> # </b></td>
-                        <th scope="col">Persona</th>
+                        <th scope="col">Cliente</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Descripcion</th>
                         <th scope="col">Correo</th>
@@ -30,14 +30,14 @@
                     @foreach ($tareas as $t)
                         <tr>
                             <td>
-                                <a href="{{ route('tareas.edit', [$t->id]) }}" class="edit"><i class="material-icons"
+                                <a href="{{ route('tareas.edit', $t->id_tarea) }}" class="edit"><i class="material-icons"
                                         title="Editar Tarea">&#xE254;</i></a>
                                 <br>
                                 <br>
-                                {{-- <a href="{{ route('tareas.delete', [$t->id]) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar Tarea">&#xE872;</i></a> --}}
+                                <a href="{{ route('tareas.show', $t->id_tarea) }}" class="delete"><i class="material-icons"
+                                        title="Eliminar Tarea">&#xE872;</i></a>
                             </td>
-                            <td>{{ $t->nombre }} </td>
+                            <td>{{ $t->cliente }} </td>
                             <td>{{ $t->telefono}} </td>
                             <td><textarea cols="20" rows="5" readonly>{{ $t->descripcion }} </textarea></td>
                             <td>{{ $t->correo}}</td>
