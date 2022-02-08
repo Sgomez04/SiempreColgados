@@ -86,6 +86,24 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cliente"> Cliente:</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <select name="cliente" class="form-control selectpicker">
+                            <option value="" selected></option>
+                            @foreach ($clientes as $cliente)
+                                    <option value="{{ $cliente->id_cliente }}">{{ $cliente->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('orden')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
             @include("notificacion")
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">

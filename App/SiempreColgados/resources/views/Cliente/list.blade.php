@@ -32,10 +32,10 @@
 
                         <tr>
                             <td>
-                                <a href="{{ route('clientes.edit', $c->id_cliente) }}"  class="btn btn-warning"><i class="far fa-edit"></i></a>
+                                <a href="{{ route('clientes.edit', $c->id_cliente) }}"  class="btn btn-warning"><i class="far fa-edit">  Modificar</i></a>
                                 <br>
                                 <br>
-                                <a href="{{ route('clientes.show', $c->id_cliente) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                                <a href="{{ route('clientes.show', $c->id_cliente) }}" class="btn btn-danger"><i class="far fa-trash-alt">  Eliminar</i></a>
                             </td>
                             <td>{{ $c->nombre }} </td>
                             <td>{{ $c->cif }} </td>

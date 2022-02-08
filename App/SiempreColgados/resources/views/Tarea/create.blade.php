@@ -105,29 +105,6 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="provincia"> Provincia: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                        <select name="provincia" class="form-control selectpicker">
-                        <option value="" selected></option>
-                        @foreach (TaskController::getInstance()->listarProv() as $p)
-                            @if ($p['nombre'] == $provincia)
-                                <option value="{{ $p['nombre'] }}" selected>{{ $p['nombre'] }}</option>
-                            @else
-                                <option value="{{ $p['nombre'] }}">{{ $p['nombre'] }}</option>
-                            @endif
-                        @endforeach
-                        </select>
-                                                @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div> --}}
-
-
             <div class="form-group">
                 <label class="col-md-4 control-label" for="estado"> Estado: </label>
                 <div class="col-md-4 inputGroupContainer">

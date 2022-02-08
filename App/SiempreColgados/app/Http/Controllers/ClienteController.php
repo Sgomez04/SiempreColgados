@@ -47,8 +47,6 @@ class ClienteController extends Controller
         //     'fecha_inicio' => 'required|date',
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
-
-        $paises = Paises::all();
         
         $cliente = new Cliente();
         $cliente->cif=$request->cif;
@@ -75,8 +73,9 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
+        $paises = Paises::all();
         $cliente = Cliente::find($id);
-        return view("Cliente.delete", compact('cliente'));
+        return view("Cliente.delete", compact('cliente','paises'));
     }
 
     /**
@@ -110,7 +109,7 @@ class ClienteController extends Controller
         
         $cliente = Cliente::find($id);
         $cliente->fill($request->input())->saveOrFail();
-        return redirect()->route("Cliente.index")
+        return redirect()->route("clientes.index")
             ->with(["success" => "Los datos del cliente [<strong>{$cliente->nombre}</strong>] fueron actualizados correctamente"]);
     }
 
@@ -124,7 +123,7 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->delete();
-        return redirect()->route("Cliente.delete")->with([
+        return redirect()->route("clientes.index")->with([
             "warning" => "El cliente [<strong>{$cliente->nombre}</strong>] fue eliminado correctamente",
         ]);
     }

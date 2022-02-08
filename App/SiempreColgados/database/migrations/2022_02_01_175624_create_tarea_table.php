@@ -23,10 +23,10 @@ class CreateTareaTable extends Migration
             $table->string('direccion', 40);
             $table->string('poblacion', 40);
             $table->string('cp', 5);
-            $table->string('provincia', 5);
             $table->string('estado', 10);
             $table->date('fecha_crea');
-            $table->string('operario', 40);
+            $table->unsignedInteger('operario');
+            $table->foreign('operario')->references('id_empleado')->on('empleados');
             $table->date('fecha_rea');
             $table->string('anotacion_anterior', 200);
             $table->string('anotacion_posterior', 200);

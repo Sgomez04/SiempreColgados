@@ -2,7 +2,7 @@
 @section('titulo', 'Modificar Tarea')
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('tareas.update') }}" method="POST" class="form-horizontal">
+    <form id="frm-tarea" action="{{ route('tareas.update', $tarea) }}" method="POST" class="form-horizontal">
         @method("PUT")
         @csrf
 
@@ -15,23 +15,13 @@
                         <select name="cliente" class="form-control selectpicker">
                             <option value="" selected></option>
                             @foreach ($clientes as $c)
-                                    <option value="{{$c->id_cliente}}">{{$c->nombre}}</option>
+                                @if ($c->id_cliente == $tarea->id_cliente)
+                                    <option value="{{ $tarea->id_cliente }}" selected>{{ $c->nombre }}</option>
+                                @else
+                                    <option value="{{ $tarea->id_cliente }}">{{ $c->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="persona">Persona de contacto:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="persona" class="form-control" value="{{ $tarea->nombre }}"
-                            placeholder="Nombre y apellidos del contratante" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -59,7 +49,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="descripcion" class="form-control"
-                            value="{{ $tarea->descripcion }}" placeholder="Descripcion de la tarea"></textarea>
+                            placeholder="Descripcion de la tarea"> {{ $tarea->descripcion }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -123,28 +113,6 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="provincia"> Provincia: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
-                        <select name="provincia" class="form-control selectpicker">
-                        <option value="" selected></option>
-                        @foreach (TaskController::getInstance()->listarProv() as $p)
-                            @if ($p['nombre'] == $provincia)
-                                <option value="{{ $p['nombre'] }}" selected>{{ $p['nombre'] }}</option>
-                            @else
-                                <option value="{{ $p['nombre'] }}">{{ $p['nombre'] }}</option>
-                            @endif
-                        @endforeach
-                        </select>
-                                                @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div> --}}
-
             <div class="form-group">
                 <label class="col-md-4 control-label" for="estado"> Estado: </label>
                 <div class="col-md-4 inputGroupContainer">
@@ -184,27 +152,27 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label class="col-md-4 control-label" for="operario"> Operario encargado:</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select name="operario" class="form-control selectpicker">
                             <option value="" selected></option>
-                            @foreach (UserController::getInstance()->listarUsuarios() as $u)
-                                @if ($u['user'] == $operario)
-                                    <option value="{{ $u['user'] }}" selected>{{ $u['user'] }}</option>
+                            @foreach ($empleados as $e)
+                                @if ($e->id_empleado == $tarea->operario)
+                                    <option value="{{ $e->id_empleado }}" selected>{{ $e->nombre }}</option>
                                 @else
-                                    <option value="{{ $u['user'] }}">{{ $u['user'] }}</option>
+                                    <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
-                                                @error('orden')
+                        @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="fechaR"> Fecha de realización:</label>
@@ -225,8 +193,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="aa" class="form-control" value="{{ $tarea->anotacion_anterior }}"
-                            placeholder="Anotacion anterior a la realizacion de la tarea"></textarea>
+                        <textarea type="text" cols="20" rows="4" name="aa" class="form-control"
+                            placeholder="Anotacion anterior a la realizacion de la tarea">{{ $tarea->anotacion_anterior }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -239,8 +207,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="ap" class="form-control" value="{{ $tarea->anotacion_posterior }}"
-                            placeholder="Anotacion posterior a la realizacion de la tarea"></textarea>
+                        <textarea type="text" cols="20" rows="4" name="ap" class="form-control"
+                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ $tarea->anotacion_posterior }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

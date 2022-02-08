@@ -23,12 +23,10 @@
                     @foreach ($empleados as $e)
                         <tr>
                             <td>
-                                <a href="{{ route('empleados.edit', $e->id_empleado) }}" class="edit"><i class="material-icons"
-                                        title="Editar empleado">&#xE254;</i></a>
+                                <a href="{{ route('empleados.edit', $e->id_empleado) }}"  class="btn btn-warning"><i class="far fa-edit">Modificar</i></a>
                                 <br>
                                 <br>
-                                <a href="{{ route('empleados.show', $e->id_empleado) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar empleado">&#xE872;</i></a>
+                                <a href="{{ route('empleados.show', $e->id_empleado) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i>   Eliminar</a>
                             </td>
                             <td>{{ $e->nombre }} </td>
                             <td>{{ $e->password}} </td>
@@ -37,7 +35,11 @@
                             <td>{{ $e->telefono}}</td>
                             <td>{{ $e->direccion}}</td>
                             <td>{{ $e->fecha_alta}}</td>
-                            <td>{{ $e->tipo}}</td>
+                            @if ($e->tipo == "A")
+                            <td>Administrador</td>
+                            @else
+                            <td>Operario</td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

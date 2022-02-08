@@ -19,6 +19,7 @@ class ClienteSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
 
         DB::table('clientes')->insert([
+            'id_cliente' => '1',
             'cif' => 'F – 25355779',
             'nombre' => 'Manuel Gonzalez',
             'telefono' => '675834212',
@@ -30,6 +31,7 @@ class ClienteSeeder extends Seeder
         ]);
 
         DB::table('clientes')->insert([
+            'id_cliente' => '2',
             'cif' => 'B – 76365789',
             'nombre' => 'Maria Fernandez',
             'telefono' => '756438192',
@@ -41,6 +43,7 @@ class ClienteSeeder extends Seeder
         ]);
 
         DB::table('clientes')->insert([
+            'id_cliente' => '3',
             'cif' => 'R – 17284921',
             'nombre' => 'Mateo Gomez',
             'telefono' => '756438192',

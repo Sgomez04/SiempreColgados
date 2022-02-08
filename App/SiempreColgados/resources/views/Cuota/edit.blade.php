@@ -87,7 +87,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                         <textarea type="text" cols="20" rows="4" name="notas" class="form-control"
-                             placeholder="Notas sobre la cuota">{{ $cuota->notas }}</textarea>
+                            placeholder="Notas sobre la cuota">{{ $cuota->notas }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -95,18 +95,18 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="operario"> Cliente:</label>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cliente"> Cliente:</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select name="cliente" class="form-control selectpicker">
                             <option value="" selected></option>
-                            @foreach (UserController::getInstance()->listarUsuarios() as $u)
-                                @if ($u['user'] == $operario)
-                                    <option value="{{ $['user'] }}" selected>{{ $u['user'] }}</option>
+                            @foreach ($clientes as $cliente)
+                                @if ($cuota->id_cliente == $cliente->id_cliente)
+                                    <option value="{{ $cliente->id_cliente }}" selected>{{ $cliente->nombre }}</option>
                                 @else
-                                    <option value="{{ $u['user'] }}">{{ $u['user'] }}</option>
+                                    <option value="{{ $cliente->id_cliente }}">{{ $cliente->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -115,7 +115,7 @@
                         @enderror
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             @include("notificacion")
             <div class="row mt-3 ">

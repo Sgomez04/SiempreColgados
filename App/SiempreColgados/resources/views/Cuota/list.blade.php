@@ -22,20 +22,29 @@
                     @foreach ($cuotas as $c)
                         <tr>
                             <td>
-                                <a href="{{ route('cuotas.edit', $c->id_cuota) }}" class="edit"><i class="material-icons"
-                                        title="Editar Cuota">&#xE254;</i></a>
+                                <a href="{{ route('cuotas.edit', $c->id_cuota) }}"  class="btn btn-warning"><i class="far fa-edit">  Modificar</i></a>
                                 <br>
                                 <br>
-                                <a href="{{ route('cuotas.show', $c->id_cuota) }}" class="delete"><i class="material-icons"
-                                        title="Eliminar Cuota">&#xE872;</i></a>
+                                <a href="{{ route('cuotas.show', $c->id_cuota) }}" class="btn btn-danger"><i class="far fa-trash-alt">  Eliminar</i></a>
                             </td>
                             <td>{{ $c->concepto }} </td>
-                            <td>{{ $c->fecha_emision}} </td>
-                            <td>{{ $c->importe}}</td>
-                            <td>{{ $c->pagada}}</td>
-                            <td>{{ $c->fecha_pago}}</td>
-                            <td><textarea cols="20" rows="5" readonly>{{ $c->notas}}</textarea></td>
-                            <td>{{ $c->id_cliente}}</td>
+                            <td>{{ $c->fecha_emision }} </td>
+                            <td>{{ $c->importe }}</td>
+                            @if ($c->pagada == "S")
+                                <td>Pagada</td>
+                            @else
+                                <td>No Pagada</td>
+                            @endif
+                            <td>{{ $c->fecha_pago }}</td>
+                            <td><textarea cols="20" rows="5" readonly>{{ $c->notas }}</textarea></td>
+                            <?php
+                            foreach ($clientes as $client) {
+                                if ($c->id_cliente == $client->id_cliente) {
+                                    $cliente = $client->nombre;
+                                }
+                            }
+                            ?>
+                            <td>{{ $cliente }}</td>
                         </tr>
                     @endforeach
                 </tbody>

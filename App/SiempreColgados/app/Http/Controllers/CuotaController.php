@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cuota;
+use App\Models\Cliente;
+
 
 class CuotaController extends Controller
 {
@@ -15,7 +17,8 @@ class CuotaController extends Controller
     public function index()
     {
         return view("Cuota.list", [
-            "cuotas" => Cuota::all()
+            "cuotas" => Cuota::all(),
+            "clientes" => Cliente::all()
         ]);
     }
 
@@ -26,7 +29,9 @@ class CuotaController extends Controller
      */
     public function create()
     {
-        return view("Cliente.create");
+        return view("Cuota.create", [
+            "clientes" => Cliente::all()
+        ]);
     }
 
     /**
@@ -45,13 +50,13 @@ class CuotaController extends Controller
         // ]);
 
         $cuota = new Cuota();
-        $cuota->concepto=$request->concepto;
-        $cuota->fecha_emision=$request->fechaemision;
-        $cuota->importe=$request->importe;
-        $cuota->pagada=$request->pagada;
-        $cuota->fecha_pago=$request->fechapago;
-        $cuota->notas=$request->notas;
-        $cuota->id_cliente=$request->cliente;
+        $cuota->concepto = $request->concepto;
+        $cuota->fecha_emision = $request->fechaemision;
+        $cuota->importe = $request->importe;
+        $cuota->pagada = $request->pagada;
+        $cuota->fecha_pago = $request->fechapago;
+        $cuota->notas = $request->notas;
+        $cuota->id_cliente = $request->cliente;
 
 
         $cuota->saveOrFail();
@@ -69,7 +74,8 @@ class CuotaController extends Controller
     public function show($id)
     {
         $cuota = Cuota::find($id);
-        return view("Cuota.delete", compact('cuota'));
+        $clientes = Cliente::all();
+        return view("Cuota.delete", compact('cuota', 'clientes'));
     }
 
     /**
@@ -81,7 +87,8 @@ class CuotaController extends Controller
     public function edit($id)
     {
         $cuota = Cuota::find($id);
-        return view("Cuota.edit", compact('cuota'));
+        $clientes = Cliente::all();
+        return view("Cuota.edit", compact('cuota', 'clientes'));
     }
 
     /**
@@ -99,10 +106,17 @@ class CuotaController extends Controller
         //     'fecha_inicio' => 'required|date',
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
-        
+
         $cuota = Cuota::find($id);
+        $cuota->concepto = $request->concepto;
+        $cuota->fecha_emision = $request->fechaemision;
+        $cuota->importe = $request->importe;
+        $cuota->pagada = $request->pagada;
+        $cuota->fecha_pago = $request->fechapago;
+        $cuota->notas = $request->notas;
+        $cuota->id_cliente = $request->cliente;
         $cuota->fill($request->input())->saveOrFail();
-        return redirect()->route("Cuota.index")
+        return redirect()->route("cuotas.index")
             ->with(["success" => "Los datos de la cuota han sido actualizados"]);
     }
 
@@ -116,7 +130,7 @@ class CuotaController extends Controller
     {
         $cuota = Cuota::find($id);
         $cuota->delete();
-        return redirect()->route("Cuota.delete")->with([
+        return redirect()->route("cuotas.index")->with([
             "warning" => "La cuota fue eliminada correctamente",
         ]);
     }
