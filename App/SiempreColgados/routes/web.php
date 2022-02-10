@@ -27,20 +27,17 @@ use App\Http\Controllers\ClienteController;
 // });
 
 Route::get('/', [TareaController::class, 'index']);
-// Route::get('/tareas', [TareaControl::class, 'index']);
-// Route::get('/cuotas', [CuotasControl::class, 'index']);
-// Route::get('/empleados', [EmpleadoControl::class, 'index']);
-// Route::get('/clientes', [ClienteControl::class, 'index']);
 
 
-Route::resource("clientes", ClienteController::class)
-    ->parameters(["clientes" => "cliente"]);
+Route::resource("clientes", ClienteController::class);
 
-Route::resource("cuotas", CuotaController::class)
-    ->parameters(["cuotas" => "cuota"]);
+Route::get('/cuotas/createE', [CuotaController::class, 'createE'])->name('createE');
+Route::post('/cuotas/storeE', [CuotaController::class, 'storeE'])->name('storeE');
+Route::get('/cuotas/userCuotas{id}', [CuotaController::class, 'UserCuotas'])->name('userCuotas');
+Route::resource("cuotas", CuotaController::class);
 
-Route::resource("empleados", EmpleadoController::class)
-    ->parameters(["empleados" => "empleado"]);
 
-Route::resource("tareas", TareaController::class)
-    ->parameters(["tareas" => "tarea"]);
+Route::resource("empleados", EmpleadoController::class);
+
+Route::resource("tareas", TareaController::class);
+

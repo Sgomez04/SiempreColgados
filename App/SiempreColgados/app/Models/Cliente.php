@@ -21,4 +21,38 @@ class Cliente extends Model
         'cuenta_corriente',
         'moneda'
     ];
+
+    public static function createC($request){
+        $cliente = new Cliente();
+        $cliente->cif=$request->cif;
+        $cliente->nombre=$request->nombre;
+        $cliente->telefono=$request->telefono;
+        $cliente->correo=$request->correo;
+        $cliente->cuenta_corriente=$request->cuenta;
+        $cliente->id_pais= $request->pais;
+        $cliente->moneda=$request->moneda;
+        $cliente->cuota_mensual=$request->importe;
+
+        $cliente->saveOrFail();
+    }
+
+    public static function updateC($request, $id){
+        $cliente = Cliente::find($id);
+        $cliente->cif=$request->cif;
+        $cliente->nombre=$request->nombre;
+        $cliente->telefono=$request->telefono;
+        $cliente->correo=$request->correo;
+        $cliente->cuenta_corriente=$request->cuenta;
+        $cliente->id_pais= $request->pais;
+        $cliente->moneda=$request->moneda;
+        $cliente->cuota_mensual=$request->importe;
+
+        $cliente->fill($request->input())->saveOrFail();
+    }
+
+    public static function destroyC($id){
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+    }
+
 }

@@ -46,4 +46,7 @@
             </table>
         </div>
     </div>
+    <div>
+        {{ $empleados->links() }}
+    </div>
 @endsection

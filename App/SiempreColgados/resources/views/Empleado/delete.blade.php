@@ -1,137 +1,53 @@
 @extends("maestra")
-@section('titulo', 'Modificar Empleado')
+@section('titulo', '¿Deseas eliminar a este empleado?')
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('empleados.destroy', $empleado->id_empleado) }}" method="POST" class="form-horizontal">
         @method("PUT")
         @csrf
         <fieldset>
             <div class="form-group">
-                <label class="col-md-4 control-label" for="nombre">Nombre:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="nombre" class="form-control" value="{{ $empleado->nombre }}"
-                            placeholder="Nombre del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>Nombre: {{ $empleado->nombre }}</p>
+            </div>
+        
+            <div class="form-group">
+                <p>Contraseña: {{ $empleado->password }}</p>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="password"> Contraseña: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="password" class="form-control" value="{{ $empleado->password }}"
-                            placeholder="Contraseña del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>DNI: {{ $empleado->dni }}</p>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="dni"> DNI: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="dni" class="form-control" value="{{ $empleado->dni }}"
-                            placeholder="DNI del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>Correo electrónico: {{ $empleado->correo }}</p>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="correo"> Correo electrónico: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" value="{{ $empleado->correo }}"
-                            placeholder="Correo del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>Telefono: {{ $empleado->telefono }}</p>
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="telefono"> Telefono: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="telefono" class="form-control" value="{{ $empleado->telefono }}"
-                            placeholder="Telefono del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>Direccion: {{ $empleado->direccion }}</p>
             </div>
-
+        
             <div class="form-group">
-                <label class="col-md-4 control-label" for="direccion"> Direccion: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" value="{{ $empleado->direccion }}"
-                            placeholder="Direccion del empleado" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                <p>Fecha de alta del empleado: {{ $empleado->fecha_alta }}</p>
             </div>
-
+        
             <div class="form-group">
-                <label class="col-md-4 control-label" for="fechalta"> Fecha de alta del empleado:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="text" name="fechalta" class="form-control" value="{{ $empleado->fecha_alta }}"
-                            placeholder="Fecha obtenida del sistema" readonly />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
+                @if ($empleado->tipo == 'A')   
+                <p>Cargo del empleado: Administrador</p>
+                @else
+                <p>Cargo del empleado: Operario</p>
+                @endif
             </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="cargo"> Cargo del empleado: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        @if ($empleado->tipo == 'A')                        
-                        <input type="text" name="cargo" class="form-control" value="Administrador" readonly />
-                        @else
-                        <input type="text" name="cargo" class="form-control" value=" Operario" readonly />
-                        @endif
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
+        
             @include("notificacion")
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">
-                    <button class="btn btn-success mx-3">Guardar</button>
-                    <a class="btn btn-danger mx-3" href="{{ url('empleados') }}">Cancelar</a>
+                    <a class="btn btn-success mx-3" href="{{ url('empleados') }}">Cancelar</a>
+                    <a class="btn btn-danger mx-3" href="{{ route('empleados.destroy' , $empleado->id_empleado) }}">Eliminar</a>
                 </div>
             </div>
 
-            {{-- <div class="text-center bton">
-                <input type="submit" class="btn btn-success" value="Guardar">
-            </div> --}}
         </fieldset>
-    </form>
 @endsection

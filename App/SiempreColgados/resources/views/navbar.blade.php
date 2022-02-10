@@ -8,16 +8,16 @@
     <div id="navbarCollapse" class=" navbar-collapse justify-content-start">
         <div class="navbar-nav ml-auto">
 
-            <a href="{{ route('tareas.index') }}" class="nav-item nav-link active"><i
+            <a href="{{ url('tareas') }}" class="nav-item nav-link active"><i
                     class="fa fa-gears"></i><span>Tareas</span></a>
 
-            <a href="{{ route('empleados.index') }}" class="nav-item nav-link"><i
+            <a href="{{ url('empleados') }}" class="nav-item nav-link"><i
                     class="fa fa-users"></i><span>Empleados</span></a>
 
-            <a href="{{ route('cuotas.index') }}" class="nav-item nav-link"><i class="fa fa-user"></i><span>
+            <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-user"></i><span>
                     Cuotas</span></a>
 
-            <a href="{{ route('clientes.index') }}" class="nav-item nav-link"><i class="fa fa-user"></i><span>
+            <a href="{{ url('clientes') }}" class="nav-item nav-link"><i class="fa fa-user"></i><span>
                     Clientes</span></a>
         </div>
     </div>

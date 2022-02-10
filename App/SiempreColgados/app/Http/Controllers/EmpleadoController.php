@@ -15,7 +15,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         return view("Empleado.list", [
-            "empleados" => Empleado::all()
+            "empleados" => Empleado::Paginate(2)
         ]);
     }
 
@@ -44,21 +44,9 @@ class EmpleadoController extends Controller
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
 
-        $empleado = new Empleado();
-        $empleado->nombre=$request->nombre;
-        $empleado->password=$request->password;
-        $empleado->dni=$request->dni;
-        $empleado->correo=$request->correo;
-        $empleado->telefono=$request->telefono;
-        $empleado->direccion=$request->direccion;
-        $empleado->fecha_alta=$request->fechalta;
-        $empleado->tipo=$request->cargo;
-
-
-        $empleado->saveOrFail();
-
+        Empleado::createE($request);
         return redirect()->route("empleados.index")->with([
-            "success" => "El empleado [<strong>{$empleado->nombre}</strong>] fue registrado correctamente",
+            "success" => "El nuevo empleado fue registrado correctamente",
         ]);
     }
 
@@ -103,10 +91,9 @@ class EmpleadoController extends Controller
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
         
-        $empleado = Empleado::find($id);
-        $empleado->fill($request->input())->saveOrFail();
+        Empleado::updateE($request,$id);
         return redirect()->route("empleados.index")
-            ->with(["success" => "Los datos del empleado [<strong>{$empleado->nombre}</strong>] fueron actualizados correctamente"]);
+            ->with(["success" => "Los datos del empleado fueron actualizados correctamente"]);
     }
 
     /**
@@ -117,11 +104,9 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        $empleado = Empleado::find($id);
-        $empleado->delete();
-        
+        Empleado::destroyE($id);
         return redirect()->route("Cliente.delete")->with([
-            "warning" => "El empleado [<strong>{$empleado->nombre}</strong>] fue eliminado correctamente",
+            "warning" => "El empleado fue eliminado correctamente",
         ]);
     }
 }

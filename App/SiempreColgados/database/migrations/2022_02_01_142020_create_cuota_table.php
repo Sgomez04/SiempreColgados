@@ -21,6 +21,7 @@ class CreateCuotaTable extends Migration
             $table->string('pagada', 1)->nullable();
             $table->date('fecha_pago')->nullable();
             $table->string('notas', 200);
+            $table->string('tipo', 200);
             $table->unsignedInteger('id_cliente');
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes');
             $table->timestamps();

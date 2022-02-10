@@ -8,12 +8,17 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    
     </script>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
-font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+font-awesome/5.15.2/css/all.min.css" />
+    <link href="{{ URL::asset('css/forms.css') }}" rel="stylesheet">
+    @yield('links')
 
-
+    <style>
+        .w-5{
+            display: none;
+        }
+    </style>
 </head>
 
 <body>

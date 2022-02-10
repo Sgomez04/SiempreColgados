@@ -1,8 +1,15 @@
 @extends("maestra")
-@section('titulo', 'Registrar Cuota')
+@section('links')
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+@endsection
+
+@section('titulo', 'Registrar Cuota Excepcional')
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('cuotas.store') }}" method="POST" class="form-horizontal">
+    <form id="frm-tarea" action="{{ route('storeE') }}" method="POST" class="form-horizontal">
         @csrf
         <fieldset>
             <div class="form-group">
@@ -23,7 +30,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="fechaemision" class="form-control"
+                        <input type="date" name="fechaemision" class="form-control"
                             placeholder="Fecha de emision de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -50,8 +57,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="S">Pagada</label><br>
-                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="N" checked>No pagada</label><br>
+                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="S"> Pagada</label><br>
+                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="N" checked> No pagada</label><br>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -64,7 +71,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="fechapago" class="form-control" placeholder="Fecha de pago de la cuota" />
+                        <input type="date" name="fechapago" class="form-control" placeholder="Fecha de pago de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -79,6 +86,19 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                         <textarea type="text" cols="20" rows="4" name="notas" class="form-control"
                         placeholder="Notas sobre la cuota"></textarea>
+                        @error('orden')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="tipo"> Tipo de Cuota: </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="tipo" class="form-control" value="Excepcional" readonly/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -111,10 +131,6 @@
                     <a class="btn btn-danger mx-3" href="{{ url('cuotas') }}">Cancelar</a>
                 </div>
             </div>
-
-            {{-- <div class="text-center bton">
-                <input type="submit" class="btn btn-success" value="Guardar">
-            </div> --}}
         </fieldset>
     </form>
 @endsection

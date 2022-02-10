@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cuota;
 use App\Models\Cliente;
-
+use App\Http\Requests\CuotaValidate;
 
 class CuotaController extends Controller
 {
@@ -17,8 +17,21 @@ class CuotaController extends Controller
     public function index()
     {
         return view("Cuota.list", [
-            "cuotas" => Cuota::all(),
+            "cuotas" => Cuota::Paginate(2),
             "clientes" => Cliente::all()
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function UserCuotas($id)
+    {
+        return view("Cuota.listC", [
+            "cuotas" => Cuota::paginate(2),
+            "cliente" => Cliente::find("$id"),
         ]);
     }
 
@@ -29,7 +42,20 @@ class CuotaController extends Controller
      */
     public function create()
     {
-        return view("Cuota.create", [
+
+        return view("Cuota.create_mensual", [
+            "clientes" => Cliente::all()
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createE()
+    {
+        return view("Cuota.create_excep", [
             "clientes" => Cliente::all()
         ]);
     }
@@ -40,28 +66,26 @@ class CuotaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CuotaValidate $request)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric|unique:clientes',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-
-        $cuota = new Cuota();
-        $cuota->concepto = $request->concepto;
-        $cuota->fecha_emision = $request->fechaemision;
-        $cuota->importe = $request->importe;
-        $cuota->pagada = $request->pagada;
-        $cuota->fecha_pago = $request->fechapago;
-        $cuota->notas = $request->notas;
-        $cuota->id_cliente = $request->cliente;
-
-
-        $cuota->saveOrFail();
+        Cuota::createM($request, Cliente::all());
         return redirect()->route("cuotas.index")->with([
-            "success" => "La nueva cuota fue registrada correctamente",
+            "success" => "Las cuotas mensuales fueron creadas correctamente",
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeE(CuotaValidate $request)
+    {
+
+        Cuota::createE($request, Cliente::all());
+        return redirect()->route("cuotas.index")->with([
+            "success" => "Las cuota expecepcional fue creada correctamente",
         ]);
     }
 
@@ -98,24 +122,9 @@ class CuotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CuotaValidate $request, $id)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-
-        $cuota = Cuota::find($id);
-        $cuota->concepto = $request->concepto;
-        $cuota->fecha_emision = $request->fechaemision;
-        $cuota->importe = $request->importe;
-        $cuota->pagada = $request->pagada;
-        $cuota->fecha_pago = $request->fechapago;
-        $cuota->notas = $request->notas;
-        $cuota->id_cliente = $request->cliente;
-        $cuota->fill($request->input())->saveOrFail();
+        Cuota::updateC($request, $id);
         return redirect()->route("cuotas.index")
             ->with(["success" => "Los datos de la cuota han sido actualizados"]);
     }
@@ -128,8 +137,7 @@ class CuotaController extends Controller
      */
     public function destroy($id)
     {
-        $cuota = Cuota::find($id);
-        $cuota->delete();
+        Cuota::destroyC($id);
         return redirect()->route("cuotas.index")->with([
             "warning" => "La cuota fue eliminada correctamente",
         ]);

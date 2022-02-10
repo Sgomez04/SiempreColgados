@@ -2,7 +2,8 @@
 @section('titulo', 'Modificar Tarea')
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('tareas.update', $tarea) }}" method="POST" class="form-horizontal">
+    <form id="frm-tarea" action="{{ route('tareas.update', $tarea, $tarea->id_tarea) }}" method="POST"
+        class="form-horizontal">
         @method("PUT")
         @csrf
 
@@ -16,9 +17,9 @@
                             <option value="" selected></option>
                             @foreach ($clientes as $c)
                                 @if ($c->id_cliente == $tarea->id_cliente)
-                                    <option value="{{ $tarea->id_cliente }}" selected>{{ $c->nombre }}</option>
+                                    <option value="{{ $c->id_cliente }}" selected>{{ $c->nombre }}</option>
                                 @else
-                                    <option value="{{ $tarea->id_cliente }}">{{ $c->nombre }}</option>
+                                    <option value="{{ $c->id_cliente }}">{{ $c->nombre }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -104,7 +105,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
-                        <input type="text" name="cp" class="form-control" value="{{ $tarea->poblacion }}"
+                        <input type="text" name="cp" class="form-control" value="{{ $tarea->cp }}"
                             placeholder="Codigo Postal de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -160,10 +161,12 @@
                         <select name="operario" class="form-control selectpicker">
                             <option value="" selected></option>
                             @foreach ($empleados as $e)
-                                @if ($e->id_empleado == $tarea->operario)
-                                    <option value="{{ $e->id_empleado }}" selected>{{ $e->nombre }}</option>
-                                @else
-                                    <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
+                                @if ($e->tipo == 'O')
+                                    @if ($e->id_empleado == $tarea->operario)
+                                        <option value="{{ $e->id_empleado }}" selected>{{ $e->nombre }}</option>
+                                    @else
+                                        <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>

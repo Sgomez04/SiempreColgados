@@ -2,7 +2,7 @@
 @section('titulo', 'Modificar Cliente')
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('clientes.update', $cliente) }}" method="POST" class="form-horizontal">
+    <form id="frm-tarea" action="{{ route('clientes.update', $cliente, $cliente->id_cliente) }}" method="POST" class="form-horizontal">
         @method("PUT")
         @csrf
         <fieldset>
@@ -126,7 +126,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="importe" class="form-control" value="{{ $cliente->mensual }}"
+                        <input type="text" name="importe" class="form-control" value="{{ $cliente->cuota_mensual }}"
                             placeholder=" Importe a pagar mensualmente" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>

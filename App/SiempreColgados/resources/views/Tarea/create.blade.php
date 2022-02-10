@@ -142,7 +142,9 @@
                         <select name="operario" class="form-control selectpicker">
                             <option value="" selected></option>
                             @foreach ($empleados as $e)
+                                @if($e->tipo == "O")
                                 <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @error('orden')

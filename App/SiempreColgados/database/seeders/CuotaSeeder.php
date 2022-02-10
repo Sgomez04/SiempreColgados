@@ -26,6 +26,7 @@ class CuotaSeeder extends Seeder
         //     'pagada' => 'N',
         //     'fecha_pago' => '2022-12-23',
         //     'notas' => 'Nota ejemplo 1',
+        //     'tipo' => 'M',
         //     'id_cliente' => '3'
         // ]);
 
@@ -37,6 +38,7 @@ class CuotaSeeder extends Seeder
         //     'pagada' => 'S',
         //     'fecha_pago' => '2022-02-14',
         //     'notas' => 'Nota ejemplo 2',
+        //     'tipo' => 'E',
         //     'id_cliente' => '3'
         // ]);
     }

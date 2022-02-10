@@ -3,7 +3,8 @@
 @section('contenido')
     <div class="row">
         <div class="col-12">
-            <a href="{{ route('cuotas.create') }}" class="btn btn-success mb-2">Agregar</a>
+            <a href="{{ route('cuotas.create') }}" class="btn btn-success mb-2">Agregar cuota mensual</a>
+            <a href="{{ route('createE') }}" class="btn btn-secondary mb-2">Agregar cuota excepcional</a>
             @include("notificacion")
             <table class="table table-bordered">
                 <thead>
@@ -50,5 +51,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div>
+        {{ $cuotas->links()}}
     </div>
 @endsection

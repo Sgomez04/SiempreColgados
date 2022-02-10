@@ -18,7 +18,7 @@ class TareaController extends Controller
     public function index()
     {
         return view("Tarea.list", [
-            "tareas" => Tarea::all(),
+            "tareas" => Tarea::Paginate(2),
             "clientes" => Cliente::all(),
             "empleados" => Empleado::all()
         ]);
@@ -33,7 +33,7 @@ class TareaController extends Controller
     {
         $clientes = Cliente::all();
         $empleados = Empleado::all();
-        return view("Tarea.create", compact('clientes','empleados'));
+        return view("Tarea.create", compact('clientes', 'empleados'));
     }
 
     /**
@@ -51,25 +51,9 @@ class TareaController extends Controller
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
 
-        $tarea = new Tarea();
-        $tarea->id_cliente=$request->cliente;
-        $tarea->telefono=$request->telefono;
-        $tarea->descripcion=$request->descripcion;
-        $tarea->correo=$request->correo;
-        $tarea->direccion=$request->direccion;
-        $tarea->poblacion=$request->poblacion;
-        $tarea->cp=$request->cp;
-        $tarea->estado=$request->estado;
-        $tarea->fecha_crea=$request->fcreacion;
-        $tarea->operario=$request->operario;
-        $tarea->fecha_rea=$request->fechaR;
-        $tarea->anotacion_anterior=$request->aa;
-        $tarea->anotacion_posterior=$request->ap;
-        // $tarea->fichero=$request->concepto;
-
-        $tarea->saveOrFail();
+        Tarea::createT($request);
         return redirect()->route("tareas.index")->with([
-            "success" => "La tarea [<strong>{$tarea->nombre}</strong>] fue registrado correctamente",
+            "success" => "La nueva tarea fue registrado correctamente",
         ]);
     }
 
@@ -82,7 +66,10 @@ class TareaController extends Controller
     public function show($id)
     {
         $tarea = Tarea::find($id);
-        return view("Tarea.delete", compact('tarea'));
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
+
+        return view("Tarea.delete", compact('tarea', 'clientes', 'empleados'));
     }
 
     /**
@@ -97,7 +84,7 @@ class TareaController extends Controller
         $clientes = Cliente::all();
         $empleados = Empleado::all();
 
-        return view("Tarea.edit", compact('tarea','clientes','empleados'));
+        return view("Tarea.edit", compact('tarea', 'clientes', 'empleados'));
     }
 
     /**
@@ -109,15 +96,14 @@ class TareaController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // $validated = $request->validate([
+        // $validated = $request->validate([
         //     'orden' => 'required|numeric',
         //     'nombre' => 'required|max:255',
         //     'fecha_inicio' => 'required|date',
         //     'fecha_fin' => 'required|date|after:fecha_inicio'
         // ]);
-        
-        $tarea = Tarea::find($id);
-        $tarea->fill($request->input())->saveOrFail();
+
+        Tarea::createT($request, $id);
         return redirect()->route("tareas.index")
             ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
     }
@@ -130,8 +116,7 @@ class TareaController extends Controller
      */
     public function destroy($id)
     {
-        $tarea = Tarea::find($id);
-        $tarea->delete();
+        Tarea::destroyT($id);
         return redirect()->route("Cliente.delete")->with([
             "warning" => "La tarea fue eliminada correctamente",
         ]);
