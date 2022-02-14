@@ -1,0 +1,48 @@
+footer {
+  padding: 2em 0;
+
+}
+
+.footer-07 {
+  background: #080500c7;
+}
+
+.footer-07 a {
+  color: #9425b6;
+}
+
+.footer-07 p {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.footer-07 .footer-heading {
+  font-size    : 30px;
+  color        : #fff;
+  font-weight  : 700;
+  margin-bottom: 30px;
+}
+
+.footer-07 .footer-heading .logo {
+  color: #fff;
+}
+
+.footer-07 .menu {
+  margin-bottom: 30px;
+}
+
+.footer-07 .menu a {
+  color          : rgba(255, 255, 255, 0.733);
+  margin         : 0 10px;
+  text-transform : uppercase;
+  text-decoration: none;
+  letter-spacing : 1px;
+}
+
+.footer-07 .menu a:hover {
+  color          : rgba(205, 96, 255, 0.836);
+  margin         : 0 10px;
+  text-transform : uppercase;
+  text-decoration: none;
+  font-weight : bold;
+  letter-spacing : 1px;
+}

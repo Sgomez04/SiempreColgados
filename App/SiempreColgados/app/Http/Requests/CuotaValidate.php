@@ -24,12 +24,12 @@ class CuotaValidate extends FormRequest
     public function rules()
     {
         return [
-            'concepto' => 'required',
-            'fechaemision' => 'required|date',
-            'importe' => 'required|numeric',
-            'fechapago' => 'required|date',
-            'notas' => 'required',
-            'cliente' => 'required'
+            // 'concepto' => 'required',
+            // 'fechaemision' => 'required|date',
+            // 'importe' => 'required|numeric',
+            // 'fechapago' => 'required|date',
+            // 'notas' => '',
+            // 'cliente' => 'required'
         ];
     }
 
@@ -43,8 +43,8 @@ class CuotaValidate extends FormRequest
         'notas.required' => 'Es obligatorio completar el campo "Notas"',
         'cliente.required' => 'Es obligatorio completar el campo "Cliente"',
 
-        'fechaemision.date' => 'El campo "Fecha de emision" debe contener una fecha',
-        'fechapago.date' => 'El campo "Fecha de pago" debe contener una fecha',
+        'fechaemision.date' => 'El campo "Fecha de emision" debe contener un formato valido (dia-mes-año)',
+        'fechapago.date' => 'El campo "Fecha de pago" debe contener un formato valido (dia-mes-año)',
 
         'importe.numeric' => 'El campo "Importe" solo debe contener numeros',
     ];

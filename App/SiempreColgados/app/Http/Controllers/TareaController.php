@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Empleado;
+use App\Http\Requests\TareaValidate;
+
 
 
 class TareaController extends Controller
@@ -42,7 +44,7 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TareaValidate $request)
     {
         // $validated = $request->validate([
         //     'orden' => 'required|numeric|unique:clientes',
@@ -94,7 +96,7 @@ class TareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TareaValidate $request, $id)
     {
         // $validated = $request->validate([
         //     'orden' => 'required|numeric',
@@ -117,7 +119,7 @@ class TareaController extends Controller
     public function destroy($id)
     {
         Tarea::destroyT($id);
-        return redirect()->route("Cliente.delete")->with([
+        return redirect()->route("Cliente.index")->with([
             "warning" => "La tarea fue eliminada correctamente",
         ]);
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DniValidateRule;
+
 
 class EmpleadoValidate extends FormRequest
 {
@@ -24,13 +26,13 @@ class EmpleadoValidate extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required',
-            'password' => 'required',
-            'dni' => 'required|new DniValidateRule',
-            'correo' => 'required|email',
-            'telefono' => 'required|numeric',
-            'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'fecha_alta' => 'required|date',
+            // 'nombre' => 'required',
+            // 'password' => 'required',
+            // 'dni' => ['required', new DniValidateRule],
+            // 'correo' => 'required|email',
+            // 'telefono' => 'required|numeric',
+            // 'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'fecha_alta' => 'required|date',
         ];
     }
 
@@ -45,7 +47,7 @@ class EmpleadoValidate extends FormRequest
             'direccion.required' => 'Es obligatorio completar el campo "Direccion"',
             'fecha_alta.required' => 'Es obligatorio completar el campo "Fecha de alta"',
 
-            'fecha_alta.date' => 'El campo "Fecha de alta" debe contener una fecha',
+            'fecha_alta.date' => 'El campo "Fecha de alta" debe contener un formato valido (dia-mes-año)',
 
             'telefono.numeric' => 'El campo "Telefono" solo debe contener numeros',
 

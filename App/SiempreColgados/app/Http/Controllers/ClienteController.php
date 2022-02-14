@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Paises;
-use App\Http\Requests\EmpleadoValidate;
+use App\Models\Cuota;
+use App\Http\Requests\ClienteValidate;
+
 
 class ClienteController extends Controller
 {
@@ -41,7 +43,7 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmpleadoValidate $request)
+    public function store(ClienteValidate $request)
     {
         Cliente::createC($request);
         return redirect()->route("clientes.index")->with([
@@ -82,7 +84,7 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EmpleadoValidate $request, $id)
+    public function update(ClienteValidate $request, $id)
     {
         Cliente::updateC($request, $id);
         return redirect()->route("clientes.index")
@@ -100,6 +102,20 @@ class ClienteController extends Controller
         Cliente::destroyC($id);
         return redirect()->route("clientes.index")->with([
             "warning" => "El cliente fue eliminado correctamente",
+        ]);
+    }
+
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function UserCuotas($id)
+    {
+        return view("Cuota.listC", [
+            "cuotas" => Cuota::paginate(2),
+            "cliente" => Cliente::find($id),
         ]);
     }
 }

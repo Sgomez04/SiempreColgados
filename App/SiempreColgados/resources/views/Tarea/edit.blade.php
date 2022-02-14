@@ -1,12 +1,30 @@
 @extends("maestra")
-@section('titulo', 'Modificar Tarea')
+
+@section('links')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}" />
+@endsection
+
+@section('navbar')
+    <a href="{{ url('tareas') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
+
+    <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
+
+    <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
+            Cuotas</span></a>
+
+    <a href="{{ url('clientes') }}" class="nav-item nav-link"><i class="fa fa-users"></i><span>
+            Clientes</span></a>
+@endsection
+
 @section('contenido')
 
-    <form id="frm-tarea" action="{{ route('tareas.update', $tarea, $tarea->id_tarea) }}" method="POST"
+    <form id="frm-empleado" action="{{ route('tareas.update', $tarea, $tarea->id_tarea) }}" method="POST"
         class="form-horizontal">
         @method("PUT")
         @csrf
-
         <fieldset>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="cliente"> Cliente:</label>
@@ -14,7 +32,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select name="cliente" class="form-control selectpicker">
-                            <option value="" selected></option>
+                            <option value="" selected>-- Selecciona un cliente --</option>
                             @foreach ($clientes as $c)
                                 @if ($c->id_cliente == $tarea->id_cliente)
                                     <option value="{{ $c->id_cliente }}" selected>{{ $c->nombre }}</option>
@@ -144,8 +162,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="text" name="fcreacion" class="form-control" value="{{ $tarea->fecha_crea }}"
-                            placeholder="Fecha obtenida del sistema" readonly />
+                        <input type="date" name="fcreacion" class="form-control" value="{{ $tarea->fecha_crea }}"
+                            placeholder="Fecha obtenida del sistema"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -159,7 +177,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select name="operario" class="form-control selectpicker">
-                            <option value="" selected></option>
+                            <option value="" selected>-- Selecciona un operario --</option>
                             @foreach ($empleados as $e)
                                 @if ($e->tipo == 'O')
                                     @if ($e->id_empleado == $tarea->operario)
@@ -182,7 +200,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="text" name="fechaR" class="form-control datepicker" value="{{ $tarea->fecha_rea }}"
+                        <input type="date" name="fechaR" class="form-control datepicker" value="{{ $tarea->fecha_rea }}"
                             placeholder="Fecha de realizacion de la tarea" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>

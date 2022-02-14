@@ -1,15 +1,42 @@
 @extends("maestra")
-@section('titulo', 'Tarea')
+
+@section('links')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/list.css') }}" />
+
+@endsection
+
+@section('navbar')
+    <a href="{{ url('tareas') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
+
+    <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
+
+    <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
+            Cuotas</span></a>
+
+    <a href="{{ url('clientes') }}" class="nav-item nav-link"><i class="fa fa-users"></i><span>
+            Clientes</span></a>
+@endsection
+
 @section('contenido')
-    <div class="row">
-        <div class="col-12">
-            <a href="{{ route('tareas.create') }}" class="btn btn-success mb-2">Agregar</a>
-            
-            {{-- @include("notificacion") --}}
-            <table class="table table-bordered">
+    <div class="container-xl">
+        {{-- @include("notificacion") --}}
+        <div class="row table-title">
+            <div class="col-sm-6">
+                <h2>Gestion <b>Tareas</b></h2>
+            </div>
+            <div class="col-sm-6">
+                <a href="{{ route('tareas.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i>
+                    <span>Añadir nueva Tarea</span></a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
                 <thead>
                     <tr>
-                        <td scope="col"><b>  </b></td>
+                        <td scope="col"><b> # </b></td>
                         <th scope="col">Cliente</th>
                         <th scope="col">Telefono</th>
                         <th scope="col">Descripcion</th>
@@ -28,12 +55,14 @@
                 </thead>
                 <tbody>
                     @foreach ($tareas as $t)
-                        <tr>
+                        <tr class="list">
                             <td>
-                                <a href="{{ route('tareas.edit', $t->id_tarea) }}"  class="btn btn-warning"><i class="far fa-edit">Modificar</i></a>
+                                <a href="{{ route('tareas.edit', $t->id_tarea) }}" class="edit"><i
+                                        class="material-icons" title="Editar Tarea">&#xE254;</i></a>
                                 <br>
                                 <br>
-                                <a href="{{ route('tareas.show', $t->id_tarea) }}" class="btn btn-danger"><i class="far fa-trash-alt"> Eliminar</i></a>
+                                <a href="{{ route('tareas.show', $t->id_tarea) }}" class="delete"><i
+                                        class="material-icons" title="Eliminar Tarea">&#xE872;</i></a>
                             </td>
                             <?php
                             foreach ($clientes as $client) {
@@ -43,32 +72,32 @@
                             }
                             ?>
                             <td>{{ $cliente }} </td>
-                            <td>{{ $t->telefono}} </td>
+                            <td>{{ $t->telefono }} </td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->descripcion }} </textarea></td>
-                            <td>{{ $t->correo}}</td>
-                            <td>{{ $t->direccion}}</td>
-                            <td>{{ $t->poblacion}}</td>
-                            <td>{{ $t->cp}}</td>
-                            @if($t->estado == "P")
-                            <td>Pendiente</td>
-                            @elseif($t->estado == "C")
-                            <td>Cancelada</td>
+                            <td>{{ $t->correo }}</td>
+                            <td>{{ $t->direccion }}</td>
+                            <td>{{ $t->poblacion }}</td>
+                            <td>{{ $t->cp }}</td>
+                            @if ($t->estado == 'P')
+                                <td>Pendiente</td>
+                            @elseif($t->estado == 'C')
+                                <td>Cancelada</td>
                             @else
-                            <td>Realizada</td>
+                                <td>Realizada</td>
                             @endif
-                            <td>{{ $t->fecha_crea}}</td>
+                            <td>{{ $t->fecha_crea }}</td>
                             <?php
-                            $empleado = "";
+                            $empleado = '';
                             foreach ($empleados as $e) {
                                 if ($t->operario == $e->id_empleado) {
                                     $empleado = $e->nombre;
                                 }
                             }
                             ?>
-                            <td>{{ $empleado}}</td>
-                            <td>{{ $t->fecha_rea}}</td>
-                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior}}</textarea></td>
-                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior}}</textarea></td>
+                            <td>{{ $empleado }}</td>
+                            <td>{{ $t->fecha_rea }}</td>
+                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
+                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
                             @if ($t->fichero != '')
                                 <td><a target="_blank" href="">Ver
                                         archivo</a></td>
@@ -79,10 +108,10 @@
                     @endforeach
                 </tbody>
             </table>
-
         </div>
     </div>
     <div>
+        <p>Paginacion</p>
         {{ $tareas->links() }}
     </div>
 @endsection

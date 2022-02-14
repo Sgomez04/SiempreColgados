@@ -32,6 +32,7 @@ class Cuota extends Model
                 $cuota->pagada = $request->pagada;
                 $cuota->fecha_pago = $request->fechapago;
                 $cuota->notas = $request->notas;
+                $cuota->tipo = $request->tipo;
                 $cuota->id_cliente = $c->id_cliente;
                 $cuota->saveOrFail();
             }
@@ -46,6 +47,7 @@ class Cuota extends Model
                 $cuota->pagada = $request->pagada;
                 $cuota->fecha_pago = $request->fechapago;
                 $cuota->notas = $request->notas;
+                $cuota->tipo = $request->tipo;
                 $cuota->id_cliente = $request->cliente;
                 $cuota->saveOrFail();
     }

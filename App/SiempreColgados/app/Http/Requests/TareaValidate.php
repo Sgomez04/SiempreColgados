@@ -24,29 +24,33 @@ class TareaValidate extends FormRequest
     public function rules()
     {
         return [
-            'concepto' => 'required',
-            'fechaemision' => 'required|date',
-            'importe' => 'required|numeric',
-            'fechapago' => 'required|date',
-            'notas' => 'required',
-            'cliente' => 'required'
+            // 'telefono' => 'required|numeric',
+            // 'descripcion' => 'required|date',
+            // 'correo' => 'required|email',
+            // 'direccion' => 'required|',
+            // 'poblacion' => 'required',
+            // 'cp' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'fecha_rea' => 'required|date',
+            // 'id_cliente' =>'required'
+
         ];
     }
 
     public function messages()
 {
     return [
-        'concepto.required' => 'Es obligatorio completar el campo "Concepto"',
-        'fechaemision.required' => 'Es obligatorio completar el campo "Fecha de emision"',
-        'importe.required' => 'Es obligatorio completar el campo "Importe"',
-        'fechapago.required' => 'Es obligatorio completar el campo "Fecha de pago"',
-        'notas.required' => 'Es obligatorio completar el campo "Notas"',
-        'cliente.required' => 'Es obligatorio completar el campo "Cliente"',
+        'telefono.required' => 'Es obligatorio completar el campo "Telefono"',
+        'descripcion.required' => 'Es obligatorio completar el campo "Descripcion"',
+        'correo.required' => 'Es obligatorio completar el campo "Importe"',
+        'direccion.required' => 'Es obligatorio completar el campo "Fecha de pago"',
+        'poblacion.required' => 'Es obligatorio completar el campo "Notas"',
+        'cp.required' => 'Es obligatorio completar el campo "Cliente"',
+        'fecha_rea.required' => 'Es obligatorio completar el campo "Fecha de realizacion"',
+        'id_cliente.required' => 'Es obligatorio completar el campo "Cliente"',
 
-        'fechaemision.date' => 'El campo "Fecha de emision" debe contener una fecha',
-        'fechapago.date' => 'El campo "Fecha de pago" debe contener una fecha',
+        'fecha_rea.date' => 'El campo "Fecha de realizacion" debe contener un formato valido (dia-mes-año)',
 
-        'importe.numeric' => 'El campo "Importe" solo debe contener numeros',
+        'telefono.numeric' => 'El campo "Telefono" solo puede contener numeros',
     ];
 }
 }

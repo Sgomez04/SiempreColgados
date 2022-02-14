@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Empleado;
+use App\Http\Requests\EmpleadoValidate;
+
 
 class EmpleadoController extends Controller
 {
@@ -35,15 +37,8 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmpleadoValidate $request)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric|unique:clientes',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-
         Empleado::createE($request);
         return redirect()->route("empleados.index")->with([
             "success" => "El nuevo empleado fue registrado correctamente",
@@ -82,15 +77,8 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmpleadoValidate $request, $id)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-        
         Empleado::updateE($request,$id);
         return redirect()->route("empleados.index")
             ->with(["success" => "Los datos del empleado fueron actualizados correctamente"]);
@@ -105,7 +93,7 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         Empleado::destroyE($id);
-        return redirect()->route("Cliente.delete")->with([
+        return redirect()->route("empleados.index")->with([
             "warning" => "El empleado fue eliminado correctamente",
         ]);
     }

@@ -37,8 +37,10 @@
             @foreach ($paises as $p)
                 @if ($p->iso_moneda == $cliente->moneda)
                     <p>Moneda: {{ $p->nombre_moneda }}</p>
+                    @break
                 @endif
             @endforeach
+            
         </div>
 
         <div class="form-group">
@@ -49,7 +51,7 @@
         <div class="row mt-3 ">
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <a class="btn btn-success mx-3" href="{{ url('clientes') }}">Cancelar</a>
-                <a class="btn btn-danger mx-3" href="{{ route('clientes.destroy', $cliente->id_cliente) }}">Eliminar</a>
+                <a class="btn btn-danger mx-3" href="{{ route('eliminarCi', $cliente->id_cliente) }}">Eliminar</a>
             </div>
         </div>
     </fieldset>

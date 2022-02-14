@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\CifValidateRule;
+
 
 class ClienteValidate extends FormRequest
 {
@@ -24,14 +26,14 @@ class ClienteValidate extends FormRequest
     public function rules()
     {
         return [
-            'cif' => 'required|new CifValidateRule',
-            'nombre' => 'required|date',
-            'telefono' => 'required|numeric',
-            'correo' => 'required|email',
-            'cuenta' => 'required|new CccValidateRule',
-            'pais' => 'required',
-            'moneda' => 'required',
-            'importe' => 'required|numeric'
+            // 'cif' => ['required' , new CifValidateRule],
+            // 'nombre' => 'required|date',
+            // 'telefono' => 'required|numeric',
+            // 'correo' => 'required|email',
+            // 'cuenta' => 'required|new CccValidateRule',
+            // 'pais' => 'required',
+            // 'moneda' => 'required',
+            // 'importe' => 'required|numeric'
         ];
     }
 

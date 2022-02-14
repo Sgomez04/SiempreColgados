@@ -49,7 +49,7 @@
         <div class="row mt-3 ">
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <a class="btn btn-success mx-3" href="{{ url('cuotas') }}">Cancelar</a>
-                <a class="btn btn-danger mx-3" href="{{ route('cuotas.destroy' , $cuota->id_cuota) }}">Eliminar</a>
+                <a class="btn btn-danger mx-3" href="{{ route('eliminarC', $cuota->id_cuota) }}">Eliminar</a>
             </div>
         </div>
     </fieldset>

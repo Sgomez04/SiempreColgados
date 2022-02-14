@@ -45,7 +45,7 @@
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <a class="btn btn-success mx-3" href="{{ url('empleados') }}">Cancelar</a>
-                    <a class="btn btn-danger mx-3" href="{{ route('empleados.destroy' , $empleado->id_empleado) }}">Eliminar</a>
+                    <a class="btn btn-danger mx-3" href="{{ route('eliminarE' , $empleado->id_empleado) }}">Eliminar</a>
                 </div>
             </div>
 

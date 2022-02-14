@@ -1,5 +1,24 @@
 @extends("maestra")
-@section('titulo', 'Modificar Cuota')
+
+@section('links')
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/forms.css') }}" />
+@endsection
+
+@section('navbar')
+    <a href="{{ url('tareas') }}" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Tareas</span></a>
+
+    <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
+
+    <a href="{{ url('cuotas') }}" class="nav-item nav-link active"><i class="fa fa-book"></i><span>
+            Cuotas</span></a>
+
+    <a href="{{ url('clientes') }}" class="nav-item nav-link"><i class="fa fa-users"></i><span>
+            Clientes</span></a>
+@endsection
+
 @section('contenido')
 
     <form id="frm-tarea" action="{{ route('cuotas.update', $cuota) }}" method="POST" class="form-horizontal">
@@ -10,7 +29,7 @@
                 <label class="col-md-4 control-label" for="concepto">Concepto:</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
                         <input type="text" name="concepto" class="form-control" value="{{ $cuota->concepto }}"
                             placeholder="Concepto de la cuota" />
                         @error('orden')
@@ -24,8 +43,8 @@
                 <label class="col-md-4 control-label" for="fechaemision"> Fecha Emision: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="fechaemision" class="form-control" value="{{ $cuota->fecha_emision }}"
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input type="date" name="fechaemision" class="form-control" value="{{ $cuota->fecha_emision }}"
                             placeholder="Fecha de emision de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -38,7 +57,7 @@
                 <label class="col-md-4 control-label" for="importe"> Importe: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
                         <input type="text" name="importe" class="form-control" value="{{ $cuota->importe }}"
                             placeholder="Importe de la cuota" />
                         @error('orden')
@@ -71,8 +90,8 @@
                 <label class="col-md-4 control-label" for="fechapago"> Fecha Pago: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="fechapago" class="form-control" value="{{ $cuota->fecha_pago }}"
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input type="date" name="fechapago" class="form-control" value="{{ $cuota->fecha_pago }}"
                             placeholder="Fecha de pago de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -85,7 +104,7 @@
                 <label class="col-md-4 control-label" for="notas"> Notas: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="notas" class="form-control"
                             placeholder="Notas sobre la cuota">{{ $cuota->notas }}</textarea>
                         @error('orden')
@@ -101,7 +120,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select name="cliente" class="form-control selectpicker">
-                            <option value="" selected></option>
+                            <option value="" selected>-- Selecciona un cliente --</option>
                             @foreach ($clientes as $cliente)
                                 @if ($cuota->id_cliente == $cliente->id_cliente)
                                     <option value="{{ $cliente->id_cliente }}" selected>{{ $cliente->nombre }}</option>
@@ -124,10 +143,7 @@
                     <a class="btn btn-danger mx-3" href="{{ url('cuotas') }}">Cancelar</a>
                 </div>
             </div>
-
-            {{-- <div class="text-center bton">
-                <input type="submit" class="btn btn-success" value="Guardar">
-            </div> --}}
+            
         </fieldset>
     </form>
 @endsection
