@@ -29,7 +29,7 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
     @yield('links')
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
-    
+
     {{-- <style>
         .w-5 {
             display: none;
@@ -48,22 +48,22 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
         <div id="navbarCollapse" class=" navbar-collapse justify-content-start">
             <div class="navbar-nav ml-auto">
                 @yield('navbar')
-                <div class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img
-                            src="" class="imgUser"
-                            alt="Avatar"> nombre <b class="caret"></b></a>
-                    <div class="dropdown-menu">
-                        <a href="" class="dropdown-item"><i
-                                class="fa fa-sliders"></i> Ajustes</a>
-                        <div class="divider dropdown-divider"></div>
-                        <form action="" method='POST' style="display:inline">
-                            <a href="#" class="dropdown-item" onclick="this.closest('form').submit()"><i
-                                class="material-icons">&#xE8AC;</i>
-                            Desconectar</a>
-                        </form>
-                        
+                @auth
+                    <div class="nav-item dropdown">
+                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src=""
+                                class="imgUser" alt="Avatar"> nombre <b class="caret"></b></a>
+                        <div class="dropdown-menu">
+                            <a href="" class="dropdown-item"><i class="fa fa-sliders"></i> Ajustes</a>
+                            <div class="divider dropdown-divider"></div>
+                            <form action="{{route('logout')}}" method='POST' style="display:inline">
+                                <a href="#" class="dropdown-item" onclick="this.closest('form').submit()"><i
+                                        class="material-icons">&#xE8AC;</i>
+                                    Desconectar</a>
+                            </form>
+
+                        </div>
                     </div>
-                </div>
+                @endauth
             </div>
         </div>
     </nav>
@@ -74,7 +74,7 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
         @yield('contenido', '** ERROR **. No se ha incluido sección de contenido')
     </div>
 
-    
+
     <footer class="footer-07">
         <div class="container">
             <div class="row justify-content-center">

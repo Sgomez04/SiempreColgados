@@ -21,7 +21,7 @@ class EmpleadoSeeder extends Seeder
         DB::table('empleados')->insert([
             'id_empleado' => '1',
             'nombre' => 'Antonio Ramirez',
-            'password' => bcrypt('ejemplo1'),
+            'password' => md5('ejemplo1'),
             'dni' => '75483715F',
             'correo' => 'AramirezNio@gmail.com',
             'telefono' => '682746352',
@@ -33,7 +33,7 @@ class EmpleadoSeeder extends Seeder
         DB::table('empleados')->insert([
             'id_empleado' => '2',
             'nombre' => 'Alba Perez',
-            'password' => bcrypt('ejemplo2'),
+            'password' => md5('ejemplo2'),
             'dni' => '09237158R',
             'correo' => 'PerezAlb@gmail.com',
             'telefono' => '682746352',
