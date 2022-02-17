@@ -53,7 +53,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="telefono" class="form-control" value="{{ $tarea->telefono }}"
+                        <input type="text" name="telefono" class="form-control" value="{{ old('telefono', $tarea->telefono) }}"
                             placeholder="Telefono del contratante" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -68,7 +68,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="descripcion" class="form-control"
-                            placeholder="Descripcion de la tarea"> {{ $tarea->descripcion }}</textarea>
+                            placeholder="Descripcion de la tarea"> {{  old('descripcion', $tarea->descripcion) }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -81,7 +81,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" value="{{ $tarea->correo }}"
+                        <input type="text" name="correo" class="form-control" value="{{ old('correo', $tarea->correo) }}"
                             placeholder="Correo del contratante" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -95,7 +95,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" value="{{ $tarea->direccion }}"
+                        <input type="text" name="direccion" class="form-control" value="{{ old('direccion', $tarea->direccion) }}"
                             placeholder="Direccion de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -109,7 +109,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="poblacion" class="form-control" value="{{ $tarea->poblacion }}"
+                        <input type="text" name="poblacion" class="form-control" value="{{ old('poblacion', $tarea->poblacion) }}"
                             placeholder="Poblacion de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -123,7 +123,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
-                        <input type="text" name="cp" class="form-control" value="{{ $tarea->cp }}"
+                        <input type="text" name="cp" class="form-control" value="{{ old('cp', $tarea->cp) }}"
                             placeholder="Codigo Postal de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -137,11 +137,11 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        @if ($tarea->estado == 'P')
+                        @if (old('estado', $tarea->estado) == 'P')
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P" checked> Pendiente</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R"> Realizada</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C"> Cancelada</label>
-                        @elseif($tarea->estado == 'R')
+                        @elseif(old('estado', $tarea->estado) == 'R')
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P"> Pendiente</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R" checked> Realizada</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C"> Cancelada</label>
@@ -162,7 +162,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fcreacion" class="form-control" value="{{ $tarea->fecha_crea }}"
+                        <input type="date" name="fcreacion" class="form-control" value="{{ old('fcreacion',$tarea->fecha_crea) }}"
                             placeholder="Fecha obtenida del sistema"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -181,9 +181,9 @@
                             @foreach ($empleados as $e)
                                 @if ($e->tipo == 'O')
                                     @if ($e->id_empleado == $tarea->operario)
-                                        <option value="{{ $e->id_empleado }}" selected>{{ $e->nombre }}</option>
+                                        <option value="{{ old('operario', $e->id_empleado) }}" selected>{{ $e->name }}</option>
                                     @else
-                                        <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
+                                        <option value="{{ $e->id_empleado }}">{{ $e->name }}</option>
                                     @endif
                                 @endif
                             @endforeach
@@ -201,7 +201,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         <input type="date" name="fechaR" class="form-control datepicker" value="{{ $tarea->fecha_rea }}"
-                            placeholder="Fecha de realizacion de la tarea" />
+                            placeholder="Fecha de realizacion de la tarea" readonly/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -215,7 +215,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="aa" class="form-control"
-                            placeholder="Anotacion anterior a la realizacion de la tarea">{{ $tarea->anotacion_anterior }}</textarea>
+                            placeholder="Anotacion anterior a la realizacion de la tarea">{{ old('aa',$tarea->anotacion_anterior) }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -229,7 +229,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="ap" class="form-control"
-                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ $tarea->anotacion_posterior }}</textarea>
+                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ old('ap',$tarea->anotacion_posterior) }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -266,10 +266,6 @@
                     <a class="btn btn-danger mx-3" href="{{ url('tareas') }}">Cancelar</a>
                 </div>
             </div>
-
-            {{-- <div class="text-center bton">
-                <input type="submit" class="btn btn-success" value="Guardar">
-            </div> --}}
         </fieldset>
     </form>
 @endsection

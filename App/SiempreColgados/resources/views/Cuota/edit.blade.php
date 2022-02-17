@@ -30,7 +30,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
-                        <input type="text" name="concepto" class="form-control" value="{{ $cuota->concepto }}"
+                        <input type="text" name="concepto" class="form-control" value="{{ old('concepto',$cuota->concepto) }}"
                             placeholder="Concepto de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -44,7 +44,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechaemision" class="form-control" value="{{ $cuota->fecha_emision }}"
+                        <input type="date" name="fechaemision" class="form-control" value="{{ old('fechaemision',$cuota->fecha_emision) }}"
                             placeholder="Fecha de emision de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -58,7 +58,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input type="text" name="importe" class="form-control" value="{{ $cuota->importe }}"
+                        <input type="text" name="importe" class="form-control" value="{{ old('importe',$cuota->importe) }}"
                             placeholder="Importe de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -72,7 +72,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        @if ($cuota->pagada == 'S')
+                        @if (old('pagada',$cuota->pagada) == 'S')
                             <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="S" checked>Pagada</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="N">No pagada</label>
                         @else
@@ -91,7 +91,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechapago" class="form-control" value="{{ $cuota->fecha_pago }}"
+                        <input type="date" name="fechapago" class="form-control" value="{{ old('fechapago',$cuota->fecha_pago) }}"
                             placeholder="Fecha de pago de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -106,7 +106,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="notas" class="form-control"
-                            placeholder="Notas sobre la cuota">{{ $cuota->notas }}</textarea>
+                            placeholder="Notas sobre la cuota">{{ old('notas',$cuota->notas) }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

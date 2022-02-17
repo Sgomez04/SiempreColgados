@@ -25,12 +25,12 @@ class CreateTareaTable extends Migration
             $table->string('cp', 5);
             $table->string('estado', 10);
             $table->date('fecha_crea');
-            $table->unsignedInteger('operario');
+            $table->unsignedInteger('operario')->nullable();
             $table->foreign('operario')->references('id_empleado')->on('empleados');
             $table->date('fecha_rea');
             $table->string('anotacion_anterior', 200);
             $table->string('anotacion_posterior', 200);
-            $table->string('fichero', 50);
+            $table->string('fichero', 50)->nullable();
             $table->timestamps();
         });
     }

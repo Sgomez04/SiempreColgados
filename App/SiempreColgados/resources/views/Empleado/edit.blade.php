@@ -30,7 +30,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                        <input type="text" name="nombre" class="form-control" value="{{ $empleado->nombre }}"
+                        <input type="text" name="nombre" class="form-control" value="{{ old('nombre', $empleado->name) }}"
                             placeholder="Nombre del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -44,7 +44,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-                        <input type="text" name="password" class="form-control" value="{{ $empleado->password }}"
+                        <input type="text" name="password" class="form-control" value="{{ old('password', $empleado->password) }}"
                             placeholder="Contraseña del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -58,7 +58,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input type="text" name="dni" class="form-control" value="{{ $empleado->dni }}"
+                        <input type="text" name="dni" class="form-control" value="{{ old('dni', $empleado->dni) }}"
                             placeholder="DNI del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -72,7 +72,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" value="{{ $empleado->correo }}"
+                        <input type="text" name="correo" class="form-control" value="{{ old('correo', $empleado->email) }}" readonly
                             placeholder="Correo del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -86,7 +86,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" name="telefono" class="form-control" value="{{ $empleado->telefono }}"
+                        <input type="text" name="telefono" class="form-control" value="{{ old('telefono', $empleado->telefono) }}"
                             placeholder="Telefono del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -100,7 +100,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" value="{{ $empleado->direccion }}"
+                        <input type="text" name="direccion" class="form-control" value="{{ old('direccion', $empleado->direccion) }}"
                             placeholder="Direccion del empleado" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -114,7 +114,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechalta" class="form-control" value="{{ $empleado->fecha_alta }}"
+                        <input type="date" name="fechalta" class="form-control" value="{{ old('fechalta', $empleado->fecha_alta) }}"
                             placeholder="Fecha obtenida del sistema" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -128,7 +128,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        @if ($empleado->tipo == 'A')
+                        @if (old('cargo', $empleado->tipo) == 'A')
                             <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="A" checked> Administrador</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="O"> Operario</label><br>
                         @else

@@ -24,10 +24,10 @@ class Empleado extends Model
 
     public static function createE($request){
         $empleado = new Empleado();
-        $empleado->nombre=$request->nombre;
+        $empleado->name=$request->nombre;
         $empleado->password=$request->password;
         $empleado->dni=$request->dni;
-        $empleado->correo=$request->correo;
+        $empleado->email=$request->correo;
         $empleado->telefono=$request->telefono;
         $empleado->direccion=$request->direccion;
         $empleado->fecha_alta=$request->fechalta;
@@ -38,10 +38,10 @@ class Empleado extends Model
     
     public static function updateE($request,$id){
         $empleado = Empleado::find($id);
-        $empleado->nombre=$request->nombre;
+        $empleado->name=$request->name;
         $empleado->password=$request->password;
         $empleado->dni=$request->dni;
-        $empleado->correo=$request->correo;
+        $empleado->email=$request->correo;
         $empleado->telefono=$request->telefono;
         $empleado->direccion=$request->direccion;
         $empleado->fecha_alta=$request->fechalta;
@@ -50,9 +50,25 @@ class Empleado extends Model
         $empleado->fill($request->input())->saveOrFail();
     }
     
+    public static function updateU($request,$id){
+        $empleado = Empleado::find($id);
+        $empleado->name=$request->name;
+        $empleado->password=$request->password;
+        $empleado->dni=$request->dni;
+        $empleado->email=$request->correo;
+        $empleado->telefono=$request->telefono;
+        $empleado->direccion=$request->direccion;
+        $empleado->fecha_alta=$empleado->fecha_alta;
+        $empleado->tipo=$empleado->tipo;
+
+        $empleado->fill($request->input())->saveOrFail();
+    }
+
     public static function destroyE($id){
 
         $empleado = Empleado::find($id);
         $empleado->delete();
     }
+    
+
 }

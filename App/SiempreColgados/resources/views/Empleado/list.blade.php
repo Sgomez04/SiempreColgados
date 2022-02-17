@@ -57,13 +57,14 @@
                                 <a href="{{ route('empleados.show', $e->id_empleado) }}" class="delete"><i
                                     class="material-icons" title="Eliminar Empleado">&#xE872;</i></a>
                             </td>
-                            <td>{{ $e->nombre }} </td>
+                            <td>{{ $e->name }} </td>
                             {{-- <td>{{ $e->password }} </td> --}}
                             <td>{{ $e->dni }}</td>
                             <td>{{ $e->correo }}</td>
                             <td>{{ $e->telefono }}</td>
                             <td>{{ $e->direccion }}</td>
-                            <td>{{ $e->fecha_alta }}</td>
+                            <td>{{ $fecha = date('d/m/Y',
+                                strtotime($e->fecha_alta)); }}</td>
                             @if ($e->tipo == 'A')
                                 <td>Administrador</td>
                             @else

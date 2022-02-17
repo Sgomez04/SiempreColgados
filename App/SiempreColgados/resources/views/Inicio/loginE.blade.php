@@ -12,12 +12,7 @@
 @endsection
 
 @section('navbar')
-    <a href="{{ url('/') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Inicio</span></a>
-
     <a href="" class="nav-item nav-link active"><i class="fa fa-id-card-o"></i><span>Empleado</span></a>
-
-    <a href="" class="nav-item nav-link"><i class="fa fa-users"></i><span>
-            Cliente</span></a>
 @endsection
 
 @section('contenido')
@@ -30,24 +25,54 @@
                 <h4 class="modal-title">Login Empleado</h4>
             </div>
             <br>
-            {{-- <center> {!! ErrorShow('login', $error) !!}</center> --}}
             <br>
             <div class="modal-body">
-                <form action="{{route('login')}}" method="POST">
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control" name="correo" placeholder="Correo Electronico"
-                            required="required" value="AramirezNio@gmail.com">
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"
+                            value="{{ old('email') }}" name="email" placeholder="Correo Electronico" required
+                            autocomplete="email" autofocus>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Contraseña"
-                            required="required" value="ejemplo1">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                            required autocomplete="current-password" placeholder="Contraseña" required="required">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                    {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <br>
                     <div class="form-group">
                         <button type="submit" name="submit"
                             class="btn btn-primary btn-lg btn-block login-btn">Login</button>
                     </div>
+                    @if (Route::has('password.request'))
+                        <a class="btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif
                 </form>
             </div>
             <div class="modal-footer">

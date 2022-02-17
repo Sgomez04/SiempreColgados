@@ -55,4 +55,5 @@ class EmpleadoValidate extends FormRequest
 
         ];
     }
+
 }

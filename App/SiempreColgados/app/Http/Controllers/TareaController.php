@@ -7,7 +7,7 @@ use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Http\Requests\TareaValidate;
-
+use Illuminate\Support\Facades\Auth;
 
 
 class TareaController extends Controller
@@ -46,13 +46,6 @@ class TareaController extends Controller
      */
     public function store(TareaValidate $request)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric|unique:clientes',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-
         Tarea::createT($request);
         return redirect()->route("tareas.index")->with([
             "success" => "La nueva tarea fue registrado correctamente",
@@ -98,14 +91,7 @@ class TareaController extends Controller
      */
     public function update(TareaValidate $request, $id)
     {
-        // $validated = $request->validate([
-        //     'orden' => 'required|numeric',
-        //     'nombre' => 'required|max:255',
-        //     'fecha_inicio' => 'required|date',
-        //     'fecha_fin' => 'required|date|after:fecha_inicio'
-        // ]);
-
-        Tarea::createT($request, $id);
+        Tarea::updateT($request, $id);
         return redirect()->route("tareas.index")
             ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
     }
@@ -119,8 +105,80 @@ class TareaController extends Controller
     public function destroy($id)
     {
         Tarea::destroyT($id);
-        return redirect()->route("Cliente.index")->with([
+        return redirect()->route("tareas.index")->with([
             "warning" => "La tarea fue eliminada correctamente",
         ]);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createClient()
+    {
+        $clientes = Cliente::all();
+        $empleados = Empleado::all();
+        return view("Tarea.createClient", compact('clientes', 'empleados'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeClient(TareaValidate $request)
+    {
+        Tarea::createT($request);
+        return redirect()->route("tareas.index")->with([
+            "success" => "La nueva tarea fue registrado correctamente",
+        ]);
+    }
+
+    //Operarios
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listTareaOP()
+    {
+        return view("Operario.listTarea", [
+            "tareas" => Tarea::Paginate(2),
+            "clientes" => Cliente::all(),
+            "empleados" => Empleado::all()
+        ]);
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editTareaOP($id)
+    {
+        $tarea = Tarea::find($id);
+        return view("Operario.editTarea", compact('tarea'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTareaOPshow(TareaValidate $request, $id)
+    {
+        Tarea::updateT($request, $id);
+        return redirect()->route("tareasOP")
+            ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
+    }
+
+
+
 }

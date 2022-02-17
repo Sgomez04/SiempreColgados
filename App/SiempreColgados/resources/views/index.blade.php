@@ -46,7 +46,7 @@
                 <div class="text-center">
                     <h1 class="mx-auto my-0 text-uppercase">Siempre Colgados</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">Haga de la seguridad una prioridad</h2>
-                    <a class="btn btn-primary" href="">CLIENTE</a>
+                    <a class="btn btn-primary" href="{{ route('tareaClient') }}">CLIENTE</a>
                     <a class="btn btn-primary" href="{{ route('login') }}">EMPLEADO</a>
                 </div>
             </div>

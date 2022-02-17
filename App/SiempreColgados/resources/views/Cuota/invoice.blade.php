@@ -1,132 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>SiempreColgados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
-font-awesome/5.15.2/css/all.min.css" />
+    <meta charset="utf-8" />
+    <title>Cuota {{ $cuota->tipo }} - SiempreColgados</title>
+
     <style>
-        .factura {
-            table-layout: fixed;
+        .invoice-title {
+            text-align: center;
+            padding-bottom: 30px;
         }
 
-        .fact-info>div>h5 {
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
             font-weight: bold;
         }
 
-        .factura>thead {
-            border-top: solid 3px #000;
-            border-bottom: 3px solid #000;
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
         }
 
-        .factura>thead>tr>th:nth-child(2),
-        .factura>tbod>tr>td:nth-child(2) {
-            width: 300px;
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
         }
 
-        .factura>thead>tr>th:nth-child(n+3) {
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .invoice-box.rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box.rtl table {
             text-align: right;
         }
 
-        .factura>tbody>tr>td:nth-child(n+3) {
-            text-align: right;
-        }
-
-        .factura>tfoot>tr>th,
-        .factura>tfoot>tr>th:nth-child(n+3) {
-            font-size: 24px;
-            text-align: right;
-        }
-
-        .cond {
-            border-top: solid 2px #000;
+        .invoice-box.rtl table tr td:nth-child(2) {
+            text-align: left;
         }
 
     </style>
 </head>
 
 <body>
-<div>
+    <div class="invoice-box">
+        <h2 class="invoice-title">Cuota {{ $cuota->tipo }} - SiempreColgados</h3>
+            <table cellpadding="0" cellspacing="0">
+                <tr class="top">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    <img src="https://i.pinimg.com/564x/db/67/d4/db67d49cf938ffcd7e24dd362d2162a9.jpg"
+                                        style="width: 100%; max-width: 150px" />
+                                </td>
 
-    <h2>Factura [Cuota {{$cuota->tipo}}</h2>
+                                <td>
+                                    Factura #: {{ $cuota->tipo }}<br />
+                                    Emitida: {{ date('d-m-Y'); }}<br />
+                                    Cobrada : {{ date('d-m-Y'); }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
 
-    <div class="row my-3">
-      <div class="col-10">
-        <h1>Direccion</h1>
-        <p>Av. Santa Marta s/n</p>
-        <p>21005</p>
-        <p>Huelva</p>
-      </div>
-      <div class="col-2">
-        {{-- <img src="~/images/Mil-Pasos_Negro.png" /> --}}
-      </div>
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td>
+                                    SiempreColgados<br />
+                                    av. Santa Marta, s/n<br />
+                                    Huelva, 21005 - España
+                                </td>
+
+                                <td>
+                                    {{ $cliente->cif }}<br />
+                                    {{ $cliente->nombre }}<br />
+                                    {{ $cliente->correo }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="heading">
+                    <td>Concepto</td>
+
+                    <td>Precio</td>
+                </tr>
+
+                <tr class="item last">
+                    <td>{{ $cuota->concepto }}</td>
+
+                    <td>{{ $cuota->importe }}</td>
+                </tr>
+
+                <tr class="total">
+                    <td></td>
+
+                    <td>Total: {{ $cuota->importe }} €</td>
+                </tr>
+            </table>
     </div>
-  
-    <hr />
-  
-    <div class="row fact-info mt-3">
-      <div class="col-3">
-        <h5>Facturar a</h5>
-        <p>
-          {{-- {{$cliente->nombre}} --}}
-        </p>
-      </div>
-      <div class="col-3">
-        <h5>Enviar a</h5>
-        <p>
-         {{-- {{$cliente->nombre}}
-         {{$cliente->correo}} --}}
-        </p>
-      </div>
-      <div class="col-3">
-        <h5>N° de factura</h5>
-        <h5>Fecha de emision</h5>
-        <h5>Fecha de pago</h5>
-      </div>
-      <div class="col-3">
-        <h5>{{$cuota->id_cuota}}</h5>
-        <p>{{$cuota->fecha_emision}}</p>
-        <p>{{$cuota->fecha_pago}}</p>
-      </div>
-    </div>
-  
-    <div class="row my-5">
-      <table class="table table-borderless factura">
-        <thead>
-          <tr>
-            <th>Cant.</th>
-            <th>Descripcion</th>
-            <th>Importe</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>{{$cuota->concepto}}</td>
-            <td>{{$cuota->importe}}</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  
-    <div class="cond row">
-      <div class="col-12 mt-3">
-        <h4>Formas de pago</h4>
-        <p>
-          Transferencia Bancaria
-          <br />
-          {{-- IBAN: {{$cliente->cuenta_corriente}}}} --}}
-        </p>
-      </div>
-    </div>
-</div>
 </body>
 
 </html>
-

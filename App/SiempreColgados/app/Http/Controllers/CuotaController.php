@@ -62,26 +62,23 @@ class CuotaController extends Controller
     public function store(CuotaValidateM $request)
     {
         $clientes = Cliente::all();
+        Cuota::createM($request, $clientes);
 
         //Envio de correos a todos los clientes por creacion de cuota mensual
         foreach ($clientes as $datos) {
+
             $cliente = Cliente::find($datos->id_cliente);
-
-            $data["title"] = "Mensual";
-            $data["cliente"] = $datos->id_cliente;
-            $data["email"] = $datos->correo;
-
-            $pdf = PDF::loadView('Cuota.invoice', compact('cuota'));
-            Mail::send('Cuota.mail', $data, function ($message) use ($data, $pdf) {
-                $message->from('sgomez_m@hotmail.com')
-                    ->to($data["email"], $data["email"])
-                    ->subject($data["title"])
-                    ->attachData($pdf->output(), "test.pdf");
+            $cuota = $request;
+    
+            $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
+            Mail::send('Mail.mail', function ($message) use ($pdf) {
+                $message->from('siemprecolgados.company@gmail.com')
+                    ->to('sgomez_m@hotmail.com')
+                    ->subject('Cuota Mensual')
+                    ->attachData($pdf->output(), "SiempreColgados.pdf");
             });
+    
         }
-
-
-        Cuota::createM($request, $clientes);
         return redirect()->route("cuotas.index")->with([
             "success" => "Las cuotas mensuales fueron creadas correctamente",
         ]);
@@ -98,33 +95,16 @@ class CuotaController extends Controller
         Cuota::createE($request, Cliente::all());
         $cliente = Cliente::find($request->cliente);
         $cuota = $request;
-
-        // $data = new \stdClass();
-        // $data->cuota = $request->tipo;
-        // $data->empresa = 'SiempreColgados';
-        // $data->cliente = $cliente->nombre;  
-
-        // dd($cliente->correo);
-
-
-        // $pdf = PDF::loadView('Cuota.invoice', compact('cuota'));
-        // $output = $pdf->output();
-
-        // Mail::to($cliente->correo)->send(new SendEmails($data, $output));
-
-
-// --------------------------------- forma 1 --------------------//
-
-        // $data["cliente"] = $cliente->id_cliente;
-        // $data["email"] = $cliente->correo;
-
-        // $pdf = PDF::loadView('Mail.mail', compact('cuota'));
-        // Mail::send('Mail.mail', $data, function ($message) use ($data, $pdf) {
-        //     $message->from('siemprecolgados.company@gmail.com')
-        //         ->to('sgomez_m@hotmail.com')
-        //         ->subject('Cuota Mensual')
-        //         ->attachData($pdf->output(), "SiempreColgados.pdf");
-        // });
+        $data['cliente'] = $cliente->name;
+        $data['cuota'] = $cuota->tipo;
+        
+        $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
+        Mail::send('Mail.mail', $data, function ($message) use ($data, $pdf) {
+            $message->from('siemprecolgados.company@gmail.com')
+                ->to('sgomez_m@hotmail.com')
+                ->subject('Cuota Mensual')
+                ->attachData($pdf->output(), "SiempreColgados.pdf");
+        });
 
         return redirect()->route("cuotas.index")->with([
             "success" => "Las cuota expecepcional fue creada correctamente",
@@ -189,10 +169,9 @@ class CuotaController extends Controller
     public function printInvoice($id_cuota)
     {
         $cuota = Cuota::find($id_cuota);
-        // $cliente = Cuota::find($id_cliente);
-        // $tarea = Cuota::find($id);
+        $cliente = Cliente::find($cuota->id_cliente);
 
-        $pdf = PDF::loadView('Cuota.invoice', compact('cuota'));
-        return $pdf->download('Factura_cuota.pdf');
+        $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
+        return $pdf->stream('Factura_cuota.pdf');
     }
 }

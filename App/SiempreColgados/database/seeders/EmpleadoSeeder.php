@@ -20,10 +20,10 @@ class EmpleadoSeeder extends Seeder
 
         DB::table('empleados')->insert([
             'id_empleado' => '1',
-            'nombre' => 'Antonio Ramirez',
-            'password' => md5('ejemplo1'),
+            'name' => 'Antonio Ramirez',
+            'password' => bcrypt('ejemplo1'),
             'dni' => '75483715F',
-            'correo' => 'AramirezNio@gmail.com',
+            'email' => 'AramirezNio@gmail.com',
             'telefono' => '682746352',
             'direccion' => 'c/ inventada - Ejemplo1',
             'fecha_alta' => '2021-09-30',
@@ -32,10 +32,10 @@ class EmpleadoSeeder extends Seeder
 
         DB::table('empleados')->insert([
             'id_empleado' => '2',
-            'nombre' => 'Alba Perez',
-            'password' => md5('ejemplo2'),
+            'name' => 'Alba Perez',
+            'password' => bcrypt('ejemplo2'),
             'dni' => '09237158R',
-            'correo' => 'PerezAlb@gmail.com',
+            'email' => 'PerezAlb@gmail.com',
             'telefono' => '682746352',
             'direccion' => 'c/ inventada - Ejemplo2',
             'fecha_alta' => '2022-01-26',

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(auth()->user()->isAdmin()){
+            return redirect('tareas');
+        } elseif(auth()->user()->isOperario()){
+            return redirect('/tareas/tareasOP');
+        } else{
+            return view('Inicio.loginE');
+
+        }
+        
     }
 }

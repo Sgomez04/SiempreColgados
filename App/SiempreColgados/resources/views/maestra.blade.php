@@ -39,7 +39,7 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
 
 <body>
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-        <img src="" class="logoI"><span class="logoN"><b>SiempreColgados</b>
+        <img src="/img/logo.png" class="logoI"><span class="logoN"><b>SiempreColgados</b>
             I.C.</span>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -50,17 +50,18 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
                 @yield('navbar')
                 @auth
                     <div class="nav-item dropdown">
-                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src=""
-                                class="imgUser" alt="Avatar"> nombre <b class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src="/img/avatars/{{mt_rand(1, 10)}}.png"
+                                class="imgUser" alt="Avatar"> {{ Auth::user()->name }} <b
+                                class="caret"></b></a>
                         <div class="dropdown-menu">
-                            <a href="" class="dropdown-item"><i class="fa fa-sliders"></i> Ajustes</a>
+                            <a href="{{route('perfil.index')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Perfil</a>
                             <div class="divider dropdown-divider"></div>
-                            <form action="{{route('logout')}}" method='POST' style="display:inline">
+                            <form action="{{ route('logout') }}" method='POST' style="display:inline">
+                                @csrf
                                 <a href="#" class="dropdown-item" onclick="this.closest('form').submit()"><i
                                         class="material-icons">&#xE8AC;</i>
                                     Desconectar</a>
                             </form>
-
                         </div>
                     </div>
                 @endauth

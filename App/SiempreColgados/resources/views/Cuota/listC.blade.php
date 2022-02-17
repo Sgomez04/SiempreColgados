@@ -62,14 +62,16 @@
                                             class="material-icons" title="Factura PDF">&#xe89c;</i></a>
                                 </td>
                                 <td>{{ $c->concepto }} </td>
-                                <td>{{ $c->fecha_emision }} </td>
+                                <td>{{ $fecha = date('d/m/Y',
+                                    strtotime($c->fecha_emision)); }} </td>
                                 <td>{{ $c->importe }}</td>
                                 @if ($c->pagada == 'S')
                                     <td>Pagada</td>
                                 @else
                                     <td>No Pagada</td>
                                 @endif
-                                <td>{{ $c->fecha_pago }}</td>
+                                <td>{{ $fecha = date('d/m/Y',
+                                    strtotime($c->fecha_pago)); }}</td>
                                 <td>{{ $c->tipo }}</td>
                                 <td><textarea cols="20" rows="5" readonly>{{ $c->notas }}</textarea></td>
                             </tr>

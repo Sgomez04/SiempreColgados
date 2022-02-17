@@ -20,7 +20,6 @@
 @endsection
 
 @section('contenido')
-
     <form id="frm-tarea" action="{{ route('tareas.store') }}" method="POST" class="form-horizontal">
         @csrf
         <fieldset>
@@ -47,7 +46,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono del contratante" />
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono del contratante"
+                            value="{{ old('telefono') }}" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -61,7 +61,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="descripcion" class="form-control"
-                            placeholder="Descripcion de la tarea"></textarea>
+                            placeholder="Descripcion de la tarea">{{ old('descripcion') }}</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -74,7 +74,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" placeholder="Correo del contratante" />
+                        <input type="text" name="correo" class="form-control" placeholder="Correo del contratante"
+                            value="{{ old('correo') }}" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -87,7 +88,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control"
+                        <input type="text" name="direccion" class="form-control" value="{{ old('direccion') }}"
                             placeholder="Direccion de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -101,7 +102,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="poblacion" class="form-control"
+                        <input type="text" name="poblacion" class="form-control" value="{{ old('poblacion') }}"
                             placeholder="Poblacion de la tarea a realizar" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -115,37 +116,8 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
-                        <input type="text" name="cp" class="form-control"
+                        <input type="text" name="cp" class="form-control" value="{{ old('pc') }}"
                             placeholder="Codigo Postal de la tarea a realizar" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="estado"> Estado: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P" checked> Pendiente</label><br>
-                        <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R"> Realizada</label><br>
-                        <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C"> Cancelada</label>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="fcreacion"> Fecha de creacion de la tarea:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fcreacion" class="form-control" placeholder="Fecha obtenida del sistema"
-                            readonly />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -161,8 +133,8 @@
                         <select name="operario" class="form-control selectpicker">
                             <option value="" selected>-- Selecciona un operario --</option>
                             @foreach ($empleados as $e)
-                                @if($e->tipo == "O")
-                                <option value="{{ $e->id_empleado }}">{{ $e->nombre }}</option>
+                                @if ($e->tipo == 'O')
+                                    <option value="{{ $e->id_empleado }}">{{ $e->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -178,8 +150,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechaR" class="form-control datepicker"
-                            value="{{ (new DateTime('now'))->format('Y-m-d') }}"
+                        <input type="date" name="fechaR" class="form-control datepicker" value="{{ old('fechaR') }}"
                             placeholder="Fecha de realizacion de la tarea" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -194,49 +165,13 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="aa" class="form-control"
-                            placeholder="Anotacion anterior a la realizacion de la tarea"></textarea>
+                            placeholder="Anotacion anterior a la realizacion de la tarea">value="{{ old('aa') }}"</textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="ap"> Anotaciones posteriores: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="ap" class="form-control"
-                            placeholder="Anotacion posterior a la realizacion de la tarea"></textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="fichero"> Fichero:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group file">
-                        <div>
-                            <label for="image_uploads" id="labelFile">Selecciona un archivo (DOC, DOCX, PDF..)</label>
-                            <input type="file" id="image_uploads" name="fichero" class="form-control"
-                                value="{{ $fichero }}">
-                            <input type="hidden" name="fichero2" value="{{ $fichero }}">
-
-                        </div>
-                        <div class="preview">
-                            @if (isset($fichero))
-                                <p id="pfile">ARCHIVO: {{ $fichero }}</p>
-                            @else
-                                <p id="pfile">No hay ningun archivo seleccionado</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             @include("notificacion")
             <div class="row mt-3 ">

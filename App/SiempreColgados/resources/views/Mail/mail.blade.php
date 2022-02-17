@@ -8,8 +8,8 @@
 </head>
 <body>
 
-<h4>Estimad@ señor/a </h4><h3><strong>{{$data->cliente}}:</strong></h3>
-<p>Le informamos mediante este e-mail de que ha sido registrada a su nombre una cuota {{$data->cuota}}.
+<h4>Estimado/a cliente/a</h4><h3><strong>:</strong></h3>
+<p>Desde SiempreColgados le informamos de que ha sido registrada a su nombre una nueva cuota.
     A continuacion le adjuntamos un archivo PDF con la factura de esta. 
     Para mas información contacte con nosotros. 
 <p>

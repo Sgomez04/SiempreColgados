@@ -42,7 +42,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-                        <input type="text" name="password" class="form-control" placeholder="Contraseña del empleado" />
+                        <input type="text" name="password" class="form-control" placeholder="Contraseña del empleado" value="{{old('password')}}" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -55,7 +55,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input type="text" name="dni" class="form-control" placeholder="DNI del empleado" />
+                        <input type="text" name="dni" class="form-control" placeholder="DNI del empleado" value="{{old('dni')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -68,7 +68,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" placeholder="Correo del empleado" />
+                        <input type="text" name="correo" class="form-control" placeholder="Correo del empleado" value="{{old('correo')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -81,7 +81,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono del empleado" />
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono del empleado" value="{{old('telefono')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -94,7 +94,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" placeholder="Direccion del empleado" />
+                        <input type="text" name="direccion" class="form-control" placeholder="Direccion del empleado" value="{{old('direccion')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

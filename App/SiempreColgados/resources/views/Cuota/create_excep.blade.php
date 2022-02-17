@@ -29,7 +29,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
-                        <input type="text" name="concepto" class="form-control" placeholder="Concepto de la cuota" />
+                        <input type="text" name="concepto" class="form-control" placeholder="Concepto de la cuota" value="{{old('concepto')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -42,7 +42,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechaemision" class="form-control"
+                        <input type="date" name="fechaemision" class="form-control" value="{{old('fechaemision')}}"
                             placeholder="Fecha de emision de la cuota" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -56,7 +56,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input type="text" name="importe" class="form-control" placeholder="Importe de la cuota" />
+                        <input type="text" name="importe" class="form-control" placeholder="Importe de la cuota" value="{{old('importe')}}" />
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -83,7 +83,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechapago" class="form-control" placeholder="Fecha de pago de la cuota" />
+                        <input type="date" name="fechapago" class="form-control" placeholder="Fecha de pago de la cuota" value="{{old('fechapago')}}"/>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -96,7 +96,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="notas" class="form-control"
+                        <textarea type="text" cols="20" rows="4" name="notas" class="form-control" value="{{old('notas')}}"
                         placeholder="Notas sobre la cuota"></textarea>
                         @error('orden')
                             <div class="alert alert-danger">{{ $message }}</div>

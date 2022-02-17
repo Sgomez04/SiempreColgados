@@ -85,12 +85,13 @@
                             @else
                                 <td>Realizada</td>
                             @endif
-                            <td>{{ $t->fecha_crea }}</td>
+                            <td>{{ $fecha = date('d/m/Y',
+                                strtotime($t->fecha_crea)); }}</td>
                             <?php
                             $empleado = '';
                             foreach ($empleados as $e) {
                                 if ($t->operario == $e->id_empleado) {
-                                    $empleado = $e->nombre;
+                                    $empleado = $e->name;
                                 }
                             }
                             ?>
