@@ -9,13 +9,13 @@
 @endsection
 
 @section('navbar')
-    <a href="{{ url('tareas/tareasOP') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
+    <a href="{{ url('tareasOp') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
 
 @endsection
 
 @section('contenido')
     <div class="container-xl">
-        {{-- @include("notificacion") --}}
+        @include("notificacion")
         <div class="row table-title">
             <div class="col-sm-6">
                 <h2>Gestion <b>Tareas</b></h2>
@@ -49,7 +49,7 @@
                     @if($t ->operario == Auth::user()->id_empleado)
                         <tr class="list">
                             <td>
-                                <a href="{{ route('tareasOPedit', $t->id_tarea) }}" class="edit"><i
+                                <a href="{{ route('tareasOp.edit', $t->id_tarea) }}" class="edit"><i
                                         class="material-icons" title="Editar Tarea">&#xE254;</i></a>
                                 <br>
                             </td>
@@ -101,8 +101,10 @@
             </table>
         </div>
     </div>
-    <div>
-        <p>Paginacion</p>
-        {{-- {{ $tareas->links() }} --}}
+    <div class="clearfix">
+        <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
+            <b>{{ $paginas['total'] }}</b> registros
+        </div>
+        <b class="pagination"> {{ $tareas->links() }}</b>
     </div>
 @endsection

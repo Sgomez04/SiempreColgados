@@ -10,7 +10,8 @@
 @section('navbar')
     <a href="{{ url('tareas') }}" class="nav-item nav-link"><i class="fa fa-gears"></i><span>Tareas</span></a>
 
-    <a href="{{ url('empleados') }}" class="nav-item nav-link active"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
+    <a href="{{ url('empleados') }}" class="nav-item nav-link active"><i
+            class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
     <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
             Cuotas</span></a>
@@ -20,7 +21,6 @@
 @endsection
 
 @section('contenido')
-
     <form id="frm-tarea" action="{{ route('empleados.update', $empleado) }}" method="POST" class="form-horizontal">
         @method("PUT")
         @csrf
@@ -30,10 +30,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                        <input type="text" name="nombre" class="form-control" value="{{ old('nombre', $empleado->name) }}"
-                            placeholder="Nombre del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
+                            value="{{ old('nombre', $empleado->name) }}" placeholder="Nombre del empleado" />
+                        @error('nombre')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -44,10 +46,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
-                        <input type="text" name="password" class="form-control" value="{{ old('password', $empleado->password) }}"
-                            placeholder="Contraseña del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="password" class="form-control @error('password') is-invalid @enderror"
+                            value="{{ old('password', $empleado->password) }}" placeholder="Contraseña del empleado" />
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -58,10 +62,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input type="text" name="dni" class="form-control" value="{{ old('dni', $empleado->dni) }}"
-                            placeholder="DNI del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="dni" class="form-control @error('dni') is-invalid @enderror"
+                            value="{{ old('dni', $empleado->dni) }}" placeholder="DNI del empleado" />
+                        @error('dni')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -72,10 +78,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" value="{{ old('correo', $empleado->email) }}" readonly
-                            placeholder="Correo del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="correo" class="form-control @error('correo') is-invalid @enderror"
+                            value="{{ old('correo', $empleado->email) }}" readonly placeholder="Correo del empleado" />
+                        @error('correo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -86,10 +94,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-                        <input type="text" name="telefono" class="form-control" value="{{ old('telefono', $empleado->telefono) }}"
-                            placeholder="Telefono del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="telefono" class="form-control @error('telefono') is-invalid @enderror"
+                            value="{{ old('telefono', $empleado->telefono) }}" placeholder="Telefono del empleado" />
+                        @error('telefono')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -100,10 +110,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" value="{{ old('direccion', $empleado->direccion) }}"
-                            placeholder="Direccion del empleado" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="direccion" class="form-control @error('direccion') is-invalid @enderror"
+                            value="{{ old('direccion', $empleado->direccion) }}" placeholder="Direccion del empleado" />
+                        @error('direccion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -114,10 +126,13 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechalta" class="form-control" value="{{ old('fechalta', $empleado->fecha_alta) }}"
+                        <input type="date" name="fechalta" class="form-control @error('fechalta') is-invalid @enderror"
+                            value="{{ old('fechalta', $empleado->fecha_alta) }}"
                             placeholder="Fecha obtenida del sistema" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('fechalta')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -135,15 +150,15 @@
                             <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="A"> Administrador</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="O" checked> Operario</label><br>
                         @endif
-
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('cargo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
             </div>
 
-            @include("notificacion")
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <button class="btn btn-success mx-3">Guardar</button>

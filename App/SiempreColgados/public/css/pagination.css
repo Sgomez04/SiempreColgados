@@ -1,0 +1,29 @@
+#paginas{
+    display: flex;
+    justify-content: center;
+}
+
+#paginas ul{
+    margin: 5px 0;
+    padding: 0;
+}
+#paginas li{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+}
+
+#paginas li a{
+    background: rgb(228, 228, 228);
+    border-radius: 3px;
+    color: rgb(50, 50, 50);
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.actual{
+    background: rgb(201, 7, 7) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+/* table */

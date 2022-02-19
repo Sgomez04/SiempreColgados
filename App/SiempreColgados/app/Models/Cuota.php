@@ -18,8 +18,8 @@ class Cuota extends Model
         'pagada',
         'fecha_pago',
         'notas',
-        'id_cliente'
-
+        'id_cliente',
+        'tipo',
     ];
 
     public static function createM($request, $clientes)

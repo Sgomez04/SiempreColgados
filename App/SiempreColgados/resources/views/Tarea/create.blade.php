@@ -28,14 +28,16 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select name="cliente" class="form-control selectpicker">
+                        <select name="cliente" class="form-control selectpicker @error('cliente') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un cliente --</option>
                             @foreach ($clientes as $c)
                                 <option value="{{ $c->id_cliente }}">{{ $c->nombre }}</option>
                             @endforeach
                         </select>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('cliente')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -46,10 +48,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono del contratante"
-                            value="{{ old('telefono') }}" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="telefono" class="form-control @error('telefono') is-invalid @enderror"
+                            placeholder="Telefono del contratante" value="{{ old('telefono') }}" />
+                        @error('telefono')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -60,10 +64,13 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="descripcion" class="form-control"
+                        <textarea type="text" cols="20" rows="4" name="descripcion"
+                            class="form-control @error('descripcion') is-invalid @enderror"
                             placeholder="Descripcion de la tarea">{{ old('descripcion') }}</textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('descripcion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -74,10 +81,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input type="text" name="correo" class="form-control" placeholder="Correo del contratante"
-                            value="{{ old('correo') }}" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="correo" class="form-control @error('correo') is-invalid @enderror"
+                            placeholder="Correo del contratante" value="{{ old('correo') }}" />
+                        @error('correo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -88,10 +97,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control" value="{{ old('direccion') }}"
-                            placeholder="Direccion de la tarea a realizar" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="direccion" class="form-control @error('direccion') is-invalid @enderror"
+                            value="{{ old('direccion') }}" placeholder="Direccion de la tarea a realizar" />
+                        @error('direccion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -102,10 +113,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="poblacion" class="form-control" value="{{ old('poblacion') }}"
-                            placeholder="Poblacion de la tarea a realizar" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="poblacion" class="form-control @error('poblacion') is-invalid @enderror"
+                            value="{{ old('poblacion') }}" placeholder="Poblacion de la tarea a realizar" />
+                        @error('poblacion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -116,10 +129,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
-                        <input type="text" name="cp" class="form-control" value="{{ old('pc') }}"
-                            placeholder="Codigo Postal de la tarea a realizar" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="cp" class="form-control @error('cp') is-invalid @enderror"
+                            value="{{ old('pc') }}" placeholder="Codigo Postal de la tarea a realizar" />
+                        @error('cp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -130,7 +145,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select name="operario" class="form-control selectpicker">
+                        <select name="operario" class="form-control selectpicker @error('operario') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un operario --</option>
                             @foreach ($empleados as $e)
                                 @if ($e->tipo == 'O')
@@ -138,8 +153,10 @@
                                 @endif
                             @endforeach
                         </select>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('operario')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -152,8 +169,10 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         <input type="date" name="fechaR" class="form-control datepicker" value="{{ old('fechaR') }}"
                             placeholder="Fecha de realizacion de la tarea" />
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        @error('fechaR')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -164,26 +183,24 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="aa" class="form-control"
-                            placeholder="Anotacion anterior a la realizacion de la tarea">value="{{ old('aa') }}"</textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <textarea type="text" cols="20" rows="4" name="aa"
+                            class="form-control @error('aa') is-invalid @enderror"
+                            placeholder="Anotacion anterior a la realizacion de la tarea">{{ old('aa') }}</textarea>
+                        @error('aa')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
             </div>
 
-            @include("notificacion")
             <div class="row mt-3 ">
                 <div class="text-center bton">
                     <button class="btn btn-success mx-3">Guardar</button>
                     <a class="btn btn-danger mx-3" href="{{ url('tareas') }}">Cancelar</a>
                 </div>
             </div>
-
-            {{-- <div class="text-center bton">
-                <input type="submit" class="btn btn-success" value="Guardar">
-            </div> --}}
         </fieldset>
     </form>
 @endsection

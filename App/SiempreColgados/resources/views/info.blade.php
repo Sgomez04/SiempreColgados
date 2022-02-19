@@ -23,7 +23,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#page-top">SiempreColgados</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -35,6 +35,13 @@
                     <li class="nav-item"><a class="nav-link" href="#">Acceso</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="#signup">Contacto</a></li>
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method='POST' style="display:inline">
+                            @csrf
+                            <a href="#" class="nav-link" onclick="this.closest('form').submit()">
+                                Desconectar</a>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -45,9 +52,9 @@
             <div class="d-flex justify-content-center">
                 <div class="text-center">
                     <h1 class="mx-auto my-0 text-uppercase">Siempre Colgados</h1>
+                    <br><br>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">Haga de la seguridad una prioridad</h2>
-                    <a class="btn btn-primary" href="{{ route('tareaClient') }}">CLIENTE</a>
-                    <a class="btn btn-primary" href="{{ route('login') }}">EMPLEADO</a>
+                    <img src="/img/logo.png" class="logoI">
                 </div>
             </div>
         </div>
@@ -164,8 +171,8 @@
     <footer class="footer bg-black small text-center text-white-50">
         <script>
             document.write(new Date().getFullYear());
-        </script> Todos los derechos reservados | Esta web esta realizada <i
-                class="ion-ios-heart" aria-hidden="true"></i> por <span>Sebas Gómez</span></div>
+        </script> Todos los derechos reservados | Esta web esta realizada <i class="ion-ios-heart"
+            aria-hidden="true"></i> por <span>Sebas Gómez</span></div>
     </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

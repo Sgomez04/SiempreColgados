@@ -24,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tipo',
+        'external_id',
+        'external_auth',
     ];
 
     /**
@@ -53,5 +56,10 @@ class User extends Authenticatable
     public function isOperario(): bool
     {
         return $this->tipo == 'O';
+    }
+
+    public function isInvitado(): bool
+    {
+        return $this->tipo == 'I';
     }
 }

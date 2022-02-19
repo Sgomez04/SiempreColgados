@@ -8,12 +8,11 @@
 @endsection
 
 @section('navbar')
-<a href="{{ url('tareas/tareasOP') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
+    <a href="{{ url('tareasOp') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
 @endsection
 
 @section('contenido')
-
-    <form id="frm-empleado" action="{{ route('tareas.update', $tarea, $tarea->id_tarea) }}" method="POST"
+    <form id="frm-empleado" action="{{ route('tareasOp.update', $tarea, $tarea->id_tarea) }}" method="POST"
         class="form-horizontal">
         @method("PUT")
         @csrf
@@ -23,7 +22,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        {{$tarea->estado = old('estado',$tarea->estado)}}
+                        {{ $tarea->estado = old('estado', $tarea->estado) }}
                         @if ($tarea->estado == 'P')
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P" checked> Pendiente</label><br>
                             <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R"> Realizada</label><br>
@@ -45,28 +44,17 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="aa"> Anotaciones anteriores: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="aa" class="form-control"
-                            placeholder="Anotacion anterior a la realizacion de la tarea">{{ old('aa',$tarea->anotacion_anterior) }}</textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <label class="col-md-4 control-label" for="ap"> Anotaciones posteriores: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="ap" class="form-control"
-                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ old('ap',$tarea->anotacion_posterior) }}</textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <textarea type="text" cols="20" rows="4" name="ap"
+                            class="form-control @error('ap') is-invalid @enderror"
+                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ old('ap', $tarea->anotacion_posterior) }}</textarea>
+                        @error('ap')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -94,7 +82,6 @@
                 </div>
             </div> --}}
 
-            @include("notificacion")
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <button class="btn btn-success mx-3">Guardar</button>

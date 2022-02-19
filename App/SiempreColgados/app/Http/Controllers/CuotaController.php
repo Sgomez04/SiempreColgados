@@ -22,9 +22,12 @@ class CuotaController extends Controller
      */
     public function index()
     {
+        $paginas['total'] = count(Cuota::all());
+        $paginas['mostrar'] = 2;
         return view("Cuota.list", [
-            "cuotas" => Cuota::Paginate(4),
-            "clientes" => Cliente::all()
+            "cuotas" => Cuota::Paginate($paginas['mostrar']),
+            "clientes" => Cliente::all(),
+            "paginas" => $paginas
         ]);
     }
 
@@ -69,9 +72,12 @@ class CuotaController extends Controller
 
             $cliente = Cliente::find($datos->id_cliente);
             $cuota = $request;
-    
-            $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
-            Mail::send('Mail.mail', function ($message) use ($pdf) {
+            $cuotaImporte = Cuota::where('id_cliente',$datos->id_cliente)->firts();
+            $data['cliente'] = $cliente->name;
+            $data['cuota'] = $cuota->tipo;
+
+            $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente', '$cuotaImporte'));
+            Mail::send('Mail.mail', $data,  function ($message) use ($pdf) {
                 $message->from('siemprecolgados.company@gmail.com')
                     ->to('sgomez_m@hotmail.com')
                     ->subject('Cuota Mensual')
@@ -99,7 +105,7 @@ class CuotaController extends Controller
         $data['cuota'] = $cuota->tipo;
         
         $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
-        Mail::send('Mail.mail', $data, function ($message) use ($data, $pdf) {
+        Mail::send('Mail.mail', $data, function ($message) use ($pdf) {
             $message->from('siemprecolgados.company@gmail.com')
                 ->to('sgomez_m@hotmail.com')
                 ->subject('Cuota Mensual')

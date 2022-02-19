@@ -7,7 +7,7 @@ body {
 .modal-login {		
 	
 	color: #636363;
-	width: 350px;
+	width: 400px;
 }
 .modal-login .modal-content {
 	padding: 20px;
@@ -24,7 +24,7 @@ body {
 .modal-login h4 {
 	text-align: center;
 	font-size: 26px;
-	margin: 30px 0 -15px;
+	margin: 30px 0 -30px;
 }
 .modal-login .form-control:focus {
 	border-color: #201313;
@@ -74,7 +74,7 @@ body {
 .modal-login .btn, .modal-login .btn:active {
 	color: #fff;
 	border-radius: 4px;
-	background: #f37a29 !important;
+	/* background: #f37a29 !important; */
 	text-decoration: none;
 	transition: all 0.4s;
 	line-height: normal;
@@ -96,106 +96,35 @@ body {
 }
 
 
-/*--- MODAL CSS ---*/
-.modal-confirm {	
-	background-color:white;	
-	color: #ffffff;
-	width: 900px;
-	border-radius: 5px;
-}
-.modal-confirm .modal-content {
-	padding: 20px;
-	border-radius: 5px;
-	border: none;
-	text-align: center;
-	font-size: 30px;
-}
-.modal-confirm .modal-header {
-	border-bottom: none;   
-	position: relative;
-	background-color:#f12c2c;
-
-}
-.modal-confirm h4 {
-	text-align: center;
-	font-size: 26px;
-	margin: 30px 0 -10px;
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0
 }
 
-.modal-confirm .modal-body {
-	color: rgb(0, 0, 0);
-	text-align: center;
-}
-.modal-confirm .modal-footer {
-	border: none;
-	text-align: center;		
-	border-radius: 5px;
-	font-size: 13px;
-	padding: 10px 15px 25px;
-}
-.modal-confirm .modal-footer a {
-	color: rgb(0, 0, 0);
-}		
-.modal-confirm .icon-box {
-	width: 80px;
-	height: 80px;
-	margin: 0 auto;
-	border-radius: 50%;
-	z-index: 9;
-	text-align: center;
-	border: 3px solid #ffffff;
-}
-.modal-confirm .icon-box i {
-	color: #ffffff;
-	font-size: 46px;
-	display: inline-block;
-	margin-top: 13px;
-}
-.modal-confirm .btn, .modal-confirm .btn:active {
-	color: #fff;
-	border-radius: 4px;
-	background: #60c7c1;
-	text-decoration: none;
-	transition: all 0.4s;
-	line-height: normal;
-	min-width: 120px;
-	border: none;
-	min-height: 40px;
-	border-radius: 3px;
-	margin: 0 5px;
-}
-.modal-confirm .btn-secondary {
-	background: #c1c1c1;
-}
-.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
-	background: #a8a8a8;
-}
-.modal-confirm .btn-danger {
-	background: #f15e5e;
-}
-.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #f12c2c;
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 5;
+    height: 1px
 }
 
-.bton{
-	display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    line-height: 1.5;
-	min-width: 120px;
-	min-height: 40px;
-	font-size: 14px;
-	padding: 8px 12px;
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
 }
 
-.error{
-	color: rgb(255, 255, 255);
-	background-color: rgb(207, 71, 71) !important;
-	margin: 10px;
-	padding: 8px;
-	border-radius: 3px;
-	width: 100%;
-	text-align: center;
+.btn-google{
+	background-color: #DB4A39 !important;
+	font-size: 15px;
+}
+
+.btn-facebook{
+	background-color: #3B5998 !important;
+	font-size: 15px;
+}
+
+.login-btn{
+	background-color: #f37a29 !important;
 }

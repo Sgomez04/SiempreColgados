@@ -22,7 +22,7 @@
 @section('titulo', 'Clientes')
 @section('contenido')
     <div class="container-xl">
-        {{-- @include("notificacion") --}}
+        @include("notificacion")
         <div class="row table-title">
             <div class="col-sm-6">
                 <h2>Gestion <b>Clientes</b></h2>
@@ -91,8 +91,10 @@
             </table>
         </div>
     </div>
-    <div>
-        <p>Paginacion</p>
-        {{ $clientes->links() }}
+    <div class="clearfix">
+        <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
+            <b>{{ $paginas['total'] }}</b> registros
+        </div>
+        <b class="pagination"> {{ $clientes->links() }}</b>
     </div>
 @endsection

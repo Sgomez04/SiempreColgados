@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tarea;
+use App\Models\Cliente;
 use App\Models\Empleado;
-use Illuminate\Support\Facades\Auth;
 
-class PerfilController extends Controller
+class OperarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,13 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        return view("Perfil.perfil", [
-            "empleado" => Empleado::find(Auth::user()->id_empleado)
+        $paginas['total'] = count(Tarea::all());
+        $paginas['mostrar'] = 2;
+        return view("Operario.listTarea", [
+            "tareas" => Tarea::Paginate(2),
+            "clientes" => Cliente::all(),
+            "empleados" => Empleado::all(),
+            "paginas" => $paginas
         ]);
     }
 
@@ -28,8 +34,8 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        $empleado = Empleado::find($id);
-        return view("Perfil.editPefil", compact('empleado'));
+        $tarea = Tarea::find($id);
+        return view("Operario.editTarea", compact('tarea'));
     }
 
     /**
@@ -41,8 +47,10 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Empleado::updateE($request,$id);
-        return redirect()->route("perfil.index")
-            ->with(["success" => "Los datos del empleado fueron actualizados correctamente"]);
+        Tarea::updateTOperario($request, $id);
+        
+        return redirect()->route("tareasOp.index")
+            ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
     }
+
 }

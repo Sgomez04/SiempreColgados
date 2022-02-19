@@ -24,14 +24,14 @@ class TareaValidate extends FormRequest
     public function rules()
     {
         return [
-            'telefono' => 'required|numeric',
-            'descripcion' => 'required|date',
-            'correo' => 'required|email',
-            'direccion' => 'required|',
-            'poblacion' => 'required',
-            'cp' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'fecha_rea' => 'required|date',
-            'id_cliente' =>'required'
+            // 'telefono' => 'required|numeric',
+            // 'descripcion' => 'required|date',
+            // 'correo' => 'required|email',
+            // 'direccion' => 'required|',
+            // 'poblacion' => 'required',
+            // 'cp' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'fecha_rea' => 'required|date',
+            // 'id_cliente' =>'required'
 
         ];
     }

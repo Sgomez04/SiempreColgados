@@ -50,7 +50,7 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
                 @yield('navbar')
                 @auth
                     <div class="nav-item dropdown">
-                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src="/img/avatars/{{mt_rand(1, 10)}}.png"
+                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src="/img/avatars/{{session('avatar')}}.png"
                                 class="imgUser" alt="Avatar"> {{ Auth::user()->name }} <b
                                 class="caret"></b></a>
                         <div class="dropdown-menu">

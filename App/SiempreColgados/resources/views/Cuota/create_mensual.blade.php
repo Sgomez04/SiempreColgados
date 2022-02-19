@@ -20,7 +20,6 @@
 @endsection
 
 @section('contenido')
-
     <form id="frm-tarea" action="{{ route('cuotas.store') }}" method="POST" class="form-horizontal">
         @csrf
         <fieldset>
@@ -29,9 +28,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-paperclip"></i></span>
-                        <input type="text" name="concepto" class="form-control" placeholder="Concepto de la cuota" value="{{old('concepto')}}"/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="concepto" class="form-control @error('concepto') is-invalid @enderror"
+                            placeholder="Concepto de la cuota" value="{{ old('concepto') }}" />
+                        @error('concepto')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -42,10 +44,13 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechaemision" class="form-control"
-                            placeholder="Fecha de emision de la cuota" value="{{old('fechaemision')}}"/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="date" name="fechaemision"
+                            class="form-control @error('fechaemision') is-invalid @enderror"
+                            placeholder="Fecha de emision de la cuota" value="{{ old('fechaemision') }}" />
+                        @error('fechaemision')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -56,10 +61,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="S">Pagada</label><br>
-                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="N" checked>No pagada</label><br>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="S" checked> Pagada</label><br>
+                        <label>&nbsp <INPUT TYPE="radio" name="pagada" VALUE="N"> No pagada</label><br>
+                        @error('pagada')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -70,9 +77,12 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechapago" class="form-control" placeholder="Fecha de pago de la cuota" value="{{old('fechapago')}}"/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="date" name="fechapago" class="form-control @error('fechapago') is-invalid @enderror"
+                            placeholder="Fecha de pago de la cuota" value="{{ old('fechapago') }}" />
+                        @error('fechapago')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -83,10 +93,13 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <textarea type="text" cols="20" rows="4" name="notas" class="form-control" value="{{old('notas')}}"
-                        placeholder="Notas sobre la cuota"></textarea>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <textarea type="text" cols="20" rows="4" name="notas"
+                            class="form-control @error('notas') is-invalid @enderror" value="{{ old('notas') }}"
+                            placeholder="Notas sobre la cuota"></textarea>
+                        @error('notas')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
@@ -97,15 +110,17 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-wrench"></i></span>
-                        <input type="text" name="tipo" class="form-control" value="Mensual" readonly/>
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <input type="text" name="tipo" class="form-control @error('tipo') is-invalid @enderror"
+                            value="Mensual" readonly />
+                        @error('tipo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
             </div>
 
-            @include("notificacion")
             <div class="row mt-3 ">
                 <div class="col-12 d-flex align-items-center justify-content-center">
                     <button class="btn btn-success mx-3">Guardar</button>

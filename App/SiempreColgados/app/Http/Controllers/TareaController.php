@@ -19,10 +19,13 @@ class TareaController extends Controller
      */
     public function index()
     {
+        $paginas['total'] = count(Tarea::all());
+        $paginas['mostrar'] = 2;
         return view("Tarea.list", [
-            "tareas" => Tarea::Paginate(2),
+            "tareas" => Tarea::Paginate($paginas['mostrar']),
             "clientes" => Cliente::all(),
-            "empleados" => Empleado::all()
+            "empleados" => Empleado::all(),
+            "paginas" => $paginas
         ]);
     }
 
@@ -119,7 +122,7 @@ class TareaController extends Controller
     {
         $clientes = Cliente::all();
         $empleados = Empleado::all();
-        return view("Tarea.createClient", compact('clientes', 'empleados'));
+        return view("TareaCliente.createClient", compact('clientes', 'empleados'));
     }
 
     /**
@@ -130,55 +133,18 @@ class TareaController extends Controller
      */
     public function storeClient(TareaValidate $request)
     {
-        Tarea::createT($request);
-        return redirect()->route("tareas.index")->with([
-            "success" => "La nueva tarea fue registrado correctamente",
-        ]);
-    }
-
-    //Operarios
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listTareaOP()
-    {
-        return view("Operario.listTarea", [
-            "tareas" => Tarea::Paginate(2),
-            "clientes" => Cliente::all(),
-            "empleados" => Empleado::all()
-        ]);
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editTareaOP($id)
-    {
-        $tarea = Tarea::find($id);
-        return view("Operario.editTarea", compact('tarea'));
+        Tarea::createClient($request);
+        return redirect()->route("tareainfo");
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateTareaOPshow(TareaValidate $request, $id)
+    public function tareainfo(TareaValidate $request)
     {
-        Tarea::updateT($request, $id);
-        return redirect()->route("tareasOP")
-            ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
+        return view("TareaCliente.clienteInfoTarea");
     }
-
-
-
 }

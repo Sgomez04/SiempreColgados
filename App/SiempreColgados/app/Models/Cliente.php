@@ -27,7 +27,11 @@ class Cliente extends Model
         $cliente->cif=$request->cif;
         $cliente->nombre=$request->nombre;
         $cliente->telefono=$request->telefono;
-        $cliente->correo=$request->correo;
+        if($cliente->email != $request->correo){
+            $cliente->email = $request->correo;
+        } else{
+            $cliente->correo = $cliente->correo;
+        }
         $cliente->cuenta_corriente=$request->cuenta;
         $cliente->id_pais= $request->pais;
         $cliente->moneda=$request->moneda;

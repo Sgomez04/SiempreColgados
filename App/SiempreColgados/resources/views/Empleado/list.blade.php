@@ -21,7 +21,7 @@
 
 @section('contenido')
     <div class="container-xl">
-        {{-- @include("notificacion") --}}
+        @include("notificacion")
         <div class="row table-title">
             <div class="col-sm-6">
                 <h2>Gestion <b>Empleados</b></h2>
@@ -60,7 +60,7 @@
                             <td>{{ $e->name }} </td>
                             {{-- <td>{{ $e->password }} </td> --}}
                             <td>{{ $e->dni }}</td>
-                            <td>{{ $e->correo }}</td>
+                            <td>{{ $e->email }}</td>
                             <td>{{ $e->telefono }}</td>
                             <td>{{ $e->direccion }}</td>
                             <td>{{ $fecha = date('d/m/Y',
@@ -76,8 +76,10 @@
             </table>
         </div>
     </div>
-    <div>
-        <p>Paginacion</p>
-        {{ $empleados->links() }}
+    <div class="clearfix">
+        <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
+            <b>{{ $paginas['total'] }}</b> registros
+        </div>
+        <b class="pagination"> {{ $empleados->links() }}</b>
     </div>
 @endsection

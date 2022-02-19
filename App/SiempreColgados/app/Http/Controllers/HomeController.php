@@ -25,10 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session(['avatar' => mt_rand(1, 10)]);
         if(auth()->user()->isAdmin()){
             return redirect('tareas');
         } elseif(auth()->user()->isOperario()){
-            return redirect('/tareas/tareasOP');
+            return redirect('tareasOp');
+        } elseif(auth()->user()->isInvitado()){
+            return redirect('/info');
+
         } else{
             return view('Inicio.loginE');
 

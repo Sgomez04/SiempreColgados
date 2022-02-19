@@ -4,6 +4,16 @@ body {
     background-size  : cover;
 }
 
+.invalid-feedback{
+    font-size: 13px;
+    color: red;
+    text-align: center;
+    background-color:#ffe4e4;
+    border: 1px solid red;
+    border-radius: 5px;
+    border-top: none;
+}
+
 ol{
     margin-left: 40px;
     margin-right: 20px;

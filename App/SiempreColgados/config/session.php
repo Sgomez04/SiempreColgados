@@ -198,4 +198,7 @@ return [
 
     'same_site' => 'lax',
 
+
+    'domain' => env('SESSION_DOMAIN', NULL),
+
 ];

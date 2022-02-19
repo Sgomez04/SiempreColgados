@@ -73,6 +73,23 @@
                             {{ __('Forgot Your Password?') }}
                         </a>
                     @endif
+                    <div class="or-container">
+                        <div class="line-separator"></div>
+                        <div class="or-label">o</div>
+                        <div class="line-separator"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="btn btn-lg btn-google btn-block text-uppercase btn-outline"
+                                href="{{route('loginredirect', 'google')}}"><img
+                                    src="https://img.icons8.com/color/16/000000/google-logo.png">  Login con
+                                Google</a>
+                            <br>
+                            <a class="btn btn-lg btn-facebook btn-block text-uppercase btn-outline"
+                                href="{{route('loginredirect', 'facebook')}}"><i class="fa fa-facebook fa-fw" style="border 2px solid"></i> Login con
+                                Facebook</a>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

@@ -5,11 +5,12 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\CuotaController;
+use App\Http\Controllers\OperarioController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\Auth\SocialAuthController;
 
 
 
@@ -56,9 +57,13 @@ use App\Http\Controllers\HomeController;
 //<------------ RUTAS CON LOGIN ------------>//
 
 // //-- INICIO -- //
-Route::get('/', function(){
+Route::get('/', function () {
     return view('Inicio.loginE');
-})->middleware('guest');;
+})->middleware('guest');
+
+Route::get('/info', function () {
+    return view('info');
+})->name('info')->middleware('auth.Invitado');
 
 
 // //-- LOGIN -- //
@@ -69,6 +74,10 @@ Route::get('/', function(){
 // Route::post('password/reset', [Auth::class, 'reset'])->name('password.update');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//login con servicios externos
+Route::get('/externalLogin/{provider}', [SocialAuthController::class, 'externalLogin']);
+Route::get('/Loginredirect/{provider}', [SocialAuthController::class, 'loginRedirect'])->name('loginredirect');
 
 
 //-- CLIENTES -- //
@@ -88,11 +97,16 @@ Route::get('/empleados/eliminarE/{id}', [EmpleadoController::class, 'destroy'])-
 Route::resource("empleados", EmpleadoController::class)->middleware('auth.Admin');
 
 //-- TAREAS -- //
-Route::get('/tareas/tareasOP', [TareaController::class, 'listTareaOP'])->name('tareasOP')->middleware('auth.Operario');
-Route::get('/tareas/tareasOPedit{id}', [TareaController::class, 'editTareaOP'])->name('tareasOPedit')->middleware('auth.Operario');
+//operario
+Route::resource("tareasOp", OperarioController::class)->middleware('auth.Operario');
+
+//admin
+Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT')->middleware('auth.Admin');
+//cliente sin logear
+Route::get('/tareas/tareainfo', [TareaController::class, 'tareainfo'])->name('tareainfo')->middleware('guest');
 Route::get('/tareas/tareaClient', [TareaController::class, 'createClient'])->name('tareaClient')->middleware('guest');
 Route::post('/tareas/tareaClientCreate', [TareaController::class, 'storeClient'])->name('tareaClientCreate')->middleware('guest');
-Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT')->middleware('auth.Admin');
+
 Route::resource("tareas", TareaController::class)->middleware('auth.Admin');
 
 //-- PERFIL -- //

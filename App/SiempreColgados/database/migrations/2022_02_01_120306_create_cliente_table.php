@@ -15,15 +15,15 @@ class CreateClienteTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id_cliente');
-            $table->string('cif', 40);
-            $table->string('nombre', 40);
-            $table->string('telefono', 11);
-            $table->string('correo', 60)->unique();
-            $table->string('cuenta_corriente', 40);
-            $table->unsignedInteger('id_pais');
+            $table->string('cif', 40)->nullable();
+            $table->string('nombre', 40)->nullable();
+            $table->string('telefono', 11)->nullable();
+            $table->string('correo', 60)->unique()->nullable();
+            $table->string('cuenta_corriente', 40)->nullable();
+            $table->unsignedInteger('id_pais')->nullable();
             $table->foreign('id_pais')->references('id')->on('paises');
-            $table->string('moneda',3);
-            $table->string('cuota_mensual', 40);
+            $table->string('moneda',3)->nullable();
+            $table->string('cuota_mensual', 40)->nullable();
             $table->timestamps();
         });
     }

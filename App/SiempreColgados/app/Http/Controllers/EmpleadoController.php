@@ -16,8 +16,11 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
+        $paginas['total'] = count(Empleado::all());
+        $paginas['mostrar'] = 2;
         return view("Empleado.list", [
-            "empleados" => Empleado::Paginate(2)
+            "empleados" => Empleado::Paginate($paginas['mostrar']),
+            "paginas" => $paginas
         ]);
     }
 

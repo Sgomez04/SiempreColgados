@@ -15,14 +15,14 @@ class CreateCuotaTable extends Migration
     {
         Schema::create('cuotas', function (Blueprint $table) {
             $table->increments('id_cuota');
-            $table->string('concepto', 40);
-            $table->date('fecha_emision');
-            $table->double('importe');
+            $table->string('concepto', 40)->nullable();
+            $table->date('fecha_emision')->nullable();
+            $table->double('importe')->nullable();
             $table->string('pagada', 1)->nullable();
             $table->date('fecha_pago')->nullable();
-            $table->string('notas', 200);
-            $table->string('tipo', 200);
-            $table->unsignedInteger('id_cliente');
+            $table->string('notas', 200)->nullable();
+            $table->string('tipo', 200)->nullable();
+            $table->unsignedInteger('id_cliente')->nullable();
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes');
             $table->timestamps();
         });

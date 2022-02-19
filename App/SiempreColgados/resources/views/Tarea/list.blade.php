@@ -5,7 +5,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/list.css') }}" />
-
 @endsection
 
 @section('navbar')
@@ -22,7 +21,7 @@
 
 @section('contenido')
     <div class="container-xl">
-        {{-- @include("notificacion") --}}
+        @include("notificacion")
         <div class="row table-title">
             <div class="col-sm-6">
                 <h2>Gestion <b>Tareas</b></h2>
@@ -85,8 +84,8 @@
                             @else
                                 <td>Realizada</td>
                             @endif
-                            <td>{{ $fecha = date('d/m/Y',
-                                strtotime($t->fecha_crea)); }}</td>
+                            <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}
+                            </td>
                             <?php
                             $empleado = '';
                             foreach ($empleados as $e) {
@@ -111,8 +110,10 @@
             </table>
         </div>
     </div>
-    <div>
-        <p>Paginacion</p>
-        {{ $tareas->links() }}
+    <div class="clearfix">
+        <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
+            <b>{{ $paginas['total'] }}</b> registros
+        </div>
+        <b class="pagination"> {{ $tareas->links() }}</b>
     </div>
 @endsection

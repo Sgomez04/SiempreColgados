@@ -12,10 +12,10 @@ class Empleado extends Model
     protected $primaryKey = "id_empleado";
 
     protected $fillable = [
-        'nombre',
+        'name',
         'password',
         'dni',
-        'correo',
+        'email',
         'telefono',
         'direccion',
         'fecha_alta',
@@ -25,7 +25,7 @@ class Empleado extends Model
     public static function createE($request){
         $empleado = new Empleado();
         $empleado->name=$request->nombre;
-        $empleado->password=$request->password;
+        $empleado->password=bcrypt($request->password);
         $empleado->dni=$request->dni;
         $empleado->email=$request->correo;
         $empleado->telefono=$request->telefono;
@@ -38,10 +38,14 @@ class Empleado extends Model
     
     public static function updateE($request,$id){
         $empleado = Empleado::find($id);
-        $empleado->name=$request->name;
-        $empleado->password=$request->password;
+        $empleado->name=$request->nombre;
+        $empleado->password=bcrypt($request->password);
         $empleado->dni=$request->dni;
-        $empleado->email=$request->correo;
+        if($empleado->email != $request->correo){
+            $empleado->email = $request->correo;
+        } else{
+            $empleado->email = $empleado->email;
+        }
         $empleado->telefono=$request->telefono;
         $empleado->direccion=$request->direccion;
         $empleado->fecha_alta=$request->fechalta;
@@ -49,24 +53,11 @@ class Empleado extends Model
 
         $empleado->fill($request->input())->saveOrFail();
     }
-    
-    public static function updateU($request,$id){
-        $empleado = Empleado::find($id);
-        $empleado->name=$request->name;
-        $empleado->password=$request->password;
-        $empleado->dni=$request->dni;
-        $empleado->email=$request->correo;
-        $empleado->telefono=$request->telefono;
-        $empleado->direccion=$request->direccion;
-        $empleado->fecha_alta=$empleado->fecha_alta;
-        $empleado->tipo=$empleado->tipo;
-
-        $empleado->fill($request->input())->saveOrFail();
-    }
 
     public static function destroyE($id){
 
         $empleado = Empleado::find($id);
+        
         $empleado->delete();
     }
     

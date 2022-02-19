@@ -18,10 +18,13 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        $paginas['total'] = count(Cliente::all());
+        $paginas['mostrar'] = 2;
         $cliente = Cliente::all();
         return view("Cliente.list", [
-            "clientes" => Cliente::Paginate(2),
+            "clientes" => Cliente::Paginate($paginas['mostrar']),
             "paises" => Paises::all(),
+            "paginas" => $paginas
 
         ]);
     }
