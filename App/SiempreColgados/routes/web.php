@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\CuotaController;
@@ -73,11 +74,11 @@ Route::get('/info', function () {
 // Route::get('password/reset/{token}', [Auth::class, 'showResetForm'])->name('password.reset');
 // Route::post('password/reset', [Auth::class, 'reset'])->name('password.update');
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 //login con servicios externos
-Route::get('/externalLogin/{provider}', [SocialAuthController::class, 'externalLogin']);
-Route::get('/Loginredirect/{provider}', [SocialAuthController::class, 'loginRedirect'])->name('loginredirect');
+Route::get('/externalLogin/{provider}', [SocialAuthController::class, 'externalLogin'])->middleware('guest');
+Route::get('/Loginredirect/{provider}', [SocialAuthController::class, 'loginRedirect'])->name('loginredirect')->middleware('guest');
 
 
 //-- CLIENTES -- //
@@ -99,15 +100,26 @@ Route::resource("empleados", EmpleadoController::class)->middleware('auth.Admin'
 //-- TAREAS -- //
 //operario
 Route::resource("tareasOp", OperarioController::class)->middleware('auth.Operario');
-
 //admin
 Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT')->middleware('auth.Admin');
 //cliente sin logear
 Route::get('/tareas/tareainfo', [TareaController::class, 'tareainfo'])->name('tareainfo')->middleware('guest');
 Route::get('/tareas/tareaClient', [TareaController::class, 'createClient'])->name('tareaClient')->middleware('guest');
 Route::post('/tareas/tareaClientCreate', [TareaController::class, 'storeClient'])->name('tareaClientCreate')->middleware('guest');
+Route::get('/archivos/{archivo}', function ($archivo) {
+    //verificamos si el archivo existe y lo retornamos
+
+        echo "hola";
+    //   return response()->download($url);
+    //si no se encuentra lanzamos un error 404.
+
+    // abort(404);
+
+});
 
 Route::resource("tareas", TareaController::class)->middleware('auth.Admin');
 
 //-- PERFIL -- //
 Route::resource("perfil", PerfilController::class)->middleware('auth');
+
+

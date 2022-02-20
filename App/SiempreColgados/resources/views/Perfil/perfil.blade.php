@@ -39,19 +39,19 @@
                     <br>
                     <ul class="container details">
                         <li>
-                            <p><span class="glyphicon glyphicon-user" style="width:50px;"></span>{{ $empleado->email }}
+                            <p><span class="glyphicon glyphicon-send" style="width:50px;"></span>{{ $empleado->email }}
                             </p>
                         </li>
                         <li>
-                            <p><span class="glyphicon glyphicon-tag" style="width:50px;"></span>{{ $empleado->dni }}</p>
+                            <p><span class="glyphicon glyphicon-credit-card" style="width:50px;"></span>{{ $empleado->dni }}</p>
                         </li>
                         <li>
-                            <p><span class="glyphicon glyphicon-briefcase"
+                            <p><span class="glyphicon glyphicon-earphone"
                                     style="width:50px;"></span>{{ $empleado->telefono }}
                             </p>
                         </li>
                         <li>
-                            <p><span class="glyphicon glyphicon-briefcase"
+                            <p><span class="glyphicon glyphicon-home"
                                     style="width:50px;"></span>{{ $empleado->direccion }}
                             </p>
                         </li>

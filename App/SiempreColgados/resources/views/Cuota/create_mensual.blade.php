@@ -122,7 +122,7 @@
             </div>
 
             <div class="row mt-3 ">
-                <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="text-center bton">
                     <button class="btn btn-success mx-3">Guardar</button>
                     <a class="btn btn-danger mx-3" href="{{ url('cuotas') }}">Cancelar</a>
                 </div>

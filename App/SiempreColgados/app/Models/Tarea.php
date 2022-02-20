@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 class Tarea extends Model
@@ -52,9 +53,9 @@ class Tarea extends Model
         $tarea->id_cliente = $request->cliente;
         $tarea->telefono = $request->telefono;
         $tarea->descripcion = $request->descripcion;
-        if($tarea->correo != $request->correo){
+        if ($tarea->correo != $request->correo) {
             $tarea->correo = $request->correo;
-        } else{
+        } else {
             $tarea->correo = $tarea->correo;
         }
         $tarea->direccion = $request->direccion;
@@ -68,7 +69,7 @@ class Tarea extends Model
         $tarea->fecha_crea = $tarea->fecha_crea;
         $tarea->estado = $tarea->estado;
         $tarea->anotacion_posterior = $tarea->anotacion_posterior;
-        $tarea->fichero= $tarea->fichero;
+        $tarea->fichero = $tarea->fichero;
         $tarea->fill($request->input())->saveOrFail();
     }
 
@@ -91,19 +92,18 @@ class Tarea extends Model
         $tarea->estado = $request->estado;
         $tarea->anotacion_anterior = $request->aa;
         $tarea->anotacion_posterior = $request->ap;
-        $tarea->fichero= null;
-        $tarea->fill($request->input())->saveOrFail();
         //fichero
-        // $fileDir = $_SERVER['DOCUMENT_ROOT'] . "/PHP/NoSeCaenSL/Assets/files/";
-        // $fichero_subido = basename($_FILES['fichero']['name']);
-        
-        // if($request->fichero2 != ""){
-        //     $tarea->fichero = $request->fichero2;
-        // } else{
-        //     $fichero_subido = basename($_FILES['fichero']['name']);
-        //     move_uploaded_file($_FILES['fichero']['tmp_name'], $fileDir . $fichero_subido);
-        //     $tarea->fichero = $_FILES['fichero']['name'];
-        // }
+        if ($request->hasFile($request->archivo)) {
+            $tarea->fichero = $request->file('archivo')->store('public');
+        } else {
+            if ($tarea->fichero == null) {
+                $tarea->fichero = null;
+            } else {
+                $tarea->fichero = $tarea->fichero;
+            }
+        }
+
+        $tarea->fill($request->input())->saveOrFail();
     }
 
     public static function createClient($request)
@@ -121,7 +121,7 @@ class Tarea extends Model
         $tarea->cp = $request->cp;
         $tarea->fecha_rea = $request->fechaR;
 
-         //datos sin editar
+        //datos sin editar
         $tarea->estado = 'P';
         $tarea->fecha_crea = date('Y-m-d', time());
 
@@ -131,6 +131,7 @@ class Tarea extends Model
     public static function destroyT($id)
     {
         $tarea = Tarea::find($id);
+        Storage::delete($tarea->fichero);
         $tarea->delete();
     }
 }

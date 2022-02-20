@@ -89,7 +89,7 @@
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
                             @if ($t->fichero != '')
-                                <td><a target="_blank" href="">Ver
+                                <td><a target="_blank" href="{{url('/archivos',$t->fichero)}}">Ver
                                         archivo</a></td>
                             @else
                                 <td>Sin archivo</td>

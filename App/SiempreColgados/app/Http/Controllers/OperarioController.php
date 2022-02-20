@@ -48,9 +48,8 @@ class OperarioController extends Controller
     public function update(Request $request, $id)
     {
         Tarea::updateTOperario($request, $id);
-        
+
         return redirect()->route("tareasOp.index")
             ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
     }
-
 }

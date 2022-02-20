@@ -19,6 +19,7 @@ ol{
     margin-right: 20px;
     font-size: 16px;
     background-color: rgba(255, 255, 255, 0.842) !important;
+    border: 1px solid black;
 }
 
 ol a{
@@ -111,7 +112,7 @@ label {
     justify-content: space-between;
     margin-bottom  : 10px;
     list-style-type: none;
-    border         : 1px solid black;
+    /* border         : 1px solid black; */
     margin-right   : 50px;
 }
 
