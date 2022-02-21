@@ -125,6 +125,21 @@ class TareaController extends Controller
         return view("TareaCliente.createClient", compact('clientes', 'empleados'));
     }
 
+        /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function listTareaClientes()
+    {
+        $tareas = Tarea::all();
+        $empleados = Empleado::all();
+        $clientes = Cliente::all();
+      
+        return view("TareaCliente.list", compact('tareas', 'empleados','clientes'));
+    }
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -143,7 +158,7 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function tareainfo(TareaValidate $request)
+    public function tareainfo()
     {
         return view("TareaCliente.clienteInfoTarea");
     }

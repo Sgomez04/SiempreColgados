@@ -116,9 +116,20 @@ class ClienteController extends Controller
      */
     public function UserCuotas($id)
     {
+        $paginas['total'] = 0;
+
+        foreach(Cuota::all() as $cuota){
+            if($cuota->id_cliente==$id){
+                $paginas['total']++;
+            }
+        }
+        $paginas['mostrar'] = 2;
+
         return view("Cuota.listC", [
-            "cuotas" => Cuota::paginate(2),
+            // "cuotas" => Cuota::paginate(2),
+            "cuotas" => Cuota::all(),
             "cliente" => Cliente::find($id),
+            "paginas" => $paginas
         ]);
     }
 }

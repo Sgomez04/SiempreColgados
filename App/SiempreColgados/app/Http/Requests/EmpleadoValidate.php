@@ -26,13 +26,13 @@ class EmpleadoValidate extends FormRequest
     public function rules()
     {
         return [
-            // 'nombre' => 'required',
-            // 'password' => 'required',
-            // 'dni' => ['required', new DniValidateRule],
-            // 'correo' => 'required|email',
-            // 'telefono' => 'required|numeric',
-            // 'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            // 'fecha_alta' => 'required|date',
+            'nombre' => 'required|regex:/[A-Za-z]/',
+            'password' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            'dni' => ['required', new DniValidateRule],
+            'correo' => 'required|email',
+            'telefono' => 'required|numeric',
+            'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            'fecha_alta' => 'required|date',
         ];
     }
 
@@ -52,6 +52,11 @@ class EmpleadoValidate extends FormRequest
             'telefono.numeric' => 'El campo "Telefono" solo debe contener numeros',
 
             'correo.email' => 'El campo "Correo Electronico" debe tener un formato correcto de email',
+
+            'nombre.regex' => 'El campo "Nombre" solo puede contener letras',
+
+            'password.regex' => 'El campo "Contraseña" no puede contener caracteres especiales',
+            'direccion.regex' => 'El campo "Direccion" no puede contener caracteres especiales',
 
         ];
     }

@@ -81,10 +81,10 @@
             </table>
         </div>
     </div>
-    <div class="clearfix">
+    {{-- <div class="clearfix">
         <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
             <b>{{ $paginas['total'] }}</b> registros
         </div>
         <b class="pagination"> {{ $cuotas->links() }}</b>
-    </div>
+    </div> --}}
 @endsection

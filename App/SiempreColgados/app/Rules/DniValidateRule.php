@@ -37,20 +37,17 @@ class DniValidateRule implements Rule
    */
   public function isValidDni($dni)
   {
-    if (preg_match("/^[a-zA-Z0-9-]*$/", $dni)) {
-      $partes = explode('-', $dni);
-      if (is_numeric($partes[0])) {
-        $numeros = $partes[0];
-        $letra = strtoupper($partes[1]);
-        if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros % 23, 1) == $letra)
-          return true;
-        else
-          return false;
+    if (strlen($dni) != 9) {
+      return false;
+    } else {
+      $letra = substr($dni, -1);
+      $numeros = substr($dni, 0, -1);
+
+      if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros % 23, 1) == $letra && strlen($letra) == 1 && strlen($numeros) == 8) {
+        return true;
       } else {
         return false;
       }
-    } else {
-      return false;
     }
   }
 
@@ -61,6 +58,6 @@ class DniValidateRule implements Rule
    */
   public function message()
   {
-    return 'El DNI debe tener un formato correcto';
+    return 'El DNI no es correcto o su formato es erroneo (ej:73547889F)';
   }
 }

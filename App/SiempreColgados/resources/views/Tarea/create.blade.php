@@ -130,7 +130,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
                         <input type="text" name="cp" class="form-control @error('cp') is-invalid @enderror"
-                            value="{{ old('pc') }}" placeholder="Codigo Postal de la tarea a realizar" />
+                            value="{{ old('cp') }}" placeholder="Codigo Postal de la tarea a realizar" />
                         @error('cp')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

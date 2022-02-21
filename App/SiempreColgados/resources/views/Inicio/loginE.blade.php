@@ -85,9 +85,9 @@
                                     src="https://img.icons8.com/color/16/000000/google-logo.png">  Login con
                                 Google</a>
                             <br>
-                            <a class="btn btn-lg btn-facebook btn-block text-uppercase btn-outline"
-                                href="{{route('loginredirect', 'facebook')}}"><i class="fa fa-facebook fa-fw" style="border 2px solid"></i> Login con
-                                Facebook</a>
+                            <a class="btn btn-lg btn-github btn-block text-uppercase btn-outline"
+                                href="{{route('loginredirect', 'github')}}"><i class="fa fa-github fa-fw" style="border 2px solid"></i> Login con
+                                GitHub</a>
                         </div>
                     </div>
                 </form>

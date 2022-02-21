@@ -62,7 +62,7 @@ class CuotaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CuotaValidateM $request)
+    public function store(CuotaValidate $request)
     {
         $clientes = Cliente::all();
         Cuota::createM($request, $clientes);

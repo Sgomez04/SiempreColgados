@@ -35,36 +35,34 @@ class CifValidateRule implements Rule
    */
   public function message()
   {
-    return 'El CIF debe tener un formato correcto';
+    return 'El CIF debe tener un formato correcto (ej: A80192727)';
   }
 
   public function isValidCif($cif)
   {
     $cif = strtoupper($cif);
-    for ($i = 0; $i < 9; $i++) {
-      $num[$i] = substr($cif, $i, 1);
-    }
-    //si no tiene un formato valido devuelve error
-    if (!preg_match("/((^[A-Z]{1}[0-9]{7}[A-Z0-9]{1}$|^[T]{1}[A-Z0-9]{8}$)|^[0-9]{8}[A-Z]{1}$)/", $cif)) {
-      return false;
-    }
-
-    //algoritmo para comprobacion de codigos tipo CIF
-    $suma = $num[2] + $num[4] + $num[6];
-    for ($i = 1; $i < 8; $i += 2) {
-      $suma += substr((2 * $num[$i]), 0, 1) + substr((2 * $num[$i]), 1, 1);
-    }
-    $n = 10 - substr($suma, strlen($suma) - 1, 1);
-
-    //comprobacion de CIFs
-    if (preg_match("/^[ABCDEFGHJNPQRSUVW]{1}/", $cif)) {
-      if ($num[8] == chr(64 + $n) || $num[8] == substr($n, strlen($n) - 1, 1)) {
-        return true;
-      } else {
-        return false;
+    if (preg_match('~(^[XYZ\d]\d{7})([TRWAGMYFPDXBNJZSQVHLCKE]$)~', $cif, $parts)) {
+      $control = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      $nie = array('X', 'Y', 'Z');
+      $parts[1] = str_replace(array_values($nie), array_keys($nie), $parts[1]);
+      $cheksum = substr($control, $parts[1] % 23, 1);
+      return ($parts[2] == $cheksum);
+    } elseif (preg_match('~(^[ABCDEFGHIJKLMUV])(\d{7})(\d$)~', $cif, $parts)) {
+      $checksum = 0;
+      foreach (str_split($parts[2]) as $pos => $val) {
+        $checksum += array_sum(str_split($val * (2 - ($pos % 2))));
       }
+      $checksum = ((10 - ($checksum % 10)) % 10);
+      return ($parts[3] == $checksum);
+    } elseif (preg_match('~(^[KLMNPQRSW])(\d{7})([JABCDEFGHI]$)~', $cif, $parts)) {
+      $control = 'JABCDEFGHI';
+      $checksum = 0;
+      foreach (str_split($parts[2]) as $pos => $val) {
+        $checksum += array_sum(str_split($val * (2 - ($pos % 2))));
+      }
+      $checksum = substr($control, ((10 - ($checksum % 10)) % 10), 1);
+      return ($parts[3] == $checksum);
     }
-    //si todavia no se ha verificado devuelve error
     return false;
   }
 }

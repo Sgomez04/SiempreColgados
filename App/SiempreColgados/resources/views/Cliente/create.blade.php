@@ -92,7 +92,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
-                        <input type="text" name="cuenta" class="form-control @error('orden') is-invalid @enderror"
+                        <input type="text" name="cuenta" class="form-control @error('cuenta') is-invalid @enderror"
                             placeholder="Cuenta corriente del cliente" value="{{ old('cuenta') }}" />
                         @error('cuenta')
                             <span class="invalid-feedback" role="alert">

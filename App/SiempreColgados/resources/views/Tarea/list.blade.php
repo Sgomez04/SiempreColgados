@@ -27,6 +27,8 @@
                 <h2>Gestion <b>Tareas</b></h2>
             </div>
             <div class="col-sm-6">
+                <a href="{{ route('tareaslistCliente') }}" class="btn btn-secondary"><i class="material-icons">&#xE147;</i>
+                    <span>Administrar incidencias de clientes</span></a>
                 <a href="{{ route('tareas.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i>
                     <span>Añadir nueva Tarea</span></a>
             </div>
@@ -99,7 +101,7 @@
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
                             @if ($t->fichero != '')
-                                <td><a target="_blank" href="{{url('/archivos',$t->fichero)}}">Ver
+                                <td><a target="_blank" href="{{ url('/archivos', $t->fichero) }}">Ver
                                         archivo</a></td>
                             @else
                                 <td>Sin archivo</td>

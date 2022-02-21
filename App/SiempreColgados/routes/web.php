@@ -101,6 +101,7 @@ Route::resource("empleados", EmpleadoController::class)->middleware('auth.Admin'
 //operario
 Route::resource("tareasOp", OperarioController::class)->middleware('auth.Operario');
 //admin
+Route::get('/tareas/tareaslistCliente', [TareaController::class, 'listTareaClientes'])->name('tareaslistCliente')->middleware('auth.Admin');
 Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT')->middleware('auth.Admin');
 //cliente sin logear
 Route::get('/tareas/tareainfo', [TareaController::class, 'tareainfo'])->name('tareainfo')->middleware('guest');

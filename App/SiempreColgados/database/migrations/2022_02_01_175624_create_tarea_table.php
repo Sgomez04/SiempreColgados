@@ -31,6 +31,8 @@ class CreateTareaTable extends Migration
             $table->string('anotacion_anterior', 200)->nullable();
             $table->string('anotacion_posterior', 200)->nullable();
             $table->string('fichero', 255)->nullable()->nullable();
+            $table->string('tipo', 20)->nullable()->nullable();
+
             $table->timestamps();
         });
     }

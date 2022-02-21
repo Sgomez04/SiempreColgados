@@ -24,11 +24,11 @@ class CuotaValidate extends FormRequest
     public function rules()
     {
         return [
-            // 'concepto' => 'required',
+            // 'concepto' => 'required|regex:/[A-Za-z]/',
             // 'fechaemision' => 'required|date',
             // 'importe' => 'required|numeric',
             // 'fechapago' => 'required|date',
-            // 'notas' => '',
+            // 'notas' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
             // 'cliente' => 'required'
         ];
     }
@@ -47,6 +47,11 @@ class CuotaValidate extends FormRequest
         'fechapago.date' => 'El campo "Fecha de pago" debe contener un formato valido (dia-mes-año)',
 
         'importe.numeric' => 'El campo "Importe" solo debe contener numeros',
+
+        'concepto.regex' => 'El campo "Concepto" solo debe contener letras',
+
+        'notas.regex' => 'El campo "Notas" no puede contener caracteres especiales',
+
     ];
 }
 }

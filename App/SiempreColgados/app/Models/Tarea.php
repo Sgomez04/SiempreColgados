@@ -25,6 +25,7 @@ class Tarea extends Model
         'anotacion_posterior',
         'fichero',
         'id_cliente',
+        'tipo',
     ];
 
     public static function createT($request)
@@ -42,6 +43,8 @@ class Tarea extends Model
         $tarea->operario = $request->operario;
         $tarea->fecha_rea = $request->fechaR;
         $tarea->anotacion_anterior = $request->aa;
+        $tarea->tipo = 'admin';
+
 
         $tarea->saveOrFail();
     }
@@ -70,6 +73,12 @@ class Tarea extends Model
         $tarea->estado = $tarea->estado;
         $tarea->anotacion_posterior = $tarea->anotacion_posterior;
         $tarea->fichero = $tarea->fichero;
+        if ($tarea->operario != null) {
+            $tarea->tipo = 'admin';
+        } else{
+            $tarea->tipo = 'cliente';
+        }
+
         $tarea->fill($request->input())->saveOrFail();
     }
 
@@ -124,6 +133,7 @@ class Tarea extends Model
         //datos sin editar
         $tarea->estado = 'P';
         $tarea->fecha_crea = date('Y-m-d', time());
+        $tarea->tipo = 'cliente';
 
         $tarea->saveOrFail();
     }

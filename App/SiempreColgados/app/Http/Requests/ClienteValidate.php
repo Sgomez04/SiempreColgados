@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\CifValidateRule;
+use App\Rules\CccValidateRule;
+
 
 
 class ClienteValidate extends FormRequest
@@ -26,14 +28,14 @@ class ClienteValidate extends FormRequest
     public function rules()
     {
         return [
-            // 'cif' => ['required' , new CifValidateRule],
-            // 'nombre' => 'required|date',
-            // 'telefono' => 'required|numeric',
-            // 'correo' => 'required|email',
-            // 'cuenta' => 'required|new CccValidateRule',
-            // 'pais' => 'required',
-            // 'moneda' => 'required',
-            // 'importe' => 'required|numeric'
+            'cif' => ['required' , new CifValidateRule],
+            'nombre' => 'required|regex:/[A-Za-z]/',
+            'telefono' => 'required|numeric',
+            'correo' => 'required|email',
+            'cuenta' => ['required' , new CccValidateRule],
+            'pais' => 'required',
+            'moneda' => 'required',
+            'importe' => 'required|numeric'
         ];
     }
 
@@ -45,14 +47,16 @@ class ClienteValidate extends FormRequest
         'telefono.required' => 'Es obligatorio completar el campo "Telefono"',
         'correo.required' => 'Es obligatorio completar el campo "Correo"',
         'cuenta.required' => 'Es obligatorio completar el campo "Cuenta Corriente"',
-        'pais.required' => 'Es obligatorio completar el campo "Pais"',
-        'moneda.required' => 'Es obligatorio completar el campo "Moneda"',
+        'pais.required' => 'Es obligatorio seleccionar un "Pais"',
+        'moneda.required' => 'Es obligatorio seleccionar una "Moneda"',
         'importe.required' => 'Es obligatorio completar el campo "Importe Cuota Mensual"',
 
         'telefono.numeric' => 'El campo "Telefono" solo debe contener numeros',
         'importe.numeric' => 'El campo "Importe Cuota Mensual" solo debe contener numeros',
 
         'correo.email' => 'El campo "Correo Electronico" debe tener un formato correcto de email',
+
+        'nombre.regex' => 'El campo "Nombre" solo debe contener letras',
 
     ];
 }

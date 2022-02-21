@@ -23,9 +23,10 @@ class CreateEmpleadoTable extends Migration
             $table->string('direccion', 40)->nullable();
             $table->date('fecha_alta')->nullable();
             $table->string('tipo', 10)->nullable();
-            $table->string('external_id', 11)->nullable();
-            $table->string('external_auth', 11)->nullable();
-
+            $table->string('external_id', 255)->nullable();
+            $table->string('external_auth', 255)->nullable();
+            $table->string('remember_token', 255)->nullable();
+            
             $table->timestamps();
         });
     }
