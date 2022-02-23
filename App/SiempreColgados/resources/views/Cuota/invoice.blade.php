@@ -121,8 +121,8 @@
 
                                 <td>
                                     Factura #: {{ $cuota->tipo }}<br />
-                                    Emitida: {{ date('d-m-Y'); }}<br />
-                                    Cobrada : {{ date('d-m-Y'); }}
+                                    Emitida: {{ date('d-m-Y') }}<br />
+                                    Cobrada : {{ date('d-m-Y') }}
                                 </td>
                             </tr>
                         </table>
@@ -151,19 +151,23 @@
                 <tr class="heading">
                     <td>Concepto</td>
 
-                    <td>Precio</td>
+                    <td>Importe</td>
                 </tr>
 
                 <tr class="item last">
-                    <td>{{ $cuota->concepto }}</td>
+                    <td>{{ $cuota->concepto }} </td>
 
-                    <td>{{ $cuota->importe }}</td>
+                    <td>{{ $importe['subtotal'] }}</td>
                 </tr>
-
+                <tr></tr>
+                <tr>
+                    <td></td>
+                    <td>IVA : 21%</td>
+                </tr>
                 <tr class="total">
                     <td></td>
+                    <td>Total: {{ $importe['total'] }} {{ $cliente->moneda }}</td>
 
-                    <td>Total: {{ $cuota->importe }} €</td>
                 </tr>
             </table>
     </div>

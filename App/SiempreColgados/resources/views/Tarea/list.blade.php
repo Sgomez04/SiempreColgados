@@ -27,7 +27,8 @@
                 <h2>Gestion <b>Tareas</b></h2>
             </div>
             <div class="col-sm-6">
-                <a href="{{ route('tareaslistCliente') }}" class="btn btn-secondary"><i class="material-icons">&#xE147;</i>
+                <a href="{{ route('tareaslistCliente') }}" class="btn btn-secondary"><i
+                        class="material-icons">&#xE147;</i>
                     <span>Administrar incidencias de clientes</span></a>
                 <a href="{{ route('tareas.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i>
                     <span>Añadir nueva Tarea</span></a>
@@ -65,14 +66,7 @@
                                 <a href="{{ route('tareas.show', $t->id_tarea) }}" class="delete"><i
                                         class="material-icons" title="Eliminar Tarea">&#xE872;</i></a>
                             </td>
-                            <?php
-                            foreach ($clientes as $client) {
-                                if ($t->id_cliente == $client->id_cliente) {
-                                    $cliente = $client->nombre;
-                                }
-                            }
-                            ?>
-                            <td>{{ $cliente }} </td>
+                            <td>{{ $t->cliente->nombre }} </td>
                             <td>{{ $t->telefono }} </td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->descripcion }} </textarea></td>
                             <td>{{ $t->correo }}</td>
@@ -88,15 +82,7 @@
                             @endif
                             <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}
                             </td>
-                            <?php
-                            $empleado = '';
-                            foreach ($empleados as $e) {
-                                if ($t->operario == $e->id_empleado) {
-                                    $empleado = $e->name;
-                                }
-                            }
-                            ?>
-                            <td>{{ $empleado }}</td>
+                            <td>{{ $t->empleado->name }}</td>
                             <td>{{ $t->fecha_rea }}</td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>

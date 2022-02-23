@@ -19,44 +19,52 @@ class Cliente extends Model
         'telefono',
         'correo',
         'cuenta_corriente',
-        'moneda'
+        'moneda',
+        'cuota_mensual',
+        'id_pais'
     ];
 
-    public static function createC($request){
-        $cliente = new Cliente();
-        $cliente->cif=$request->cif;
-        $cliente->nombre=$request->nombre;
-        $cliente->telefono=$request->telefono;
-        if($cliente->email != $request->correo){
-            $cliente->email = $request->correo;
-        } else{
-            $cliente->correo = $cliente->correo;
-        }
-        $cliente->cuenta_corriente=$request->cuenta;
-        $cliente->id_pais= $request->pais;
-        $cliente->moneda=$request->moneda;
-        $cliente->cuota_mensual=$request->importe;
-
-        $cliente->saveOrFail();
+    public function createC($request)
+    {
+        Cliente::created([
+            'cif' => $request->cif,
+            'nombre' => $request->nombre,
+            'telefono' => $request->telefono,
+            'correo' => $request->correo,
+            'cuente_corriente' => $request->cuenta,
+            'id_pais' => $request->pais,
+            'moneda' => $request->moneda,
+            'cuota_mensual' => $request->importe,
+        ]);
     }
 
-    public static function updateC($request, $id){
-        $cliente = Cliente::find($id);
-        $cliente->cif=$request->cif;
-        $cliente->nombre=$request->nombre;
-        $cliente->telefono=$request->telefono;
-        $cliente->correo=$request->correo;
-        $cliente->cuenta_corriente=$request->cuenta;
-        $cliente->id_pais= $request->pais;
-        $cliente->moneda=$request->moneda;
-        $cliente->cuota_mensual=$request->importe;
+    public function updateC($request, $id)
+    {
+        Cliente::find($id)->update([
+            'cif' => $request->cif,
+            'nombre' => $request->nombre,
+            'telefono' => $request->telefono,
+            'correo' => $request->correo,
+            'cuente_corriente' => $request->cuenta,
+            'id_pais' => $request->pais,
+            'moneda' => $request->moneda,
+            'cuota_mensual' => $request->importe,
+        ]);
 
-        $cliente->fill($request->input())->saveOrFail();
+        // if ($cliente->correo != $request->correo) {
+        //     $cliente->correo = $request->correo;
+        // }
     }
 
-    public static function destroyC($id){
+    public function destroyC($id)
+    {
         $cliente = Cliente::find($id);
         $cliente->delete();
     }
 
+
+    public function Paises()
+    {
+        return $this->belongsTo(Paises::class, 'id');
+    }
 }

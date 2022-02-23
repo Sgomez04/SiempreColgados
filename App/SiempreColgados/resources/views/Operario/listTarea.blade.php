@@ -5,12 +5,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/list.css') }}" />
-
 @endsection
 
 @section('navbar')
     <a href="{{ url('tareasOp') }}" class="nav-item nav-link active"><i class="fa fa-gears"></i><span>Tareas</span></a>
-
 @endsection
 
 @section('contenido')
@@ -46,55 +44,39 @@
                 </thead>
                 <tbody>
                     @foreach ($tareas as $t)
-                    @if($t ->operario == Auth::user()->id_empleado)
-                        <tr class="list">
-                            <td>
-                                <a href="{{ route('tareasOp.edit', $t->id_tarea) }}" class="edit"><i
-                                        class="material-icons" title="Editar Tarea">&#xE254;</i></a>
-                                <br>
-                            </td>
-                            <?php
-                            foreach ($clientes as $client) {
-                                if ($t->id_cliente == $client->id_cliente) {
-                                    $cliente = $client->nombre;
-                                }
-                            }
-                            ?>
-                            <td>{{ $cliente }} </td>
-                            <td>{{ $t->telefono }} </td>
-                            <td><textarea cols="15" rows="4" readonly>{{ $t->descripcion }} </textarea></td>
-                            <td>{{ $t->correo }}</td>
-                            <td>{{ $t->direccion }}</td>
-                            <td>{{ $t->poblacion }}</td>
-                            <td>{{ $t->cp }}</td>
-                            @if ($t->estado == 'P')
-                                <td>Pendiente</td>
-                            @elseif($t->estado == 'C')
-                                <td>Cancelada</td>
-                            @else
-                                <td>Realizada</td>
-                            @endif
-                            <td>{{ $fecha = date('d/m/Y',
-                                strtotime($t->fecha_crea)); }}</td>
-                            <?php
-                            $empleado = '';
-                            foreach ($empleados as $e) {
-                                if ($t->operario == $e->id_empleado) {
-                                    $empleado = $e->name;
-                                }
-                            }
-                            ?>
-                            <td>{{ $empleado }}</td>
-                            <td>{{ $t->fecha_rea }}</td>
-                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
-                            <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
-                            @if ($t->fichero != '')
-                                <td><a target="_blank" href="{{url('/archivos',$t->fichero)}}">Ver
-                                        archivo</a></td>
-                            @else
-                                <td>Sin archivo</td>
-                            @endif
-                        </tr>
+                        @if ($t->operario == Auth::user()->id_empleado)
+                            <tr class="list">
+                                <td>
+                                    <a href="{{ route('tareasOp.edit', $t->id_tarea) }}" class="edit"><i
+                                            class="material-icons" title="Editar Tarea">&#xE254;</i></a>
+                                    <br>
+                                </td>
+                                <td>{{ $t->cliente->nombre }} </td>
+                                <td>{{ $t->telefono }} </td>
+                                <td><textarea cols="15" rows="4" readonly>{{ $t->descripcion }} </textarea></td>
+                                <td>{{ $t->correo }}</td>
+                                <td>{{ $t->direccion }}</td>
+                                <td>{{ $t->poblacion }}</td>
+                                <td>{{ $t->cp }}</td>
+                                @if ($t->estado == 'P')
+                                    <td>Pendiente</td>
+                                @elseif($t->estado == 'C')
+                                    <td>Cancelada</td>
+                                @else
+                                    <td>Realizada</td>
+                                @endif
+                                <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}</td>
+                                <td>{{ $t->empleado->name }}</td>
+                                <td>{{ $t->fecha_rea }}</td>
+                                <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
+                                <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
+                                @if ($t->fichero != '')
+                                    <td><a target="_blank" href="{{ url('/archivos', $t->fichero) }}">Ver
+                                            archivo</a></td>
+                                @else
+                                    <td>Sin archivo</td>
+                                @endif
+                            </tr>
                         @endif
                     @endforeach
                 </tbody>

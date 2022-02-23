@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="col-md-4 control-label" for="password"> Contraseña: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="dni"> DNI: </label>

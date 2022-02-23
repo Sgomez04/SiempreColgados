@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use App\Models\Cuota;
 use App\Models\Cliente;
 use App\Http\Requests\CuotaValidate;
-use App\Http\Requests\CuotaValidateM;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Mail\SendEmails;
+// use App\Mail\SendEmails;
+use App\Models\CambioDivisa;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -26,7 +26,6 @@ class CuotaController extends Controller
         $paginas['mostrar'] = 2;
         return view("Cuota.list", [
             "cuotas" => Cuota::Paginate($paginas['mostrar']),
-            "clientes" => Cliente::all(),
             "paginas" => $paginas
         ]);
     }
@@ -69,21 +68,21 @@ class CuotaController extends Controller
 
         //Envio de correos a todos los clientes por creacion de cuota mensual
         foreach ($clientes as $datos) {
-
             $cliente = Cliente::find($datos->id_cliente);
+            $importe['subtotal'] = CambioDivisa::toEuros($datos->cuota_mensual, strtolower($datos->moneda));
+            $importe['total'] = round($importe['subtotal'] * 0.21, 2);
             $cuota = $request;
-            $cuotaImporte = Cuota::where('id_cliente',$datos->id_cliente)->firts();
+
             $data['cliente'] = $cliente->name;
             $data['cuota'] = $cuota->tipo;
 
-            $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente', '$cuotaImporte'));
+            $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente', '$importe'));
             Mail::send('Mail.mail', $data,  function ($message) use ($pdf) {
                 $message->from('siemprecolgados.company@gmail.com')
                     ->to('sgomez_m@hotmail.com')
                     ->subject('Cuota Mensual')
                     ->attachData($pdf->output(), "SiempreColgados.pdf");
             });
-    
         }
         return redirect()->route("cuotas.index")->with([
             "success" => "Las cuotas mensuales fueron creadas correctamente",
@@ -98,13 +97,15 @@ class CuotaController extends Controller
      */
     public function storeE(CuotaValidate $request)
     {
-        Cuota::createE($request, Cliente::all());
         $cliente = Cliente::find($request->cliente);
+        Cuota::createE($request, Cliente::all());
+
+        $importe['subtotal'] = CambioDivisa::toEuros($request->importe, strtolower($cliente->moneda));
+        $importe['total'] = round($importe['subtotal'] * 0.21, 2);
         $cuota = $request;
-        $data['cliente'] = $cliente->name;
         $data['cuota'] = $cuota->tipo;
-        
-        $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
+
+        $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente','importe'));
         Mail::send('Mail.mail', $data, function ($message) use ($pdf) {
             $message->from('siemprecolgados.company@gmail.com')
                 ->to('sgomez_m@hotmail.com')
@@ -115,7 +116,6 @@ class CuotaController extends Controller
         return redirect()->route("cuotas.index")->with([
             "success" => "Las cuota expecepcional fue creada correctamente",
         ]);
-
     }
 
     /**
@@ -176,8 +176,10 @@ class CuotaController extends Controller
     {
         $cuota = Cuota::find($id_cuota);
         $cliente = Cliente::find($cuota->id_cliente);
+        $importe['subtotal'] = CambioDivisa::toEuros($cuota->importe, strtolower($cliente->moneda));
+        $importe['total'] = round($importe['subtotal'] * 0.21, 2);
 
-        $pdf = PDF::loadView('Cuota.invoice', compact('cuota','cliente'));
+        $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente','importe'));
         return $pdf->stream('Factura_cuota.pdf');
     }
 }

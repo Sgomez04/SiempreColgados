@@ -25,19 +25,19 @@ class TareaValidate extends FormRequest
     public function rules()
     {
         return [
-            'cif' => ['required' , new CifValidateRule],
-            'cliente' => 'required',
-            'telefono' => 'required|numeric',
-            'descripcion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'correo' => 'required|email',
-            'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'poblacion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'cp' => 'required|numeric',
-            'fecha_rea' => 'required|date',
-            'operario' => 'required',
-            'aa' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'ap' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'id_cliente' =>'required'
+            // 'cif' => ['required' , new CifValidateRule],
+            // 'cliente' => 'required',
+            // 'telefono' => 'required|numeric',
+            // 'descripcion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'correo' => 'required|email',
+            // 'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'poblacion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'cp' => 'required|numeric',
+            // 'fecha_rea' => 'required|date',
+            // 'operario' => 'required',
+            // 'aa' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'ap' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            // 'id_cliente' =>'required'
 
         ];
     }

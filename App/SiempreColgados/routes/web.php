@@ -11,7 +11,10 @@ use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmpleadoJsController;
+
 use App\Http\Controllers\Auth\SocialAuthController;
+
 
 
 
@@ -25,37 +28,6 @@ use App\Http\Controllers\Auth\SocialAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//<------------ RUTAS SIN LOGIN ------------>//
-
-// //-- INICIO -- //
-// Route::get('/', [TareaController::class, 'index']);
-
-// //-- CLIENTES -- //
-// Route::get('/clientes/eliminarCi/{id}', [ClienteController::class, 'destroy'])->name('eliminarCi');
-// Route::get('/clientes/userCuotas/{id_cuota}', [ClienteController::class, 'UserCuotas'])->name('userCuotas');
-// Route::resource("clientes", ClienteController::class);
-
-// //-- CUOTAS -- //
-// Route::get('/factura/printInvoice/{id_cliente}', [CuotaController::class, 'printInvoice'])->name('printInvoice');
-// Route::get('/cuotas/createE', [CuotaController::class, 'createE'])->name('createE');
-// Route::post('/cuotas/storeE', [CuotaController::class, 'storeE'])->name('storeE');
-// Route::get('/cuotas/eliminarC/{id}', [CuotaController::class, 'destroy'])->name('eliminarC');
-// Route::resource("cuotas", CuotaController::class);
-
-// //-- EMPLEADOS -- //
-// Route::get('/empleados/eliminarE/{id}', [EmpleadoController::class, 'destroy'])->name('eliminarE');
-// Route::resource("empleados", EmpleadoController::class);
-
-// //-- TAREAS -- //
-// Route::get('/tareas/tareaC', [TareaController::class, ''])->name('tareaC');
-// Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT');
-// Route::resource("tareas", TareaController::class);
-
-// //-- LOGIN -- //
-
-
-//<------------ RUTAS CON LOGIN ------------>//
 
 // //-- INICIO -- //
 Route::get('/', function () {
@@ -124,3 +96,4 @@ Route::resource("tareas", TareaController::class)->middleware('auth.Admin');
 Route::resource("perfil", PerfilController::class)->middleware('auth');
 
 
+Route::resource('posts', EmpleadoJsController::class);

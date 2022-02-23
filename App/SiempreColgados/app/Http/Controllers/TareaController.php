@@ -23,8 +23,6 @@ class TareaController extends Controller
         $paginas['mostrar'] = 2;
         return view("Tarea.list", [
             "tareas" => Tarea::Paginate($paginas['mostrar']),
-            "clientes" => Cliente::all(),
-            "empleados" => Empleado::all(),
             "paginas" => $paginas
         ]);
     }
@@ -133,10 +131,8 @@ class TareaController extends Controller
     public function listTareaClientes()
     {
         $tareas = Tarea::all();
-        $empleados = Empleado::all();
-        $clientes = Cliente::all();
       
-        return view("TareaCliente.list", compact('tareas', 'empleados','clientes'));
+        return view("TareaCliente.list", compact('tareas'));
     }
     
 

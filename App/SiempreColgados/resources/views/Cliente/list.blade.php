@@ -44,6 +44,7 @@
                         <th scope="col">Cuenta Corriente</th>
                         <th scope="col">Pais</th>
                         <th scope="col">Moneda</th>
+                        <th scope="col">Cuota Mensual</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,25 +67,9 @@
                             <td>{{ $c->telefono }}</td>
                             <td>{{ $c->correo }}</td>
                             <td>{{ $c->cuenta_corriente }}</td>
-                            <?php
-                            $pais = '';
-                            foreach ($paises as $p) {
-                                if ($c->id_pais == $p->id) {
-                                    $pais = $p;
-                                }
-                            }
-                            ?>
-                            <td>{{ $pais->nombre }}</td>
-                            <?php
-                            $moneda = '';
-                            foreach ($paises as $p) {
-                                if ($c->moneda == $p->iso_moneda) {
-                                    $moneda = $p->nombre_moneda;
-                                }
-                            }
-                            ?>
-                            <td>{{ $moneda }}</td>
-
+                            <td>{{ $c->paises->nombre }}</td>
+                            <td>{{ $c->paises->nombre_moneda }}</td>
+                            <td>{{ $c->cuota_mensual }} €</td>
                         </tr>
                     @endforeach
                 </tbody>

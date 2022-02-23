@@ -66,7 +66,7 @@
                             <td>{{ $c->concepto }} </td>
                             <td>{{ $fecha = date('d/m/Y',
                                 strtotime($c->fecha_emision)); }} </td>
-                            <td>{{ $c->importe }}</td>
+                            <td>{{ $c->importe }} €</td>
                             @if ($c->pagada == 'S')
                                 <td>Pagada</td>
                             @else
@@ -76,14 +76,7 @@
                                 strtotime($c->fecha_pago)); }}</td>
                             <td>{{ $c->tipo }}</td>
                             <td><textarea cols="20" rows="5" readonly>{{ $c->notas }}</textarea></td>
-                            <?php
-                            foreach ($clientes as $client) {
-                                if ($c->id_cliente == $client->id_cliente) {
-                                    $cliente = $client->nombre;
-                                }
-                            }
-                            ?>
-                            <td>{{ $cliente }}</td>
+                            <td>{{ $c->cliente->nombre }}</td>
                         </tr>
                     @endforeach
                 </tbody>

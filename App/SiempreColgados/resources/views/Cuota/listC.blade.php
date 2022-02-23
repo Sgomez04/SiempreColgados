@@ -64,7 +64,7 @@
                                 <td>{{ $c->concepto }} </td>
                                 <td>{{ $fecha = date('d/m/Y',
                                     strtotime($c->fecha_emision)); }} </td>
-                                <td>{{ $c->importe }}</td>
+                                <td>{{ $c->importe }} €</td>
                                 @if ($c->pagada == 'S')
                                     <td>Pagada</td>
                                 @else

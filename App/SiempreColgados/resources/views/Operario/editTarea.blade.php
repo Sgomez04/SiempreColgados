@@ -60,11 +60,11 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="fichero"> Fichero:</label>
+                <label class="col-md-4 control-label" for="archivo"> Fichero:</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group file">
                         <div>
-                            <input type="file" name="archivo" required>
+                            <input type="file" name="archivo">
                         </div>
                         
                     </div>
