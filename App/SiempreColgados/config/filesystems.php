@@ -35,6 +35,13 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'tareasPDF' => [
+            'driver' => 'local',
+            'root' => storage_path('app/pdf'),
+            'url' => env('APP_URL').'/viewPDF',
+            'visibility' => 'public',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -67,7 +74,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        // public_path('storage') => storage_path('app/public'),
+        public_path('viewPDF') => storage_path('app/pdf'),
     ],
 
 ];

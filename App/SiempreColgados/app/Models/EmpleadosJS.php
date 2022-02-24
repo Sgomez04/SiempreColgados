@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmpleadosJS extends Model
+class Empleadosjs extends Model
 {
     use HasFactory;
-
     protected $table = 'empleados';
     protected $primaryKey = "id_empleado";
 
@@ -21,6 +20,5 @@ class EmpleadosJS extends Model
         'fecha_alta',
         'tipo'
     ];
-
 
 }

@@ -81,5 +81,6 @@
             <b>{{ $paginas['total'] }}</b> registros
         </div>
         <b class="pagination"> {{ $empleados->links() }}</b>
+        
     </div>
 @endsection

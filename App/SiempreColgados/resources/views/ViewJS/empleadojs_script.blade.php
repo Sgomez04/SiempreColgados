@@ -12,7 +12,7 @@
 
     function editPost(event) {
         var id = $(event).data("id");
-        let _url = `/posts/${id}`;
+        let _url = `/empleadosjs/${id}`;
         $('#nombreError').text('');
         $('#dniError').text('');
         $('#correoError').text('');
@@ -42,30 +42,31 @@
     }
 
     function createPost() {
-        var id_empleado = $('#id_empleado').val();
-        var name = $('#name').val();
-        var dni = $('#dni').val();
-        var correo = $('#correo').val();
-        var telefono = $('#telefono').val();
-        var direccion = $('#direccion').val();
-        var fechalta = $('#fechalta').val();
-        var cargo = $('#cargo').val();
+        let empleado = $('#id_empleado').val();
+        let nombre = $('#nombre').val();
+        let dni_empleado = $('#dni').val();
+        let correo = $('#correo').val();
+        let telefono_empleado = $('#telefono').val();
+        let direccion_empleado = $('#direccion').val();
+        let fechalta = $('#fechalta').val();
+        let cargo = $('#cargo').val();
 
-        let _url = `/posts`;
+        let _url = `/empleadosjs`;
         let _token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
             url: _url,
-            type: "POST",
+            type: "post",
             data: {
-                id_empleado: id_empleado,
-                name: nombre,
-                dni: dni,
-                email: correo,
-                telefono: telefono,
-                direccion: direccion,
-                fecha_alta: fechalta,
-                tipo: cargo,
+                id_empleado:"1",
+                name:"Ramiro",
+                // password: 'contrasenna',
+                dni: '231223A',
+                email: 'ramiro@hotmail.com',
+                telefono: '423412312',
+                direccion: 'ejemplo',
+                fecha_alta: '2022-03-01',
+                tipo: 'A',
                 _token: _token
             },
             success: function(response) {
@@ -104,19 +105,20 @@
                 }
             },
             error: function(response) {
-                $('#nombreError').text(response.responseJSON.errors.nombre);
-                $('#dniError').text(response.responseJSON.errors.dni);
-                $('#correoError').text(response.responseJSON.errors.correo);
-                $('#telefonoError').text(response.responseJSON.errors.telefono);
-                $('#direccionError').text(response.responseJSON.errors.direccion);
-                $('#fechaltaError').text(response.responseJSON.errors.fecha_alta);
+                // $('#nombreError').text(response.responseJSON.errors.nombre);
+                // $('#dniError').text(response.responseJSON.errors.dni);
+                // $('#correoError').text(response.responseJSON.errors.correo);
+                // $('#telefonoError').text(response.responseJSON.errors.telefono);
+                // $('#direccionError').text(response.responseJSON.errors.direccion);
+                // $('#fechaltaError').text(response.responseJSON.errors.fechalta);
+                alert('error');
             }
         });
     }
 
     function deletePost(event) {
         var id = $(event).data("id");
-        let _url = `/posts/${id}`;
+        let _url = `/empleadosjs/${id}`;
         let _token = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({

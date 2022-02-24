@@ -22,11 +22,12 @@ class Empleado extends Model
         'tipo'
     ];
 
-    public function createE($request){
+    public function createE($request)
+    {
         Empleado::created([
             'name' => $request->nombre,
             'password' => bcrypt($request->password),
-            'dni' => $request->dni ,
+            'dni' => $request->dni,
             'email' => $request->correo,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
@@ -34,30 +35,27 @@ class Empleado extends Model
             'tipo' => $request->cargo,
         ]);
     }
-    
-    public function updateE($request,$id){
-        Empleado::find($id)->update([
-            'name' => $request->nombre,
-            // 'password' => bcrypt($request->password),
-            'dni' => $request->dni ,
-            'email' => $request->correo,
-            'telefono' => $request->telefono,
-            'direccion' => $request->direccion,
-            'fecha_alta' => $request->fechalta,
-            'tipo' => $request->cargo,  
-        ]);
 
-        // if($empleado->email != $request->correo){
-        //     $empleado->email = $request->correo;
-        // }
+    public function updateE($request, $id)
+    {
+        $empleado = Empleado::find($id);;
+
+        $empleado->name =$request->nombre;
+        $empleado->dni=$request->dni;
+        if ($empleado->email != $request->correo) {
+            $empleado->email = $request->correo;
+        }
+        $empleado->telefono = $request->telefono;
+        $empleado->direccion = $request->direccion;
+        $empleado->fecha_alta = $request->fechalta;
+        $empleado->tipo = $request->cargo;
     }
 
-    public static function destroyE($id){
+    public static function destroyE($id)
+    {
 
         $empleado = Empleado::find($id);
-        
+
         $empleado->delete();
     }
-    
-
 }

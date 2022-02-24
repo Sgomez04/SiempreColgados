@@ -32,7 +32,7 @@ class EmpleadoValidate extends FormRequest
             'correo' => 'required|email',
             'telefono' => 'required|numeric',
             'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            'fecha_alta' => 'required|date',
+            'fechalta' => 'required|date',
         ];
     }
 

@@ -27,6 +27,7 @@ class Tarea extends Model
         'anotacion_posterior',
         'fichero',
         'id_cliente',
+        'operario',
         'tipo',
     ];
 
@@ -49,56 +50,43 @@ class Tarea extends Model
         ]);
     }
 
-    public function updateT($request, $id)
+    public static function updateT($request, $id)
     {
-        Tarea::find($id)->update([
-            'id_cliente' => $request->cliente,
-            'operario' => $request->operario,
-            'telefono' => $request->telefono,
-            'descripcion' => $request->descripcion,
-            'correo' => $request->correo,
-            'tipo' => 'admin',
-            'direccion' => $request->direccion,
-            'poblacion' => $request->poblacion,
-            'cp' => $request->cp,
-            'fecha_rea' => $request->fechaR,
-            'anotacion_anterior' => $request->aa,
-            'estado' => 'P',
-            'fecha_crea' => date('Y-m-d', time()),
-        ]);
+        $tarea = Tarea::find($id);
+        $tarea->id_cliente = $request->cliente;
+        $tarea->operario = $request->operario;
+        $tarea->telefono = $request->telefono;
+        $tarea->descripcion = $request->descripcion;
+        if ($tarea->correo != $request->correo) {
+            $tarea->correo = $request->correo;
+        }
+        $tarea->direccion = $request->direccion;
+        $tarea->poblacion = $request->poblacio;
+        $tarea->cp = $request->cp;
+        $tarea->fecha_rea = $request->fechaR;
+        $tarea->anotacion_anterior = $request->aa;
+        $tarea->estado = $request->estado;
+        if ($tarea->operario != null) {
+            $tarea->tipo = 'admin';
+        } else {
+            $tarea->tipo = 'cliente';
+        }
 
-        // if ($tarea->correo != $request->correo) {
-        //     $tarea->correo = $request->correo;
-        // } else {
-        //     $tarea->correo = $tarea->correo;
-        // }
-
-        // if ($tarea->operario != null) {
-        //     $tarea->tipo = 'admin';
-        // } else {
-        //     $tarea->tipo = 'cliente';
-        // }
-
+        $tarea->fill($request->input())->saveOrFail();
     }
 
-    public function updateTOperario($request, $id)
+    public static function updateTOperario($request, $id)
     {
-        Tarea::find($id)->update([
-            'estado' => $request->estado,
-            'anotacion_posterior' => $request->ap,
-            'fichero' => $request->file('archivo')->store('public')
-        ]);
+        $tarea = Tarea::find($id);
+        $tarea->estado = $request->estado;
+        $tarea->anotacion_posterior = $request->ap;
+        if ($request->hasFile('archivo')) {
+            $tarea->fichero = $request->file('archivo')->store('/', 'tareasPDF');
+        } else{
+            $tarea->fichero = "noentro";
 
-        // if ($request->hasFile($request->archivo)) {
-        //     $tarea->fichero = $request->file('archivo')->store('public');
-        // } else {
-        //     if ($tarea->fichero == null) {
-        //         $tarea->fichero = null;
-        //     } else {
-        //         $tarea->fichero = $tarea->fichero;
-        //     }
-        // }
-
+        }
+        $tarea->fill($request->input())->saveOrFail();
     }
 
     public function createClient($request)
@@ -117,7 +105,6 @@ class Tarea extends Model
             'estado' => 'P',
             'fecha_crea' => date('Y-m-d', time()),
             'tipo' => 'cliente',
-
         ]);
     }
 
@@ -128,14 +115,13 @@ class Tarea extends Model
         $tarea->delete();
     }
 
-
-    public function Empleado()
-    {
-        return $this->belongsTo(Empleado::class, 'operario');
-    }
-
     public function Cliente()
     {
         return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
+    
+    public function Empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'operario');
     }
 }

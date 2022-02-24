@@ -74,6 +74,7 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
         </div>
         @yield('contenido', '** ERROR **. No se ha incluido sección de contenido')
     </div>
+    <div><br></div>
 
 
     <footer class="footer-07">

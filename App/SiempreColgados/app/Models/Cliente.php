@@ -12,7 +12,6 @@ class Cliente extends Model
     protected $table = 'clientes';
     protected $primaryKey = "id_cliente";
 
-
     protected $fillable = [
         'nombre',
         'cif',
@@ -40,20 +39,17 @@ class Cliente extends Model
 
     public function updateC($request, $id)
     {
-        Cliente::find($id)->update([
-            'cif' => $request->cif,
-            'nombre' => $request->nombre,
-            'telefono' => $request->telefono,
-            'correo' => $request->correo,
-            'cuente_corriente' => $request->cuenta,
-            'id_pais' => $request->pais,
-            'moneda' => $request->moneda,
-            'cuota_mensual' => $request->importe,
-        ]);
-
-        // if ($cliente->correo != $request->correo) {
-        //     $cliente->correo = $request->correo;
-        // }
+        $cliente = Cliente::find($id);
+        $cliente->cif=$request->cif;
+        $cliente->nombre=$request->nombre;
+        $cliente->telefono= $request->telefono;
+               if ($cliente->correo != $request->correo) {
+            $cliente->correo = $request->correo;
+        }
+        $cliente->cuente_corriente=$request->cuenta;
+        $cliente->id_pais= $request->pais;
+        $cliente->moneda=$request->moneda;
+        $cliente->cuota_mensual=$request->importe; 
     }
 
     public function destroyC($id)

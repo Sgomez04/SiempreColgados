@@ -65,7 +65,6 @@ class Cuota extends Model
             'notas' => $request->notas,
             'id_cliente' => $request->cliente,
         ]);
-
     }
 
     public function destroyC($id)

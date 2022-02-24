@@ -39,14 +39,14 @@ class EmpleadoJsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            // 'nombre' => 'required|regex:/[A-Za-z]/',
-            // 'dni' => 'required',
-            // 'correo' => 'required|email',
-            // 'telefono' => 'required|numeric',
-            // 'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            // 'fecha_alta' => 'required|date',
-        ]);
+        // $request->validate([
+        //     'nombre' => 'required',
+        //     'dni' => 'required',
+        //     'correo' => 'required|email',
+        //     'telefono' => 'required|numeric',
+        //     'direccion' => 'required',
+        //     'fechalta' => 'required|date',
+        // ]);
 
         $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado], [
             'name' => $request->nombre,
