@@ -12,7 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
-    {{-- <link rel="stylesheet" href="{{ asset('css/list.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/listJS.css') }}" />
 
 </head>
 <style>
@@ -25,7 +25,7 @@
 <body>
 
     <div class="container">
-        <h2 style="margin-top: 12px;" class="alert alert-success">Empleados
+        <h2 style="margin-top: 12px;" class="alert alert-success table-title">Gestion de <b>Empleados</b> - JS 
         </h2><br>
         <div class="row">
             <div class="col-12 text-right">
@@ -34,7 +34,7 @@
         </div>
         <div class="row" style="clear: both;margin-top: 18px;">
             <div class="col-12">
-                <table id="empleados" class="table table-striped table-bordered">
+                <table id="empleados" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -49,14 +49,14 @@
                     </thead>
                     <tbody>
                         @foreach ($empleados as $empleado)
-                            <tr id="row_{{ $empleado->id_empleado }}">
+                            <tr id="row_{{ $empleado->id_empleado }}" class="list">
                                 <td>
                                     <a href="javascript:void(0)" data-id="{{ $empleado->id_empleado }}"
-                                        onclick="editPost(event.target)" class="btn btn-info">Editar</a>
+                                        onclick="editPost(event.target)" class="btn b-edit btn-info">Editar</a>
                                     <br>
                                     <br>
                                     <a href="javascript:void(0)" data-id="{{ $empleado->id_empleado }}"
-                                        class="btn btn-danger" onclick="deletePost(event.target)">Borrar</a>
+                                        class="btn b-del btn-danger" onclick="deletePost(event.target)">Borrar</a>
                                 </td>
                                 <td>{{ $empleado->name }}</td>
                                 <td>{{ $empleado->dni }}</td>
@@ -76,8 +76,9 @@
             </div>
         </div>
     </div>
-    @include('ViewJS.empleadojs_modal')
     @include('ViewJS.empleadojs_script')
+    @include('ViewJS.empleadojs_modal')
+    
 </body>
 
 </html>

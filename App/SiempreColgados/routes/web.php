@@ -152,16 +152,6 @@ Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name(
 Route::get('/tareas/tareainfo', [TareaController::class, 'tareainfo'])->name('tareainfo')->middleware('guest');
 Route::get('/tareas/tareaClient', [TareaController::class, 'createClient'])->name('tareaClient')->middleware('guest');
 Route::post('/tareas/tareaClientCreate', [TareaController::class, 'storeClient'])->name('tareaClientCreate')->middleware('guest');
-Route::get('/storage/{archivo}', function ($archivo) {
-    //verificamos si el archivo existe y lo retornamos
-
-        echo "hola";
-    //   return response()->download($url);
-    //si no se encuentra lanzamos un error 404.
-
-    // abort(404);
-
-});
 
 Route::resource("tareas", TareaController::class)->middleware('auth.Admin');
 

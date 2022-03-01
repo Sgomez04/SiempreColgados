@@ -61,6 +61,6 @@ class Cliente extends Model
 
     public function Paises()
     {
-        return $this->belongsTo(Paises::class, 'id');
+        return $this->belongsTo(Paises::class, 'id_pais');
     }
 }

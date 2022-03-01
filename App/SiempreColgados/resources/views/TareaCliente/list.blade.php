@@ -64,14 +64,7 @@
                                     <a href="{{ route('tareas.show', $t->id_tarea) }}" class="delete"><i
                                             class="material-icons" title="Eliminar Tarea">&#xE872;</i></a>
                                 </td>
-                                <?php
-                                foreach ($clientes as $client) {
-                                    if ($t->id_cliente == $client->id_cliente) {
-                                        $cliente = $client->nombre;
-                                    }
-                                }
-                                ?>
-                                <td>{{ $cliente }} </td>
+                                <td>{{ $t->cliente->nombre }} </td>
                                 <td>{{ $t->telefono }} </td>
                                 <td><textarea cols="15" rows="4" readonly>{{ $t->descripcion }} </textarea></td>
                                 <td>{{ $t->correo }}</td>
@@ -87,15 +80,7 @@
                                 @endif
                                 <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}
                                 </td>
-                                <?php
-                                $empleado = '';
-                                foreach ($empleados as $e) {
-                                    if ($t->operario == $e->id_empleado) {
-                                        $empleado = $e->name;
-                                    }
-                                }
-                                ?>
-                                <td>{{ $empleado }}</td>
+                                <td>{{ $t->empleado->name }}</td>
                                 <td>{{ $t->fecha_rea }}</td>
                                 <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                                 <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>
@@ -106,16 +91,16 @@
                                     <td>Sin archivo</td>
                                 @endif
                             </tr>
-                    @endif
+                        @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-    {{-- <div class="clearfix">
+    <div class="clearfix">
         <div class="hint-text">Mostrando <b>{{ $paginas['mostrar'] }}</b> de
             <b>{{ $paginas['total'] }}</b> registros
         </div>
         <b class="pagination"> {{ $tareas->links() }}</b>
-    </div> --}}
+    </div>
 @endsection

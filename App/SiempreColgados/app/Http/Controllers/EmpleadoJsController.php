@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EmpleadosJS;
-use App\Http\Requests\EmpleadoValidate;
+use App\Http\Requests\EmpleadoJSValidate;
 
 
 class EmpleadoJsController extends Controller
@@ -37,30 +37,24 @@ class EmpleadoJsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmpleadoJSValidate $request)
     {
-        // $request->validate([
-        //     'nombre' => 'required',
-        //     'dni' => 'required',
-        //     'correo' => 'required|email',
-        //     'telefono' => 'required|numeric',
-        //     'direccion' => 'required',
-        //     'fechalta' => 'required|date',
-        // ]);
 
-        $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado], [
-            'name' => $request->nombre,
+        $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado],[
+            'name' => $request->name,
+            'password' => bcrypt($request->password),
             'dni' => $request->dni,
-            'descripcion' => $request->descripcion,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
             'direccion' => $request->direccion,
-            'fecha_alta' => $request->fechalta,
-            'tipo' => $request->cargo,
-            'email' => $request->correo,
-            'telefono' => $request->telefono
-
+            'fecha_alta' => $request->fecha_alta,
+            'tipo' => $request->tipo        
         ]);
 
-        return response()->json(['code' => 200, 'message' => 'Post Created successfully', 'data' => $empleados], 200);
+        
+        // return response()->json(['code' => 500, 'message' => 'Post Created successfully', 'data' => print_r($request->all(), true)]);
+        return response()->json(['code' => 200, 'message' => 'Post Created successfully', 'data' => $empleados]);
+
     }
 
     /**

@@ -82,9 +82,6 @@ class Tarea extends Model
         $tarea->anotacion_posterior = $request->ap;
         if ($request->hasFile('archivo')) {
             $tarea->fichero = $request->file('archivo')->store('/', 'tareasPDF');
-        } else{
-            $tarea->fichero = "noentro";
-
         }
         $tarea->fill($request->input())->saveOrFail();
     }

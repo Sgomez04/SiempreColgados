@@ -41,13 +41,13 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <label class="col-md-4 control-label" for="password"> Contraseña: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
                         <input type="text" name="password" class="form-control @error('password') is-invalid @enderror"
-                            value="{{ old('password', $empleado->password) }}" placeholder="Contraseña del empleado" />
+                            value="{{ old('password') }}" placeholder="Contraseña del empleado" />
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="dni"> DNI: </label>

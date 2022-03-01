@@ -50,15 +50,19 @@
                     @foreach ($empleados as $e)
                         <tr class="list">
                             <td>
+                                @if(Auth::user()->id_empleado != $e->id_empleado)
+
                                 <a href="{{ route('empleados.edit', $e->id_empleado) }}" class="edit"><i
                                     class="material-icons" title="Editar Empleado">&#xE254;</i></a>
                                 <br>
                                 <br>
                                 <a href="{{ route('empleados.show', $e->id_empleado) }}" class="delete"><i
                                     class="material-icons" title="Eliminar Empleado">&#xE872;</i></a>
+                                    @else
+                                    <a href="{{route('perfil.index')}}"  title="Perfil"><i class="fa fa-sliders"></i></a>
+                                   @endif
                             </td>
                             <td>{{ $e->name }} </td>
-                            {{-- <td>{{ $e->password }} </td> --}}
                             <td>{{ $e->dni }}</td>
                             <td>{{ $e->email }}</td>
                             <td>{{ $e->telefono }}</td>

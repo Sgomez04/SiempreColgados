@@ -252,28 +252,6 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="fichero"> Fichero:</label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group file">
-                        <div>
-                            <label for="image_uploads" id="labelFile">Selecciona un archivo (DOC, DOCX, PDF..)</label>
-                            <input type="file" id="image_uploads" name="fichero" class="form-control"
-                                value="{{ $tarea->fichero }}">
-                            <input type="hidden" name="fichero2" value="{{ $fichero }}">
-
-                        </div>
-                        <div class="preview">
-                            @if (isset($fichero))
-                                <p id="pfile">ARCHIVO: {{ $fichero }}</p>
-                            @else
-                                <p id="pfile">No hay ningun archivo seleccionado</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-
             <div class="row mt-3 ">
                 <div class="text-center bton">
                     <button class="btn btn-success mx-3">Guardar</button>

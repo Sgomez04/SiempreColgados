@@ -18,6 +18,62 @@
         @csrf
         <fieldset>
             <div class="form-group">
+                <label class="col-md-4 control-label" for="cliente"> Cliente:</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="cliente" class="form-control"
+                            value="{{ $tarea->empleado->name }}" readonly/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="telefono"> Teléfono/s contacto: </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" name="telefono" class="form-control"
+                        value="{{ $tarea->telefono }}" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="direccion"> Direccion: </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input type="text" name="direccion" class="form-control"
+                        value="{{ $tarea->direccion }}" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="poblacion"> Poblacion: </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input type="text" name="poblacion" class="form-control"
+                        value="{{ $tarea->poblacion }}" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="cp"> Codigo Postal: </label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
+                        <input type="text" name="cp" class="form-control"
+                        value="{{ $tarea->cp }}" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-md-4 control-label" for="estado"> Estado: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -74,7 +130,7 @@
             <div class="row mt-3 ">
                 <div class="text-center bton">
                     <button class="btn btn-success mx-3">Guardar</button>
-                    <a class="btn btn-danger mx-3" href="{{ url('tareas') }}">Cancelar</a>
+                    <a class="btn btn-danger mx-3" href="{{ url('tareasOp') }}">Cancelar</a>
                 </div>
             </div>
         </fieldset>

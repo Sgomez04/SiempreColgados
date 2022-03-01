@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
+// use Illuminate\Http\Request;
+// use App\Models\User;
+use App\Models\Tarea;
+
 
 
 class HomeController extends Controller
@@ -27,6 +29,7 @@ class HomeController extends Controller
     {
         session(['avatar' => mt_rand(1, 10)]);
         if(auth()->user()->isAdmin()){
+            session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
             return redirect('tareas');
         } elseif(auth()->user()->isOperario()){
             return redirect('tareasOp');

@@ -22,8 +22,8 @@ class CuotaController extends Controller
      */
     public function index()
     {
-        $paginas['total'] = count(Cuota::all());
-        $paginas['mostrar'] = 2;
+        $paginas['total'] = Cuota::all()->count();
+        $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Cuota.list", [
             "cuotas" => Cuota::Paginate($paginas['mostrar']),
             "paginas" => $paginas

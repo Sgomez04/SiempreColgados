@@ -13,7 +13,9 @@ class Empleadosjs extends Model
 
     protected $fillable = [
         'name',
+        'password',
         'dni',
+        'descripcion',
         'email',
         'telefono',
         'direccion',

@@ -5,18 +5,6 @@
     <meta charset="UTF-8">
     <title>SiempreColgados</title>
 
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
-font-awesome/5.15.2/css/all.min.css" /> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap-theme.css.map') }}" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap.css.map') }}" />
-    <link rel="stylesheet" href="{{ asset('css/bootstrap/bootstrap-theme.min.css') }}" /> --}}
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -30,11 +18,6 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
     <link rel="stylesheet" href="{{ asset('css/navbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}" />
 
-    {{-- <style>
-        .w-5 {
-            display: none;
-        }
-    </style> --}}
 </head>
 
 <body>
@@ -47,14 +30,38 @@ font-awesome/5.15.2/css/all.min.css" /> --}}
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class=" navbar-collapse justify-content-start">
             <div class="navbar-nav ml-auto">
+                @auth
+                    @if (Auth::user()->tipo == 'A')
+                        <div class="nav-item dropdown">
+                            @if (session('noti') >= 1)
+                                <a href="#" data-toggle="dropdown" class="nav-item nav-link"><i
+                                        class="fa fa-bell notification" title="Incidencias"><span
+                                            class="badge numNotification">{{ session('noti') }}</span></i> </a>
+                                <div class="dropdown-menu">
+                                    @if (session('noti') == 1)
+                                        <a href="{{ route('tareaslistCliente') }}" class="dropdown-item">Hay
+                                            <b>{{ session('noti') }}</b>
+                                            incidencia registrada<br> por clientes sin administrar</a>
+                                    @else
+                                        <a href="{{ route('tareaslistCliente') }}" class="dropdown-item">Hay
+                                            <b>{{ session('noti') }}</b>
+                                            incidencias, registradas<br> por clientes, sin administrar</a>
+                                    @endif
+                                </div>
+                            @endif
+
+                        </div>
+                    @endif
+                @endauth
                 @yield('navbar')
                 @auth
                     <div class="nav-item dropdown">
-                        <a href="#" data-toggle="dropdown" class="nav-item nav-link  user-action"><img src="/img/avatars/{{session('avatar')}}.png"
-                                class="imgUser" alt="Avatar"> {{ Auth::user()->name }} <b
-                                class="caret"></b></a>
+                        <a href="#" data-toggle="dropdown" class="nav-item nav-link user-action"><img
+                                src="/img/avatars/{{ session('avatar') }}.png" class="imgUser" alt="Avatar">
+                            {{ Auth::user()->name }} <b class="caret"></b></a>
                         <div class="dropdown-menu">
-                            <a href="{{route('perfil.index')}}" class="dropdown-item"><i class="fa fa-sliders"></i> Perfil</a>
+                            <a href="{{ route('perfil.index') }}" class="dropdown-item"><i class="fa fa-sliders"></i>
+                                Perfil</a>
                             <div class="divider dropdown-divider"></div>
                             <form action="{{ route('logout') }}" method='POST' style="display:inline">
                                 @csrf

@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">Datos del Empleado</h4>
             </div>
             <div class="modal-body">
                 <form name="userForm" class="form-horizontal">
@@ -20,6 +20,18 @@
                         </div>
                     </div>
         
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="nombre">Contraseña:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
+                                <input type="text" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Contraseña del empleado" />
+                                    <span id="passwordError" class="alert-message"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="dni"> DNI: </label>
                         <div class="col-md-4 inputGroupContainer">
@@ -91,28 +103,10 @@
                             </div>
                         </div>
                     </div>
-                    
-                    {{-- <div class="form-group">
-                        <label for="name" class="col-sm-2">title</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
-                            <span id="titleError" class="alert-message"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2">Description</label>
-                        <div class="col-sm-12">
-                            <textarea class="form-control" id="description" name="description"
-                                placeholder="Enter description" rows="4" cols="50">
-                        </textarea>
-                            <span id="descriptionError" class="alert-message"></span>
-                        </div>
-                    </div> --}}
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="createPost()">Guardar</button>
+                <button type="button" class="btn b-save btn-primary" onclick="createPost()">Guardar</button>
             </div>
         </div>
     </div>

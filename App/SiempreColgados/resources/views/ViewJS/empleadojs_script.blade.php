@@ -7,6 +7,14 @@
 
     function addPost() {
         $("#id_empleado").val('');
+        $("#nombre").val('');
+        $('#password').val('');
+        $("#dni").val('');
+        $("#correo").val('');
+        $("#telefono").val('');
+        $("#direccion").val('')
+        $("#fechalta").val('');
+        $("#cargo").val('');
         $('#post-modal').modal('show');
     }
 
@@ -14,6 +22,7 @@
         var id = $(event).data("id");
         let _url = `/empleadosjs/${id}`;
         $('#nombreError').text('');
+        $('#passwordError').text('');
         $('#dniError').text('');
         $('#correoError').text('');
         $('#telefonoError').text('');
@@ -27,7 +36,6 @@
                 if (response) {
                     $("#id_empleado").val(response.id_empleado);
                     $("#nombre").val(response.name);
-                    // $("#password").val(response.password);
                     $("#dni").val(response.dni);
                     $("#correo").val(response.email);
                     $("#telefono").val(response.telefono);
@@ -42,8 +50,17 @@
     }
 
     function createPost() {
+        $('#nombreError').text('');
+        $('#passwordError').text('');
+        $('#dniError').text('');
+        $('#correoError').text('');
+        $('#telefonoError').text('');
+        $('#direccionError').text('');
+        $('#fechaltaError').text('');
+
         let empleado = $('#id_empleado').val();
         let nombre = $('#nombre').val();
+        let password = $('#password').val();
         let dni_empleado = $('#dni').val();
         let correo = $('#correo').val();
         let telefono_empleado = $('#telefono').val();
@@ -56,62 +73,57 @@
 
         $.ajax({
             url: _url,
-            type: "post",
+            type: "POST",
             data: {
-                id_empleado:"1",
-                name:"Ramiro",
-                // password: 'contrasenna',
-                dni: '231223A',
-                email: 'ramiro@hotmail.com',
-                telefono: '423412312',
-                direccion: 'ejemplo',
-                fecha_alta: '2022-03-01',
-                tipo: 'A',
+                id_empleado: empleado,
+                name: nombre,
+                password: password,
+                dni: dni_empleado,
+                email: correo,
+                telefono: telefono_empleado,
+                direccion: direccion_empleado,
+                fecha_alta: fechalta,
+                tipo: cargo,
                 _token: _token
             },
             success: function(response) {
                 if (response.code == 200) {
-                    if (id != "") {
-                        $("#row_" + id_empleado + " td:nth-child(2)").html(response.data.name);
-                        $("#row_" + id_empleado + " td:nth-child(3)").html(response.data.dni);
-                        $("#row_" + id_empleado + " td:nth-child(4)").html(response.data.email);
-                        $("#row_" + id_empleado + " td:nth-child(5)").html(response.data.telefono);
-                        $("#row_" + id_empleado + " td:nth-child(6)").html(response.data.direccion);
-                        $("#row_" + id_empleado + " td:nth-child(7)").html(response.data.fecha_alta);
-                        $("#row_" + id_empleado + " td:nth-child(8)").html(response.data.tipo);
+                    if (empleado != "") {
+                        $("#row_" + empleado + " td:nth-child(2)").html(response.data.nombre);
+                        $("#row_" + empleado + " td:nth-child(3)").html(response.data.dni_empleado);
+                        $("#row_" + empleado + " td:nth-child(4)").html(response.data.correo);
+                        $("#row_" + empleado + " td:nth-child(5)").html(response.data.telefono_empleado);
+                        $("#row_" + empleado + " td:nth-child(6)").html(response.data.direccion_empleado);
+                        $("#row_" + empleado + " td:nth-child(7)").html(response.data.fechalta);
+                        $("#row_" + empleado + " td:nth-child(8)").html(response.data.cargo);
 
                     } else {
-                        $('table tbody').prepend('<tr id="row_' + response.data.id_empleado + '"><td>' +
-                            response.data.name + '</td><td>' + response.data.dni + '</td><td>' +
-                            response.data.email + '</td><td>' +
-                            response.data.telefono + '</td><td>' +
-                            response.data.direccion + '</td><td>' +
-                            response.data.fecha_alta + '</td><td>' +
-                            response.data.tipo + '</td><td><a href="javascript:void(0)" data-id="' +
-                            response.data.id_empleado +
+                        $('table tbody').prepend('<tr id="row_' + response.data.empleado + '"><td>' +
+                            response.data.nombre + '</td><td>' + response.data.dni_empleado +
+                            '</td><td>' +
+                            response.data.correo + '</td><td>' +
+                            response.data.telefono_empleado + '</td><td>' +
+                            response.data.direccion_empleado + '</td><td>' +
+                            response.data.fechalta + '</td><td>' +
+                            response.data.cargo + '</td><td><a href="javascript:void(0)" data-id="' +
+                            response.data.empleado +
                             '" onclick="editPost(event.target)" class="btn btn-info">Edit</a></td><td><a href="javascript:void(0)" data-id="' +
-                            response.data.id_empleado +
+                            response.data.empleado +
                             '" class="btn btn-danger" onclick="deletePost(event.target)">Delete</a></td></tr>'
                         );
                     }
-                    $('#nombreError').text('');
-                    $('#dniError').text('');
-                    $('#correoError').text('');
-                    $('#telefonoError').text('');
-                    $('#direccionError').text('');
-                    $('#fechaltaError').text('');
-
                     $('#post-modal').modal('hide');
+                    location.reload();
                 }
             },
             error: function(response) {
-                // $('#nombreError').text(response.responseJSON.errors.nombre);
-                // $('#dniError').text(response.responseJSON.errors.dni);
-                // $('#correoError').text(response.responseJSON.errors.correo);
-                // $('#telefonoError').text(response.responseJSON.errors.telefono);
-                // $('#direccionError').text(response.responseJSON.errors.direccion);
-                // $('#fechaltaError').text(response.responseJSON.errors.fechalta);
-                alert('error');
+                $('#nombreError').text(response.responseJSON.errors.name);
+                $('#passwordError').text(response.responseJSON.errors.password);
+                $('#dniError').text(response.responseJSON.errors.dni);
+                $('#correoError').text(response.responseJSON.errors.email);
+                $('#telefonoError').text(response.responseJSON.errors.telefono);
+                $('#direccionError').text(response.responseJSON.errors.direccion);
+                $('#fechaltaError').text(response.responseJSON.errors.fecha_alta);
             }
         });
     }

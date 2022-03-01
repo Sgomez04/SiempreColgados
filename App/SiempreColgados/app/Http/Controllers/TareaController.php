@@ -19,8 +19,8 @@ class TareaController extends Controller
      */
     public function index()
     {
-        $paginas['total'] = count(Tarea::all());
-        $paginas['mostrar'] = 2;
+        $paginas['total'] = Tarea::all()->count();
+        $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Tarea.list", [
             "tareas" => Tarea::Paginate($paginas['mostrar']),
             "paginas" => $paginas
@@ -93,6 +93,7 @@ class TareaController extends Controller
     public function update(TareaValidate $request, $id)
     {
         Tarea::updateT($request, $id);
+        session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
         return redirect()->route("tareas.index")
             ->with(["success" => "Los datos de la tarea fueron actualizados correctamente"]);
     }
@@ -106,6 +107,7 @@ class TareaController extends Controller
     public function destroy($id)
     {
         Tarea::destroyT($id);
+        session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
         return redirect()->route("tareas.index")->with([
             "warning" => "La tarea fue eliminada correctamente",
         ]);
@@ -123,18 +125,22 @@ class TareaController extends Controller
         return view("TareaCliente.createClient", compact('clientes', 'empleados'));
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function listTareaClientes()
     {
-        $tareas = Tarea::all();
-      
-        return view("TareaCliente.list", compact('tareas'));
+        $paginas['total'] = Tarea::where('tipo', 'cliente')->count();
+        $paginas['mostrar'] = env('PAGINATE', 4);
+        session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
+        return view("TareaCliente.list", [
+            "tareas" => Tarea::Paginate($paginas['mostrar']),
+            "paginas" => $paginas
+        ]);
     }
-    
+
 
     /**
      * Store a newly created resource in storage.

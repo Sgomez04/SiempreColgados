@@ -18,9 +18,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $paginas['total'] = count(Cliente::all());
-        $paginas['mostrar'] = 2;
-        $cliente = Cliente::all();
+        $paginas['total'] = Cliente::all()->count();
+        $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Cliente.list", [
             "clientes" => Cliente::Paginate($paginas['mostrar']),
             "paises" => Paises::all(),

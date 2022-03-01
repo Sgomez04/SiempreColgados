@@ -41,6 +41,7 @@ class Empleado extends Model
         $empleado = Empleado::find($id);;
 
         $empleado->name =$request->nombre;
+        $empleado->password =$request->password;
         $empleado->dni=$request->dni;
         if ($empleado->email != $request->correo) {
             $empleado->email = $request->correo;

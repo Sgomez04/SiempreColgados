@@ -16,10 +16,10 @@ class OperarioController extends Controller
      */
     public function index()
     {
-        $paginas['total'] = count(Tarea::all());
-        $paginas['mostrar'] = 2;
+        $paginas['total'] = Tarea::all()->count();
+        $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Operario.listTarea", [
-            "tareas" => Tarea::Paginate(2),
+            "tareas" => Tarea::Paginate($paginas['mostrar']),
             "clientes" => Cliente::all(),
             "empleados" => Empleado::all(),
             "paginas" => $paginas
