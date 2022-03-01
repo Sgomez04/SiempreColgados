@@ -54,7 +54,6 @@
                 </thead>
                 <tbody>
                     @foreach ($tareas as $t)
-                        @if ($t->tipo == 'cliente')
                             <tr class="list">
                                 <td>
                                     <a href="{{ route('tareas.edit', $t->id_tarea) }}" class="edit"><i
@@ -78,7 +77,7 @@
                                 @else
                                     <td>Realizada</td>
                                 @endif
-                                <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}
+                                <td>{{ date('d/m/Y', strtotime($t->fecha_crea)) }}
                                 </td>
                                 <td>{{ $t->empleado->name }}</td>
                                 <td>{{ $t->fecha_rea }}</td>
@@ -91,7 +90,6 @@
                                     <td>Sin archivo</td>
                                 @endif
                             </tr>
-                        @endif
                     @endforeach
                 </tbody>
             </table>

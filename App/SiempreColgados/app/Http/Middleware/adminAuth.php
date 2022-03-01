@@ -20,7 +20,6 @@ class adminAuth
             if(auth()->user()->isAdmin()){
                 return $next($request);
             }
-
         }
         return redirect()->to('/');
     }

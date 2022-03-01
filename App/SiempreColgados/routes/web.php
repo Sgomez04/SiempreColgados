@@ -28,78 +28,6 @@ use App\Http\Controllers\Auth\SocialAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// //----------------------> RUTAS PARA PRUEBAS <-----------------------//
-// // //-- INICIO -- //
-// Route::get('/', function () {
-//     return view('Inicio.loginE');
-// });
-
-// Route::get('/info', function () {
-//     return view('info');
-// })->name('info');
-
-
-// // //-- LOGIN -- //
-// // Route::get('login', [Auth::class, 'showLoginForm'])->name('login');
-// // Route::post('login', [Auth::class, 'showLoginForm'])->name('login');
-// // Route::post('logout', [Auth::class, 'logout'])->name('logout');
-// // Route::get('password/reset/{token}', [Auth::class, 'showResetForm'])->name('password.reset');
-// // Route::post('password/reset', [Auth::class, 'reset'])->name('password.update');
-// Auth::routes();
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-// //login con servicios externos
-// Route::get('/externalLogin/{provider}', [SocialAuthController::class, 'externalLogin']);
-// Route::get('/Loginredirect/{provider}', [SocialAuthController::class, 'loginRedirect'])->name('loginredirect');
-
-
-// //-- CLIENTES -- //
-// Route::get('/clientes/eliminarCi/{id}', [ClienteController::class, 'destroy'])->name('eliminarCi');
-// Route::get('/clientes/userCuotas/{id_cuota}', [ClienteController::class, 'UserCuotas'])->name('userCuotas');
-// Route::resource("clientes", ClienteController::class);
-
-// //-- CUOTAS -- //
-// Route::get('/factura/printInvoice/{id_cliente}', [CuotaController::class, 'printInvoice'])->name('printInvoice');
-// Route::get('/cuotas/createE', [CuotaController::class, 'createE'])->name('createE');
-// Route::post('/cuotas/storeE', [CuotaController::class, 'storeE'])->name('storeE');
-// Route::get('/cuotas/eliminarC/{id}', [CuotaController::class, 'destroy'])->name('eliminarC');
-// Route::resource("cuotas", CuotaController::class);
-
-// //-- EMPLEADOS -- //
-// Route::get('/empleados/eliminarE/{id}', [EmpleadoController::class, 'destroy'])->name('eliminarE');
-// Route::resource("empleados", EmpleadoController::class);
-
-// //-- TAREAS -- //
-// //operario
-// Route::resource("tareasOp", OperarioController::class);
-// //admin
-// Route::get('/tareas/tareaslistCliente', [TareaController::class, 'listTareaClientes'])->name('tareaslistCliente');
-// Route::get('/tareas/eliminarT/{id}', [TareaController::class, 'destroy'])->name('eliminarT');
-// //cliente sin logear
-// Route::get('/tareas/tareainfo', [TareaController::class, 'tareainfo'])->name('tareainfo');
-// Route::get('/tareas/tareaClient', [TareaController::class, 'createClient'])->name('tareaClient');
-// Route::post('/tareas/tareaClientCreate', [TareaController::class, 'storeClient'])->name('tareaClientCreate');
-// Route::get('/archivos/{archivo}', function ($archivo) {
-//     //verificamos si el archivo existe y lo retornamos
-
-//         echo "hola";
-//     //   return response()->download($url);
-//     //si no se encuentra lanzamos un error 404.
-
-//     // abort(404);
-
-// });
-
-// Route::resource("tareas", TareaController::class);
-
-// //-- PERFIL -- //
-// Route::resource("perfil", PerfilController::class);
-
-
-// Route::resource('empleadosjs', EmpleadoJsController::class);
-
-
-
 
 //----------------------> RUTAS CON MIDDLEWARE <-----------------------//
 // //-- INICIO -- //
@@ -113,11 +41,6 @@ Route::get('/info', function () {
 
 
 // //-- LOGIN -- //
-// Route::get('login', [Auth::class, 'showLoginForm'])->name('login');
-// Route::post('login', [Auth::class, 'showLoginForm'])->name('login');
-// Route::post('logout', [Auth::class, 'logout'])->name('logout');
-// Route::get('password/reset/{token}', [Auth::class, 'showResetForm'])->name('password.reset');
-// Route::post('password/reset', [Auth::class, 'reset'])->name('password.update');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 

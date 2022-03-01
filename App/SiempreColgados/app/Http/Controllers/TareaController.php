@@ -136,7 +136,8 @@ class TareaController extends Controller
         $paginas['mostrar'] = env('PAGINATE', 4);
         session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
         return view("TareaCliente.list", [
-            "tareas" => Tarea::Paginate($paginas['mostrar']),
+            "tareas" => Tarea::where('tipo', 'cliente')
+            ->paginate($paginas['mostrar']),
             "paginas" => $paginas
         ]);
     }
