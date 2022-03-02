@@ -81,5 +81,5 @@ Route::resource("tareas", TareaController::class)->middleware('auth.Admin');
 //-- PERFIL -- //
 Route::resource("perfil", PerfilController::class)->middleware('auth');
 
-
+//-- SISTEMA JS --//
 Route::resource('empleadosjs', EmpleadoJsController::class);

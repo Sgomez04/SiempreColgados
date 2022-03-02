@@ -19,6 +19,7 @@ class TareaController extends Controller
      */
     public function index()
     {
+        // phpinfo();
         $paginas['total'] = Tarea::all()->count();
         $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Tarea.list", [
