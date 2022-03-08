@@ -49,7 +49,7 @@ class ClienteController extends Controller
     {
         Cliente::createC($request);
         return redirect()->route("clientes.index")->with([
-            "success" => "El cliente [<strong>{$request->nombre}</strong>] fue registrado correctamente",
+            "success" => "El cliente fue registrado correctamente",
         ]);
     }
 

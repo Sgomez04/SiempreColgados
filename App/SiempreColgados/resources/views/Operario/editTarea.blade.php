@@ -22,7 +22,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="cliente" class="form-control"
+                        <input type="text" name="cliente" class="form-control readonly"
                             value="{{ $tarea->empleado->name }}" readonly/>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input type="text" name="telefono" class="form-control"
+                        <input type="text" name="telefono" class="form-control readonly"
                         value="{{ $tarea->telefono }}" readonly/>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="direccion" class="form-control"
+                        <input type="text" name="direccion" class="form-control readonly"
                         value="{{ $tarea->direccion }}" readonly/>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                        <input type="text" name="poblacion" class="form-control"
+                        <input type="text" name="poblacion" class="form-control readonly"
                         value="{{ $tarea->poblacion }}" readonly/>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
-                        <input type="text" name="cp" class="form-control"
+                        <input type="text" name="cp" class="form-control readonly"
                         value="{{ $tarea->cp }}" readonly/>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="ap"
                             class="form-control @error('ap') is-invalid @enderror"
-                            placeholder="Anotacion posterior a la realizacion de la tarea">{{ old('ap', $tarea->anotacion_posterior) }}</textarea>
+                            placeholder="Anotación posterior a la realizacion de la tarea">{{ old('ap', $tarea->anotacion_posterior) }}</textarea>
                         @error('ap')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

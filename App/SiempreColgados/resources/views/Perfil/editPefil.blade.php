@@ -13,6 +13,8 @@
 
         <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
+        <a href="{{ url('empleadosjs') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>EmpleadosJS</span></a>
+        
         <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
                 Cuotas</span></a>
 
@@ -50,7 +52,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
                         <input type="text" name="password" class="form-control @error('password') is-invalid @enderror"
-                            value="{{ old('password', $empleado->password) }}" placeholder="Contraseña del empleado" />
+                            value="{{ old('password', bcript($empleado->password)) }}" placeholder="Contraseña del empleado" />
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

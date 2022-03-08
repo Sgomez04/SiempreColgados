@@ -27,11 +27,11 @@ class EmpleadoValidate extends FormRequest
     {
         return [
             'nombre' => 'required|regex:/[A-Za-z]/',
-            'password' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
             'dni' => ['required', new DniValidateRule],
+            'password' =>'required',
             'correo' => 'required|email',
             'telefono' => 'required|numeric',
-            'direccion' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
+            'direccion' => 'required',
             'fechalta' => 'required|date',
         ];
     }
@@ -53,10 +53,8 @@ class EmpleadoValidate extends FormRequest
 
             'correo.email' => 'El campo "Correo Electronico" debe tener un formato correcto de email',
 
-            'nombre.regex' => 'El campo "Nombre" solo puede contener letras',
 
-            'password.regex' => 'El campo "Contraseña" no puede contener caracteres especiales',
-            'direccion.regex' => 'El campo "Direccion" no puede contener caracteres especiales',
+      
 
         ];
     }

@@ -12,6 +12,8 @@
 
     <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
+    <a href="{{ url('empleadosjs') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>EmpleadosJS</span></a>
+
     <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
             Cuotas</span></a>
 
@@ -31,7 +33,11 @@
                         <select name="cliente" class="form-control selectpicker @error('cliente') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un cliente --</option>
                             @foreach ($clientes as $c)
-                                <option value="{{ $c->id_cliente }}">{{ $c->nombre }}</option>
+                                @if (old('cliente') == $c->id_cliente)
+                                    <option value="{{ $c->id_cliente }}" selected>{{ $c->nombre }}</option>
+                                @else
+                                    <option value="{{ $c->id_cliente }}">{{ $c->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @error('cliente')
@@ -148,8 +154,12 @@
                         <select name="operario" class="form-control selectpicker @error('operario') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un operario --</option>
                             @foreach ($empleados as $e)
-                                @if ($e->tipo == 'O')
-                                    <option value="{{ $e->id_empleado }}">{{ $e->name }}</option>
+                                @if (old('operario') == $e->id_empleado)
+                                <option value="{{ $e->id_empleado }}" selected>{{ $e->name }}</option>
+                                @else
+                                    @if ($e->tipo == 'O')
+                                        <option value="{{ $e->id_empleado }}">{{ $e->name }}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>

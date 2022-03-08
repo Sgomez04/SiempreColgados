@@ -24,12 +24,12 @@ class CuotaValidate extends FormRequest
     public function rules()
     {
         return [
-            // 'concepto' => 'required|regex:/[A-Za-z]/',
-            // 'fechaemision' => 'required|date',
-            // 'importe' => 'required|numeric',
-            // 'fechapago' => 'required|date',
-            // 'notas' => 'required|regex:/^[a-zA-Z0-9_\-]*$/',
-            // 'cliente' => 'required'
+            'concepto' => 'required|regex:/[A-Za-z]/',
+            'fechaemision' => 'required|date',
+            'importe' => 'required|numeric',
+            'fechapago' => 'required|date',
+            'notas' => 'required',
+            'cliente' => 'required'
         ];
     }
 

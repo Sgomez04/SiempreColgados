@@ -12,6 +12,8 @@
 
     <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
+    <a href="{{ url('empleadosjs') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>EmpleadosJS</span></a>
+    
     <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
             Cuotas</span></a>
 
@@ -149,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="col-md-4 control-label" for="estado"> Estado: </label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
@@ -172,7 +174,7 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="fcreacion"> Fecha de creacion de la tarea:</label>

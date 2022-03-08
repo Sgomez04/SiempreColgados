@@ -12,6 +12,8 @@
 
     <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
+    <a href="{{ url('empleadosjs') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>EmpleadosJS</span></a>
+
     <a href="{{ url('cuotas') }}" class="nav-item nav-link"><i class="fa fa-book"></i><span>
             Cuotas</span></a>
 
@@ -111,7 +113,11 @@
                         <select name="pais" class="form-control selectpicker @error('pais') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un pais --</option>
                             @foreach ($paises as $p)
-                                <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                                @if (old('pais') == $p->id)
+                                    <option value="{{ $p->id }}" selected>{{ $p->nombre }}</option>
+                                @else
+                                    <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                                @endif
                             @endforeach
                         </select>
                         @error('pais')
@@ -131,8 +137,14 @@
                         <select name="moneda" class="form-control selectpicker @error('moneda') is-invalid @enderror">
                             <option value="" selected>-- Selecciona una moneda --</option>
                             @foreach ($paises as $p)
-                                @if ($p->iso_moneda != null)
-                                    <option value="{{ $p->iso_moneda }}">{{ $p->nombre_moneda }}</option>
+                                @if (old('moneda') == $p->iso_moneda)
+                                    @if ($p->iso_moneda != null)
+                                        <option value="{{ $p->iso_moneda }}" selected>{{ $p->nombre_moneda }}</option>
+                                    @endif
+                                @else
+                                    @if ($p->iso_moneda != null)
+                                        <option value="{{ $p->iso_moneda }}">{{ $p->nombre_moneda }}</option>
+                                    @endif
                                 @endif
                             @endforeach
                         </select>

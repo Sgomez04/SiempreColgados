@@ -39,22 +39,29 @@ class EmpleadoJsController extends Controller
      */
     public function store(EmpleadoJSValidate $request)
     {
+        $empleado = EmpleadosJS::find($request->id_empleado);
+        if($empleado){
+            if($request->password != $empleado->password){
+                $password = bcrypt($request->password);
+            }else{
+                $password = $empleado->password;
+            }
+        }
 
-        $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado],[
+        $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado], [
             'name' => $request->name,
-            'password' => bcrypt($request->password),
+            'password' => $password,
             'dni' => $request->dni,
             'email' => $request->email,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
             'fecha_alta' => $request->fecha_alta,
-            'tipo' => $request->tipo        
+            'tipo' => $request->tipo
         ]);
 
-        
+
         // return response()->json(['code' => 500, 'message' => 'Post Created successfully', 'data' => print_r($request->all(), true)]);
         return response()->json(['code' => 200, 'message' => 'Post Created successfully', 'data' => $empleados]);
-
     }
 
     /**

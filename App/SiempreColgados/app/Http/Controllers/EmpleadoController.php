@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Http\Requests\EmpleadoValidate;
+use App\Http\Requests\EditEmpleadoValidate;
+
 
 
 class EmpleadoController extends Controller
@@ -80,7 +82,7 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EmpleadoValidate $request, $id)
+    public function update(EditEmpleadoValidate $request, $id)
     {
         Empleado::updateE($request,$id);
         return redirect()->route("empleados.index")

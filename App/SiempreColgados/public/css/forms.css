@@ -4,6 +4,11 @@ body {
     background-size  : cover;
 }
 
+.readonly{
+    background-color: rgba(255, 115, 0, 0.315) !important;
+    color:#532800;
+}
+
 .invalid-feedback{
     font-size: 13px;
     color: red;
@@ -54,7 +59,7 @@ label {
 }
 
 .glyphicon {
-    color: rgb(83, 40, 0);
+    color: #532800;
 }
 
 .file {

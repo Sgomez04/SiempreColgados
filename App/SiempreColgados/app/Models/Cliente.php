@@ -23,21 +23,34 @@ class Cliente extends Model
         'id_pais'
     ];
 
-    public function createC($request)
+    public static function createC($request)
     {
-        Cliente::created([
-            'cif' => $request->cif,
-            'nombre' => $request->nombre,
-            'telefono' => $request->telefono,
-            'correo' => $request->correo,
-            'cuente_corriente' => $request->cuenta,
-            'id_pais' => $request->pais,
-            'moneda' => $request->moneda,
-            'cuota_mensual' => $request->importe,
-        ]);
+        // Cliente::created([
+        //     'cif' => $request->cif,
+        //     'nombre' => $request->nombre,
+        //     'telefono' => $request->telefono,
+        //     'correo' => $request->correo,
+        //     'cuente_corriente' => $request->cuenta,
+        //     'id_pais' => $request->pais,
+        //     'moneda' => $request->moneda,
+        //     'cuota_mensual' => $request->importe,
+        // ]);
+
+        $cliente = new Cliente();
+        $cliente->cif = $request->cif;
+        $cliente->nombre = $request->nombre;
+        $cliente->telefono = $request->telefono;
+        $cliente->correo = $request->correo;
+        $cliente->cuenta_corriente = $request->cuenta;
+        $cliente->id_pais = $request->pais;
+        $cliente->moneda = $request->moneda;
+        $cliente->cuota_mensual = $request->importe;
+
+        $cliente->fill($request->input())->saveOrFail();
+
     }
 
-    public function updateC($request, $id)
+    public static function updateC($request, $id)
     {
         $cliente = Cliente::find($id);
         $cliente->cif=$request->cif;
@@ -46,10 +59,12 @@ class Cliente extends Model
                if ($cliente->correo != $request->correo) {
             $cliente->correo = $request->correo;
         }
-        $cliente->cuente_corriente=$request->cuenta;
+        $cliente->cuenta_corriente=$request->cuenta;
         $cliente->id_pais= $request->pais;
         $cliente->moneda=$request->moneda;
         $cliente->cuota_mensual=$request->importe; 
+
+        $cliente->fill($request->input())->saveOrFail();
     }
 
     public function destroyC($id)
@@ -63,4 +78,6 @@ class Cliente extends Model
     {
         return $this->belongsTo(Paises::class, 'id_pais');
     }
+    
+
 }

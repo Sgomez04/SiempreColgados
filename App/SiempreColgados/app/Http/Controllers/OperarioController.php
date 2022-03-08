@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Empleado;
+use App\Http\Requests\TareaOperarioValidate;
+
 
 class OperarioController extends Controller
 {
@@ -45,7 +47,7 @@ class OperarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TareaOperarioValidate $request, $id)
     {
         Tarea::updateTOperario($request, $id);
 

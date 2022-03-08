@@ -20,7 +20,7 @@
                         </div>
                     </div>
         
-                    <div class="form-group">
+                    <div class="form-group" id="contraseña">
                         <label class="col-md-4 control-label" for="nombre">Contraseña:</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">

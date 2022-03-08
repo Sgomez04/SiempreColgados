@@ -12,6 +12,8 @@
 
     <a href="{{ url('empleados') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>Empleados</span></a>
 
+    <a href="{{ url('empleadosjs') }}" class="nav-item nav-link"><i class="fa fa-id-card-o"></i><span>EmpleadosJS</span></a>
+    
     <a href="{{ url('cuotas') }}" class="nav-item nav-link active"><i class="fa fa-book"></i><span>
             Cuotas</span></a>
 
@@ -110,8 +112,8 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         <textarea type="text" cols="20" rows="4" name="notas"
-                            class="form-control @error('notas') is-invalid @enderror" value="{{ old('notas') }}"
-                            placeholder="Notas sobre la cuota"></textarea>
+                            class="form-control @error('notas') is-invalid @enderror"
+                            placeholder="Notas sobre la cuota">{{ old('notas') }}</textarea>
                         @error('notas')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -145,7 +147,11 @@
                         <select name="cliente" class="form-control selectpicker @error('cliente') is-invalid @enderror">
                             <option value="" selected>-- Selecciona un cliente --</option>
                             @foreach ($clientes as $cliente)
-                                <option value="{{ $cliente->id_cliente }}">{{ $cliente->nombre }}</option>
+                            @if(old('cliente') == $cliente->id_cliente )
+                            <option value="{{ $cliente->id_cliente }}" selected>{{ $cliente->nombre }}</option>
+                            @else
+                            <option value="{{ $cliente->id_cliente }}">{{ $cliente->nombre }}</option>
+                            @endif
                             @endforeach
                         </select>
                         @error('cliente')

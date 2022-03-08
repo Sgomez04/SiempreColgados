@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 use App\Models\Cuota;
 use App\Models\Cliente;
 use App\Http\Requests\CuotaValidate;
+use App\Http\Requests\CuotaMensualValidate;
 use Barryvdh\DomPDF\Facade as PDF;
 // use App\Mail\SendEmails;
 use App\Models\CambioDivisa;
 use Illuminate\Support\Facades\Mail;
+
 
 
 
@@ -61,7 +63,7 @@ class CuotaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CuotaValidate $request)
+    public function store(CuotaMensualValidate $request)
     {
         $clientes = Cliente::all();
         Cuota::createM($request, $clientes);
@@ -70,14 +72,14 @@ class CuotaController extends Controller
         foreach ($clientes as $datos) {
             $cliente = Cliente::find($datos->id_cliente);
             $importe['subtotal'] = CambioDivisa::toEuros($datos->cuota_mensual, strtolower($datos->moneda));
-            $importe['total'] = round($importe['subtotal'] * 0.21, 2);
+            $importe['total'] = round($importe['subtotal'] + $importe['subtotal'] * 0.21, 2);
             $cuota = $request;
 
-            $data['cliente'] = $cliente->name;
+            $data['cliente'] = $cliente->nombre;
             $data['cuota'] = $cuota->tipo;
 
-            $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente', '$importe'));
-            Mail::send('Mail.mail', $data,  function ($message) use ($pdf) {
+            $pdf = PDF::loadView('Factura.invoice_mail', compact('cuota', 'cliente', 'importe'));
+            Mail::send('Mail.mail', ['datos' => $data], function ($message) use ($pdf) {
                 $message->from('siemprecolgados.company@gmail.com')
                     ->to('sgomez_m@hotmail.com')
                     ->subject('Cuota Mensual')
@@ -101,12 +103,14 @@ class CuotaController extends Controller
         Cuota::createE($request, Cliente::all());
 
         $importe['subtotal'] = CambioDivisa::toEuros($request->importe, strtolower($cliente->moneda));
-        $importe['total'] = round($importe['subtotal'] * 0.21, 2);
+        $importe['total'] = round($importe['subtotal'] + $importe['subtotal'] * 0.21, 2);
         $cuota = $request;
+
+        $data['cliente'] = $cliente->nombre;
         $data['cuota'] = $cuota->tipo;
 
-        $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente','importe'));
-        Mail::send('Mail.mail', $data, function ($message) use ($pdf) {
+        $pdf = PDF::loadView('Factura.invoice_mail', compact('cuota', 'cliente','importe'));
+        Mail::send('Mail.mail', ['datos' => $data], function ($message) use ($pdf) {
             $message->from('siemprecolgados.company@gmail.com')
                 ->to('sgomez_m@hotmail.com')
                 ->subject('Cuota Mensual')
@@ -176,10 +180,8 @@ class CuotaController extends Controller
     {
         $cuota = Cuota::find($id_cuota);
         $cliente = Cliente::find($cuota->id_cliente);
-        $importe['subtotal'] = CambioDivisa::toEuros($cuota->importe, strtolower($cliente->moneda));
-        $importe['total'] = round($importe['subtotal'] * 0.21, 2);
 
-        $pdf = PDF::loadView('Cuota.invoice', compact('cuota', 'cliente','importe'));
+        $pdf = PDF::loadView('Factura.invoice_client', compact('cuota', 'cliente'));
         return $pdf->stream('Factura_cuota.pdf');
     }
 }

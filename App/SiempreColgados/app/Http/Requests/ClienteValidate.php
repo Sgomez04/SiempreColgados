@@ -29,7 +29,7 @@ class ClienteValidate extends FormRequest
     {
         return [
             'cif' => ['required' , new CifValidateRule],
-            'nombre' => 'required|regex:/[A-Za-z]/',
+            'nombre' => 'required',
             'telefono' => 'required|numeric',
             'correo' => 'required|email',
             'cuenta' => ['required' , new CccValidateRule],
@@ -56,7 +56,7 @@ class ClienteValidate extends FormRequest
 
         'correo.email' => 'El campo "Correo Electronico" debe tener un formato correcto de email',
 
-        'nombre.regex' => 'El campo "Nombre" solo debe contener letras',
+        // 'nombre.regex' => 'El campo "Nombre" solo debe contener letras',
 
     ];
 }

@@ -26,7 +26,7 @@ class rutasTest extends TestCase
     /** @test */
     function test_ruta_info()
     {
-        $invitado = User::where('id_empleado', 3)->first();
+        $invitado = User::where('id_empleado', 4)->first();
         $this->actingAs($invitado)->get('/info')->assertStatus(200);
     }
 
@@ -128,6 +128,34 @@ class rutasTest extends TestCase
     //---EMPLEADOS---//
 
     // /** @test */
+    function test_ruta_crear_empleado()
+    {
+        $this->post('empleados/store', [
+            'name' => 'manolo',
+            'password' => 'ejemplo',
+            'dni' => '12421234R',
+            'email' => 'manolo@gmail.com',
+            'telefono' => '657384574',
+            'direccion' => 'inventada',
+            'fecha_alta' => '2022-02-02',
+            'tipo' => 'A'
+        ])->assertStatus(200);
+
+        // $request = [
+        //     'name' => 'manolo',
+        //     'password' => 'ejemplo',
+        //     'dni' => '12421234R',
+        //     'email' => 'manolo@gmail.com',
+        //     'telefono' => '657384574',
+        //     'direccion' => 'inventada',
+        //     'fecha_alta' => '2022-02-02',
+        //     'tipo' => 'A'
+        // ];
+
+        // $this->post('empleados/store', $request)->assertStatus(200);
+    }
+
+    // // /** @test */
     // function test_ruta_eliminar_empleado()
     // {
     //     $admin = User::where('id_empleado', 1)->first();

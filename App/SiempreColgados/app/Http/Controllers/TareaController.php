@@ -7,7 +7,11 @@ use App\Models\Tarea;
 use App\Models\Cliente;
 use App\Models\Empleado;
 use App\Http\Requests\TareaValidate;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\EditTareaValidate;
+use App\Http\Requests\TareaClienteValidate;
+
+
+// use Illuminate\Support\Facades\Auth;
 
 
 class TareaController extends Controller
@@ -19,7 +23,6 @@ class TareaController extends Controller
      */
     public function index()
     {
-        // phpinfo();
         $paginas['total'] = Tarea::all()->count();
         $paginas['mostrar'] = env('PAGINATE', 4);
         return view("Tarea.list", [
@@ -91,7 +94,7 @@ class TareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TareaValidate $request, $id)
+    public function update(EditTareaValidate $request, $id)
     {
         Tarea::updateT($request, $id);
         session(['noti' => Tarea::where('tipo', 'cliente')->count()]);
@@ -150,7 +153,7 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeClient(TareaValidate $request)
+    public function storeClient(TareaClienteValidate $request)
     {
         Tarea::createClient($request);
         return redirect()->route("tareainfo");
