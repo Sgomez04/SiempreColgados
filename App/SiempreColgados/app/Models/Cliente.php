@@ -46,7 +46,7 @@ class Cliente extends Model
         $cliente->moneda = $request->moneda;
         $cliente->cuota_mensual = $request->importe;
 
-        $cliente->fill($request->input())->saveOrFail();
+        $cliente->saveOrFail();
 
     }
 
@@ -64,10 +64,10 @@ class Cliente extends Model
         $cliente->moneda=$request->moneda;
         $cliente->cuota_mensual=$request->importe; 
 
-        $cliente->fill($request->input())->saveOrFail();
+        $cliente->saveOrFail();
     }
 
-    public function destroyC($id)
+    public static function destroyC($id)
     {
         $cliente = Cliente::find($id);
         $cliente->delete();

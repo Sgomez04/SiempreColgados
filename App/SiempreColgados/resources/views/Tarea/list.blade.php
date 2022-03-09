@@ -84,7 +84,11 @@
                             @endif
                             <td>{{ $fecha = date('d/m/Y', strtotime($t->fecha_crea)) }}
                             </td>
+                            @if($t->operario != null)
                             <td>{{ $t->empleado->name }}</td>
+                            @else
+                            <td style="color:red">Sin Asignar</td>
+                            @endif  
                             <td>{{ $t->fecha_rea }}</td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                             <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>

@@ -81,7 +81,7 @@
                                 @endif
                                 <td>{{ date('d/m/Y', strtotime($t->fecha_crea)) }}
                                 </td>
-                                <td>{{ $t->empleado->name }}</td>
+                                <td style="color:red">Sin Asignar</td>
                                 <td>{{ $t->fecha_rea }}</td>
                                 <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_anterior }}</textarea></td>
                                 <td><textarea cols="15" rows="4" readonly>{{ $t->anotacion_posterior }}</textarea></td>

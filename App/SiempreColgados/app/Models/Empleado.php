@@ -37,15 +37,15 @@ class Empleado extends Model
 
         $empleado = new Empleado();
         $empleado->name = $request->nombre;
-        $empleado->password =  bcrypt($request->password);
+        $empleado->password = bcrypt($request->password);
         $empleado->dni = $request->dni;
         $empleado->email = $request->correo;
         $empleado->telefono = $request->telefono;
         $empleado->direccion = $request->direccion;
-        $empleado->fecha_alta = $request->fechalta;
+        $empleado->fecha_alta = date('Y-m-d', time());
         $empleado->tipo = $request->cargo;
 
-        $empleado->fill($request->input())->saveOrFail();
+        $empleado->saveOrFail();
 
     }
 
@@ -62,7 +62,7 @@ class Empleado extends Model
         $empleado->fecha_alta = $request->fechalta;
         $empleado->tipo = $request->cargo;
 
-        $empleado->fill($request->input())->saveOrFail();
+        $empleado->saveOrFail();
 
     }
 

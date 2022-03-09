@@ -19,7 +19,7 @@ class CreateTareaTable extends Migration
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes');
             $table->string('telefono', 15)->nullable();
             $table->string('descripcion', 200)->nullable();
-            $table->string('correo', 60)->unique()->nullable();
+            $table->string('correo', 60)->nullable();
             $table->string('direccion', 40)->nullable();
             $table->string('poblacion', 40)->nullable();
             $table->string('cp', 5)->nullable();

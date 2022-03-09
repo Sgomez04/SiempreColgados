@@ -25,7 +25,7 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-tag"></i></span>
-                                <input type="text" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
                                     placeholder="Contraseña del empleado" />
                                     <span id="passwordError" class="alert-message"></span>
                             </div>
@@ -98,8 +98,8 @@
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                                <label>&nbsp <INPUT TYPE="radio" name="cargo" id="cargo" VALUE="A"> Administrador</label><br>
-                                <label>&nbsp <INPUT TYPE="radio" name="cargo" id="cargo" VALUE="O" checked> Operario</label><br>
+                                <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="A"> Administrador</label><br>
+                                <label>&nbsp <INPUT TYPE="radio" name="cargo" VALUE="O" checked> Operario</label><br>
                             </div>
                         </div>
                     </div>

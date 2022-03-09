@@ -151,31 +151,6 @@
                 </div>
             </div>
 
-            {{-- <div class="form-group">
-                <label class="col-md-4 control-label" for="estado"> Estado: </label>
-                <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        @if (old('estado', $tarea->estado) == 'P')
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P" checked> Pendiente</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R"> Realizada</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C"> Cancelada</label>
-                        @elseif(old('estado', $tarea->estado) == 'R')
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P"> Pendiente</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R" checked> Realizada</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C"> Cancelada</label>
-                        @else
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="P"> Pendiente</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="R"> Realizada</label><br>
-                            <label>&nbsp <INPUT TYPE="radio" name="estado" VALUE="C" checked> Cancelada</label>
-                        @endif
-                        @error('orden')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div> --}}
-
             <div class="form-group">
                 <label class="col-md-4 control-label" for="fcreacion"> Fecha de creacion de la tarea:</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -227,7 +202,7 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         <input type="date" name="fechaR"
                             class="form-control datepicker @error('fechaR') is-invalid @enderror"
-                            value="{{ $tarea->fecha_rea }}" placeholder="Fecha de realizacion de la tarea" readonly />
+                            value="{{ $tarea->fecha_rea }}" placeholder="Fecha de realizacion de la tarea"  />
                         @error('fechaR')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

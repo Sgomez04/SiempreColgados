@@ -22,7 +22,7 @@
                 <h4 class="modal-title w-100">TAREA REGISTRADA</h4>
             </div>
             <div class="modal-body">
-                <p>La tarea fue registrada y enviada correctamente. Un operario se pondra en contacto con uste pronto. Gracias.</p>
+                <p>La tarea fue registrada y enviada correctamente. Un operario se pondra en contacto con usted pronto. Gracias.</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <a href="{{route('tareaClient')}}" class="bton btn-danger">Nueva Tarea</a>

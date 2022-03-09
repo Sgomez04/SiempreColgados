@@ -26,12 +26,12 @@ class EmpleadoJSValidate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|regex:/[A-Za-z]/',
-            'password' => 'required',
-            'dni' => ['required', new DniValidateRule],
-            'email' => 'required|email',
-            'telefono' => 'required|numeric',
-            'direccion' => 'required',
+            // 'name' => 'required',
+            // 'password' => 'required',
+            // 'dni' => ['required', new DniValidateRule],
+            // 'email' => 'required|email',
+            // 'telefono' => 'required|numeric',
+            // 'direccion' => 'required',
         ];
     }
 
@@ -49,10 +49,6 @@ class EmpleadoJSValidate extends FormRequest
             'telefono.numeric' => 'El campo "Telefono" solo debe contener numeros',
 
             'email.email' => 'El campo "Correo Electronico" debe tener un formato correcto de email',
-
-            'name.regex' => 'El campo "Nombre" solo puede contener letras',
-
-            'password.regex' => 'El campo "Contraseña" no puede contener caracteres especiales',
         ];
     }
 }

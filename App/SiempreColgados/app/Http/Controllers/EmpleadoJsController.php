@@ -40,12 +40,15 @@ class EmpleadoJsController extends Controller
     public function store(EmpleadoJSValidate $request)
     {
         $empleado = EmpleadosJS::find($request->id_empleado);
-        if($empleado){
-            if($request->password != $empleado->password){
+
+        if ($empleado) {
+            if ($request->password != $empleado->password) {
                 $password = bcrypt($request->password);
-            }else{
+            } else {
                 $password = $empleado->password;
             }
+        } else{
+            $password = $request->password;
         }
 
         $empleados = EmpleadosJS::updateOrCreate(['id_empleado' => $request->id_empleado], [
@@ -55,7 +58,7 @@ class EmpleadoJsController extends Controller
             'email' => $request->email,
             'telefono' => $request->telefono,
             'direccion' => $request->direccion,
-            'fecha_alta' => $request->fecha_alta,
+            'fecha_alta' => date('Y-m-d', time()),
             'tipo' => $request->tipo
         ]);
 

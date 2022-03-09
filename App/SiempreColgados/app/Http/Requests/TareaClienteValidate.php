@@ -28,7 +28,7 @@ class TareaClienteValidate extends FormRequest
    public function rules()
    {
        return [
-           'cif' => ['required' , new CifValidateRule],
+           'cif' => 'required',
            'telefono' => 'required|numeric',
            'descripcion' => 'required',
            'correo' => 'required|email',

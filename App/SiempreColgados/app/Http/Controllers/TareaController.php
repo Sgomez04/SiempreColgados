@@ -155,6 +155,7 @@ class TareaController extends Controller
      */
     public function storeClient(TareaClienteValidate $request)
     {
+        // dd($request);
         Tarea::createClient($request);
         return redirect()->route("tareainfo");
     }

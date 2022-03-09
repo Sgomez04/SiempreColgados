@@ -177,7 +177,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input type="date" name="fechaR" class="form-control datepicker" value="{{ old('fechaR') }}"
+                        <input type="date" name="fechaR" class="form-control datepicker @error('fechaR') is-invalid @enderror" value="{{ old('fechaR') }}"
                             placeholder="Fecha de realizacion de la tarea" />
                         @error('fechaR')
                             <span class="invalid-feedback" role="alert">

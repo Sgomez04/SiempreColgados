@@ -65,7 +65,7 @@ class Tarea extends Model
         $tarea->fecha_crea  = date('Y-m-d', time());
         $tarea->anotacion_anterior = $request->aa;
 
-        $tarea->fill($request->input())->saveOrFail();
+        $tarea->saveOrFail();
     }
 
     public static function updateT($request, $id)
@@ -75,22 +75,20 @@ class Tarea extends Model
         $tarea->operario = $request->operario;
         $tarea->telefono = $request->telefono;
         $tarea->descripcion = $request->descripcion;
-        if ($tarea->correo != $request->correo) {
-            $tarea->correo = $request->correo;
-        }
+        $tarea->correo = $request->correo;
         $tarea->direccion = $request->direccion;
         $tarea->poblacion = $request->poblacio;
         $tarea->cp = $request->cp;
         $tarea->fecha_rea = $request->fechaR;
+        $tarea->fecha_crea = $request->fcreacion;
         $tarea->anotacion_anterior = $request->aa;
-        $tarea->estado = $request->estado;
         if ($tarea->operario != null) {
             $tarea->tipo = 'admin';
         } else {
             $tarea->tipo = 'cliente';
         }
 
-        $tarea->fill($request->input())->saveOrFail();
+        $tarea->saveOrFail();
     }
 
     public static function updateTOperario($request, $id)
@@ -100,11 +98,11 @@ class Tarea extends Model
         $tarea->anotacion_posterior = $request->ap;
         if ($request->hasFile('archivo')) {
             if ($request->file('archivo') != $tarea->fichero) {
-                Storage::disk('tareasPDF')->delete('app/pdf/'.$tarea->fichero);
+                Storage::disk('tareasPDF')->delete('app/pdf/' . $tarea->fichero);
                 $tarea->fichero = $request->file('archivo')->store('/', 'tareasPDF');
             }
         }
-        $tarea->fill($request->input())->saveOrFail();
+        $tarea->saveOrFail();
     }
 
     public static function createClient($request)
@@ -126,22 +124,21 @@ class Tarea extends Model
         // ]);
 
         $tarea = new Tarea();
-        $tarea->id_cliente = Cliente::where('cif', $request->cif)->first();
+        $cliente = Cliente::where('cif', $request->cif)->first();
+        $tarea->id_cliente = $cliente->id_cliente;
         $tarea->telefono = $request->telefono;
         $tarea->descripcion = $request->descripcion;
-        if ($tarea->correo != $request->correo) {
-            $tarea->correo = $request->correo;
-        }
+        $tarea->correo = $request->correo;
         $tarea->direccion = $request->direccion;
         $tarea->tipo = 'cliente';
         $tarea->estado = 'P';
         $tarea->poblacion = $request->poblacion;
         $tarea->cp = $request->cp;
         $tarea->fecha_rea = $request->fechaR;
-        $tarea->fecha_crea  = date('Y-m-d', time());
+        $tarea->fecha_crea = date('Y-m-d', time());
         $tarea->anotacion_anterior = $request->aa;
 
-        $tarea->fill($request->input())->saveOrFail();
+        $tarea->saveOrFail();
     }
 
     public static function destroyT($id)

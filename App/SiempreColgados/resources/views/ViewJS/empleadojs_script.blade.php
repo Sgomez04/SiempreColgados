@@ -70,7 +70,7 @@
         let telefono_empleado = $('#telefono').val();
         let direccion_empleado = $('#direccion').val();
         let fechalta = $('#fechalta').val();
-        let cargo = $('#cargo').val();
+        let cargo = $('input[name="cargo"]:checked').val();;
 
         let _url = `/empleadosjs`;
         let _token = $('meta[name="csrf-token"]').attr('content');

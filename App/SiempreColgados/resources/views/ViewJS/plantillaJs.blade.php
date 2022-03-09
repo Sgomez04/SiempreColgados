@@ -25,11 +25,12 @@
 <body>
 
     <div class="container">
-        <h2 style="margin-top: 12px;" class="alert alert-success table-title">Gestion de <b>Empleados</b> - JS 
+        <h2 style="margin-top: 12px;" class="alert alert-success table-title">Gestion de <b>Empleados</b> - JS
         </h2><br>
         <div class="row">
             <div class="col-12 text-right">
-                <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Añadir Empleado</a>
+                <a href="javascript:void(0)" class="btn btn-success mb-3" id="create-new-post" onclick="addPost()">Añadir
+                    Empleado</a>
             </div>
         </div>
         <div class="row" style="clear: both;margin-top: 18px;">
@@ -66,8 +67,10 @@
                                 <td>{{ $empleado->fecha_alta }}</td>
                                 @if ($empleado->tipo == 'A')
                                     <td>Administrador</td>
-                                @else
+                                @elseif($empleado->tipo == 'O')
                                     <td>Operario</td>
+                                @else
+                                    <td>Invitado</td>
                                 @endif
                             </tr>
                         @endforeach
@@ -78,7 +81,7 @@
     </div>
     @include('ViewJS.empleadojs_script')
     @include('ViewJS.empleadojs_modal')
-    
+
 </body>
 
 </html>
